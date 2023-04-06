@@ -10,6 +10,8 @@ namespace SistemaOrcamentario.Mappings
         {
             builder.ToTable("Orcamento");
 
+            builder.HasKey("ID");
+
             builder.Property(p => p.Descricao)
                 .HasColumnType("nvarchar(MAX)")
                 .IsRequired();
@@ -34,13 +36,13 @@ namespace SistemaOrcamentario.Mappings
                 .WithMany()
                 .HasForeignKey(p => p.PessoaID);
 
-            //builder.HasIndex(p => p.Descricao)
-            //    .HasDatabaseName("IX_OrcamentoModel_Descricao");
+            builder.HasIndex(p => p.ID)
+                .HasDatabaseName("IX_OrcamentoModel_ID");
 
-            builder.HasOne(p => p.Pessoa)
-                .WithMany(p => p.Orcamentos)
-                .HasForeignKey(p => p.PessoaID)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(p => p.Pessoa)
+            //    .WithMany(p => p.Orcamentos)
+            //    .HasForeignKey(p => p.PessoaID)
+            //    .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

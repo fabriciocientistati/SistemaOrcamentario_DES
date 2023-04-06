@@ -46,18 +46,20 @@ namespace SistemaOrcamentario.Controllers
         }
 
         // GET: Orcamento/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id) //Carrega o ID que vem por parametro
         {
-            ViewData["PessoaID"] = new SelectList(_context.Pessoas, "ID", "Nome");
+            if (id == null || id == 0)
+            {
+                ViewData["PessoaID"] = new SelectList(_context.Pessoas, "ID", "Nome"); //Lista nomes no select aleatório
+
+                return View();
+            }
+            ViewBag.PessoaID = new SelectList(_context.Pessoas, "ID", "Nome", id); //Lista nome no select por parametro
             return View();
         }
 
-        // POST: Orcamento/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,PessoaID,Descricao,Observacoes,Preco,TipoPagamento,TipoEntrega,DataInclusao")] OrcamentoModel orcamento)
+        public async Task<IActionResult> Create([Bind("PessoaID,Descricao,Observacoes,Preco,TipoPagamento,TipoEntrega,DataInclusao")] OrcamentoModel orcamento)
         {
             if (ModelState.IsValid)
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualBasic;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Models;
 using System.Collections;
@@ -20,7 +21,7 @@ namespace SistemaOrcamentario.Controllers
         public IActionResult Index()
         {
             IEnumerable<PessoaModel> pessoa = _dataContext.Pessoas;
-                return View(pessoa);
+            return View(pessoa);
         }
 
         public IActionResult Create()
@@ -65,8 +66,10 @@ namespace SistemaOrcamentario.Controllers
         public IActionResult Details(int? id)
         {
             PessoaModel pessoa = _dataContext.Pessoas.FirstOrDefault(x => x.ID == id);
+            List<OrcamentoModel> orcamentos = _dataContext.Orcamentos.Where(x => x.PessoaID == id).ToList();
+            var viewModel = new ViewModel { Pessoa = pessoa, Orcamento = orcamentos };
 
-            return View(pessoa);
+            return View(viewModel);
         }
 
         [HttpPost]

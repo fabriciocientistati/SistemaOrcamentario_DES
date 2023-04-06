@@ -57,6 +57,9 @@ namespace SistemaOrcamentario.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ID")
+                        .HasDatabaseName("IX_OrcamentoModel_ID");
+
                     b.HasIndex("PessoaID");
 
                     b.HasIndex("PessoaModelID");

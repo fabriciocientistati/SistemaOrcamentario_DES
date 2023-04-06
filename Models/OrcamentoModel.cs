@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaOrcamentario.Models
 {
@@ -18,7 +21,8 @@ namespace SistemaOrcamentario.Models
             TipoEntrega = tipoEntrega;
             DataInclusao = dataInclusao;
         }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public int PessoaID { get; set; }
         public string Descricao { get; set; }

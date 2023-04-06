@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-7 mb-4">
                         <label class="control-label">Nome da Pessoa</label>
-                        <select asp-for="PessoaID" class="form-control" asp-items="ViewBag.PessoaID"></select>
+                        <select asp-for="PessoaID" class="form-select"  asp-items="ViewBag.PessoaID"></select>
                     </div>
                     <div class="col-3">
                         <label class="control-label">Data de hoje</label>
@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="col-2">
-                        <label class="control-label">Preço</label>
-                        <input asp-for="Preco" class="form-control" />
+                        <label class="control-label"><b>Valor R$</b></label>
+                        <input placeholder="R$" asp-for="Preco" class="form-control" />
                         <span asp-validation-for="Preco" class="text-danger"></span>
                     </div>
 

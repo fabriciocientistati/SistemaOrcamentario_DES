@@ -12,8 +12,8 @@ using SistemaOrcamentario.Context;
 namespace SistemaOrcamentario.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230406122333_configurandoModoCascata")]
-    partial class configurandoModoCascata
+    [Migration("20230406212025_newDb")]
+    partial class newDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,9 @@ namespace SistemaOrcamentario.Migrations
                         .HasColumnType("varchar(80)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ID")
+                        .HasDatabaseName("IX_OrcamentoModel_ID");
 
                     b.HasIndex("PessoaID");
 
