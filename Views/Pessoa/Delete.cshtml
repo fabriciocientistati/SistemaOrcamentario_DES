@@ -1,0 +1,95 @@
+﻿@model SistemaOrcamentario.Models.PessoaModel
+
+@{
+    TempData["Title"] = "Excluir Pessoa";
+}
+
+<section class="container">
+    <h2>Pessoa</h2>
+    <form asp-controller="Pessoa" asp-action="Delete" method="post" class="formCad">
+        <div class="column">
+            <div class="input-box">
+                <label for="Nome">Nome</label>
+                <input asp-for="Nome" type="text" placeholder="Insira o nome" readonly />
+            </div>
+            <div class="input-box">
+                <label for="DataInclusao">Data</label>
+                <input asp-for="DataInclusao" type="date" placeholder="Insirá a data de hoje" readonly />
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+                <label for="NumberCellPhone">Contato</label>
+                <input asp-for="NumberCellPhone" type="text" placeholder="XX XXXXX-XXXX" readonly />
+            </div>
+            <div class="input-box">
+                <label for="NumberFixPhone">Contato</label>
+                <input asp-for="NumberFixPhone" type="text" placeholder="XX XXXXX-XXXX" readonly />
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+                <label for="Cpf">CPF</label>
+                <input asp-for="Cpf" type="text" placeholder="000.000.000-00" readonly />
+            </div>
+            <div class="input-box">
+                <label for="Cnpj">CNPJ</label>
+                <input asp-for="Cnpj" type="text" placeholder="00.000.000/0000-00" readonly />
+            </div>
+        </div>
+
+        <div class="input-box">
+            <label for="Email">E-mail</label>
+            <input type="email" asp-for="Email" placeholder="email@email.com" readonly />
+        </div>
+
+        <br />
+        <div class="input-box address">
+            <h2>Endereço</h2>
+            <br />
+            <label for="Cep">Cep</label>
+            <div class="column">
+                <div class="col-3">
+                    <input id="cep" type="text" asp-for="Cep" placeholder="00000-000" readonly />
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Rua</label>
+                    <input id="rua" type="text" asp-for="Rua" placeholder="" readonly  />
+                </div>
+                <div class="input-box">
+                    <label>Numero</label>
+                    <input id="numero" asp-for="Numero" type="text" placeholder="" readonly />
+                </div>
+                <div class="input-box">
+                    <label>Bairro</label>
+                    <input id="bairro" asp-for="Bairro" type="text" placeholder="" readonly  />
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label>Estado</label>
+                    <input id="estado" type="text" asp-for="Estado" placeholder="" readonly  />
+                </div>
+                <div class="input-box">
+                    <label>Cidade</label>
+                    <input id="cidade" asp-for="Cidade" type="text" placeholder="" readonly  />
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="column" style="align-items: center;">
+            <div class="column">
+                <button class="btn btn-danger" type="submit">Deletar</button>
+                <a type="button" class="btn btn-primary" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</section>

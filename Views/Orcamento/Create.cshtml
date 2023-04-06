@@ -1,0 +1,83 @@
+﻿@model SistemaOrcamentario.Models.OrcamentoModel
+
+@{
+    TempData["Title"] = "Incluir orçamento";
+}
+
+<section class="container">
+    <h4>Orçamento</h4>
+
+    <hr />
+    <div class="row">
+        <div>
+            <form method="post" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-7 mb-4">
+                        <label class="control-label">Nome da Pessoa</label>
+                        <select asp-for="PessoaID" class="form-control" asp-items="ViewBag.PessoaID"></select>
+                    </div>
+                    <div class="col-3">
+                        <label class="control-label">Data de hoje</label>
+                        <input asp-for="DataInclusao" class="form-control" />
+                        <span asp-validation-for="DataInclusao" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <label class="control-label">Forma de pagamento</label>
+                        <select class="form-select col-2" asp-for="TipoPagamento" aria-label="Selecione uma forma de pagamento">
+                            <option selected>Selecione</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Cartão">Cartão</option>
+                            <option value="Parcelado">Parcelado</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="control-label"> Tipo de entrega</label>
+                        <select class="form-select col-2" asp-for="TipoEntrega" aria-label="Selecione o tipo de entrega">
+                            <option selected>Selecione</option>
+                            <option asp-for="TipoEntrega" value="Loja">Loja</option>
+                            <option asp-for="TipoEntrega" value="Cliente">Cliente</option>
+                            <option asp-for="TipoEntrega" value="Transportadora">Transportadora</option>
+                        </select>
+                    </div>
+
+                    <div class="col-2">
+                        <label class="control-label">Preço</label>
+                        <input asp-for="Preco" class="form-control" />
+                        <span asp-validation-for="Preco" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Observacoes" class="control-label"></label>
+                    <input asp-for="Observacoes" class="form-control" />
+                    <span asp-validation-for="Observacoes" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+                    <textarea asp-for="Descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Incluir orçamento" class="btn btn-primary" />
+                    <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

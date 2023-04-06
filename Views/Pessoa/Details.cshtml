@@ -1,0 +1,110 @@
+﻿@model SistemaOrcamentario.Models.PessoaModel
+
+@{
+    TempData["Title"] = "Detalhes da pessoa";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+    <section class="container">
+        <div class="container-fluid">
+            <h4>@Model.Nome</h4>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Cpf)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Cpf)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Cnpj)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Cnpj)
+                </dd>
+                <dt class = "col-sm-2">
+                    <span>Contato</span>
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.NumberCellPhone)
+                </dd>
+                <dt class = "col-sm-2">
+                    <span>Contato</span>
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.NumberFixPhone)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Cep)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Cep)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Rua)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Rua)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Numero)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Numero)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Bairro)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Bairro)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Cidade)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+                <dt class = "col-sm-2">
+                    <span>Data de inclusão</span>
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.DataInclusao)
+                </dd>
+                <dt class = "col-sm-2">
+                    <span>Descrição</span>
+                </dt>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ID">Editar</a> 
+            <a class="btn btn-danger" asp-action="Index">Voltar</a>
+        </div>
+    </section>
+</body>
+</html>
