@@ -13,7 +13,6 @@
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>
-                        <th>Contato</th>
                         <th>Data</th>
                         <th>Status</th>
                         <th></th>
@@ -27,16 +26,16 @@
                             <tr>
                                 <th scope="row">@pessoa.ID</th>
                                 <td>@pessoa.Nome</td>
-                                <td>@pessoa.NumberCellPhone</td>
                                 <td>@pessoa.DataInclusao</td>
                                 <td>
                                     <span class="badge bg-success">Ativo</span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Visualizar Pessoa" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.ID"><i class="bi bi-eye mx-2"></i>Visualizar</a>
-                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar Pessoa" asp-controller="Pessoa" asp-action="Edit" asp-route-id="@pessoa.ID"><i class="bi bi-pencil-square mx-2"></i>Editar</a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.ID"><i class="bi bi-trash3-fill mx-2"></i>Deletar</a>
-                                    <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.ID"><i class="bi bi-pencil-square mx-2"></i>Incluir Orçamento</a>
+                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Visualizar Pessoa" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.ID"><i class="bi bi-eye mx-2"></i></a>
+                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar Pessoa" asp-controller="Pessoa" asp-action="Edit" asp-route-id="@pessoa.ID"><i class="bi bi-pencil-square mx-2"></i></a>
+                                    <a class="btn btn-info btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar Orçamento" asp-controller="Orcamento" asp-action="Edit" asp-route-id="@pessoa.ID"><i class="bi bi-pencil-square mx-2"></i></a>
+                                    <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.ID"><i class="bi bi-file-earmark-plus"></i></a>
+                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.ID"><i class="bi bi-trash3-fill mx-2"></i></a>
                                 </td>
                             </tr>
                         }
@@ -46,3 +45,5 @@
         </div>
     </div>
 </div>
+
+                              

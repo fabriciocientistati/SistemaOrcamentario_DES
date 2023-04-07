@@ -21,8 +21,8 @@ namespace SistemaOrcamentario.Models
             TipoEntrega = tipoEntrega;
             DataInclusao = dataInclusao;
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public int PessoaID { get; set; }
         public string Descricao { get; set; }

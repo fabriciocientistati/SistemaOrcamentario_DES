@@ -3,99 +3,155 @@
 @{
     TempData["Title"] = "Cadastrar Pessoa";
 }
+<section id="input-with-icons">
+    <form asp-action="Create">
+        <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <h6>Nome</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                <input type="text" class="form-control" required placeholder="Insira o nome..." asp-for="Nome">
+                                <div class="form-control-icon">
+                                    <i data-feather="user"></i>
+                                </div>
+                            </div>
+                        </div>
 
-<section class="container">
-    <h2>Pessoa</h2>
-        <form asp-controller="Pessoa" asp-action="Create" method="post" class="formCad">
-            <div class="column">
-                <div class="input-box">
-                    <label for="Nome">Nome</label>
-                    <input asp-for="Nome" type="text" placeholder="Insira o nome" required />
-                </div>
-                <div class="input-box">
-                    <label for="DataInclusao">Data</label>
-                    <input asp-for="DataInclusao" type="date" placeholder="Insirá a data de hoje" required />
+                        <div class="col-sm-2 mb-3">
+                            <h6>Data de hoje</h6>
+                            <div class="form-group position-relative has-icon-right">
+                                <input type="datetime-local" required class="form-control"
+                                       placeholder="" asp-for="DataInclusao">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-3 mb-3">
+                            <h6>Número telefone</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" required oninput="mascaraTelefone(this)" asp-for="NumberCellPhone">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-telephone-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-3">
+                            <h6>Número telefone</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" oninput="mascaraTelefone(this)" asp-for="NumberFixPhone">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-telephone-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">    
+                        <div class="col-sm-3 mb-3">
+                            <h6>CPF</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                <input id="cpf" type="text" class="form-control" maxlength="14" required placeholder="000.000.000-00" oninput="mascaraCpfCnpj(this)" asp-for="Cpf">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-3">
+                            <h6>CNPJ</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                <input id="cnpj" type="text" class="form-control" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCpfCnpj(this)" asp-for="Cnpj">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 mb-5">
+                            <h6>E-mail</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                <input id="email" type="email" class="form-control" placeholder="email@email.com.br" asp-for="Email">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-envelope"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h3 class="mb-4">Endereço</h3>
+                        <div class="col-sm-2">
+                            <h6>CEP</h6>
+                            <div class="form-group position-relative has-icon-left">
+                                    <input id="cep" type="text" class="form-control" oninput="mascaraCep(this)" placeholder="XXXXX-XXX" asp-for="Cep">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-house"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-primary" style="margin-top: 25px;" onclick="pesquisacep(cep.value)">
+                                Pesquisar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>Rua</h6>
+                            <div class="form-group position-relative">
+                                <input id="rua" type="text" class="form-control" readonly placeholder="" asp-for="Rua">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <h6>Número</h6>
+                            <div class="form-group position-relative">
+                                <input id="numero" type="text" class="form-control" placeholder="" asp-for="Numero">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 mb-4">
+                            <h6>Bairro</h6>
+                            <div class="form-group position-relative">
+                                <input id="bairro" type="text" class="form-control" readonly placeholder="" asp-for="Bairro">
+                            </div>
+                        </div>
+
+                            <div class="col-sm-2 mb-4">
+                            <h6>Estado</h6>
+                            <div class="form-group position-relative">
+                                <input id="estado" type="text" class="form-control" readonly placeholder="" asp-for="Estado">
+                            </div>
+                        </div>
+
+                            <div class="col-sm-3 mb-4">
+                            <h6>Cidade</h6>
+                            <div class="form-group position-relative">
+                                <input id="cidade" type="text" class="form-control" readonly placeholder="" asp-for="Cidade">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-sm mb-4">
+                            <button class="btn btn-success" type="submit">Cadastrar</button>
+                            <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="column">    
-                <div class="input-box">
-                    <label for="NumberCellPhone">Contato</label>
-                <input asp-for="NumberCellPhone" type="text" placeholder="XX XXXXX-XXXX" required />
-                </div>
-                <div class="input-box">
-                    <label for="NumberFixPhone">Contato</label>
-                <input asp-for="NumberFixPhone" type="text" placeholder="XX XXXXX-XXXX" required />
-                </div>
-            </div>
-
-            <div class="column">    
-                <div class="input-box">
-                    <label for="Cpf">CPF</label>
-                <input asp-for="Cpf" type="text" placeholder="000.000.000-00" required />
-                </div>
-                <div class="input-box">
-                    <label for="Cnpj">CNPJ</label>
-                <input asp-for="Cnpj" type="text" placeholder="00.000.000/0000-00" />
-                </div>
-            </div>
-
-            <div class="input-box">
-                <label for="Email">E-mail</label>
-                <input type="email" asp-for="Email" placeholder="email@email.com" />
-            </div>
-
-            <br />
-            <div class="input-box address">
-                <h2>Endereço</h2>
-                <br />
-                <label for="Cep">Cep</label>
-                <div class="column">
-                   <div class="col-3">
-                        <input id="cep" type="text" asp-for="Cep" placeholder="00000-000" required />
-                   </div>              
-
-                    <div class="input-box">
-                        <button type="button" class="btn btn-primary" style="margin-top: auto;" onclick="pesquisacep(cep.value)">
-                            Pesquisar
-                        </button>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="input-box">
-                        <label>Rua</label>
-                        <input id="rua" type="text" asp-for="Rua" placeholder="" readonly required />
-                    </div>
-                    <div class="input-box">
-                        <label>Numero</label>
-                    <input id="numero" asp-for="Numero" type="text" placeholder="" />
-                    </div>
-                    <div class="input-box">
-                        <label>Bairro</label>
-                    <input id="bairro" asp-for="Bairro" type="text" placeholder="" readonly required />
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="input-box">
-                        <label>Estado</label>
-                    <input id="estado" type="text" asp-for="Estado" placeholder="" readonly required />
-                    </div>
-                    <div class="input-box">
-                        <label>Cidade</label>
-                    <input id="cidade" asp-for="Cidade" type="text" placeholder="" readonly required />
-                    </div>
-                </div>
-            </div>
-
-            <br />
-
-            <div class="column" style="align-items: center;">
-                <div class="column">
-                    <button class="btn btn-success" type="submit">Cadastrar</button>
-                    <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
-                </div>
-            </div>
+        </div>
+    </div>
     </form>
 </section>

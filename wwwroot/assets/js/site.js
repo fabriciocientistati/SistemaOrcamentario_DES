@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
-    $('#Pessoa').DataTable();
+    $('#table1').DataTable();
 });
 
 $('.close.alert').click(function () {
     $('.alert').hide('hide');
 })
 
-$('#Pessoa').DataTable({
+$('#table1').DataTable({
     "ordering": true,
     "paging": true,
     "searching": true,
@@ -105,35 +105,38 @@ function pesquisacep(valor) {
     }
 }
 
-//Controle de formatação dos campos
-function mascaraCpf(i) {
 
-    var v = i.value;
-
-    if (isNaN(v[v.length - 1])) { //Não deixa a pessoa incluir letras
-        i.value = v.substring(0, v.length - 1);
-        return;
+function mascaraCpfCnpj(input) {
+    var value = input.value;
+    // Remove tudo que não é dígito
+    value = value.replace(/\D/g, '');
+    if (value.length <= 11) { // CPF
+        // Coloca a máscara do CPF (XXX.XXX.XXX-XX)
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    } else { // CNPJ
+        // Coloca a máscara do CNPJ (XX.XXX.XXX/XXXX-XX)
+        value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+        value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+        value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+        value = value.replace(/(\d{4})(\d)/, '$1-$2');
     }
-
-    i.setAttribute("maxlength", "14");
-    if (v.length == 3 || v.length == 7) i.value += ".";
-    if (v.length == 11) i.value += "-";
-
+    input.value = value;
 }
 
-function mascaraCnpj(i) {
-
-    var valor = i.value;
-
-    if (isNaN(valor[valor.length - 1])) { //Não deixa a pessoa incluir letras
-        i.value = valor.substring(0, valor.length - 1);
-        return;
+function mascaraTelefone(input) {
+    var value = input.value;
+    // Remove tudo que não é dígito
+    value = value.replace(/\D/g, '');
+    if (value.length === 11) { // Celular
+        // Coloca a máscara do telefone celular (DDD 9XXXX-XXXX)
+        value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    } else if (value.length === 10) { // Telefone fixo
+        // Coloca a máscara do telefone fixo (DDD XXXX-XXXX)
+        value = value.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
     }
-
-    i.setAttribute("maxlength", "18");
-    if (valor.length == 2 || valor.length == 6) i.value += ".";
-    if (valor.length == 10) i.value += "/";
-    if (valor.length == 15) i.value += "-"
+    input.value = value;
 }
 
 function mascaraCep(i) {
@@ -148,53 +151,6 @@ function mascaraCep(i) {
     i.setAttribute("maxlength", "9");
     if (valor.length == 5) i.value += "-";
 }
-
-//Telefone1
-function mascaraFone1(event) {
-    var valor = document.getElementById("telefone1").attributes[0].ownerElement['value'];
-    var retorno = valor.replace(/\D/g, "");
-    retorno = retorno.replace(/^0/, "");
-    if (retorno.length > 10) {
-        retorno = retorno.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-    } else if (retorno.length > 5) {
-        if (retorno.length == 6 && event.code == "Backspace") {
-            // necessário pois senão o "-" fica sempre voltando ao dar backspace
-            return;
-        }
-        retorno = retorno.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-    } else if (retorno.length > 2) {
-        retorno = retorno.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-    } else {
-        if (retorno.length != 0) {
-            retorno = retorno.replace(/^(\d*)/, "($1");
-        }
-    }
-    document.getElementById("telefone1").attributes[0].ownerElement['value'] = retorno;
-}
-
-//Telefone 2
-function mascaraFone2(event) {
-    var valor = document.getElementById("telefone2").attributes[0].ownerElement['value'];
-    var retorno = valor.replace(/\D/g, "");
-    retorno = retorno.replace(/^0/, "");
-    if (retorno.length > 10) {
-        retorno = retorno.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-    } else if (retorno.length > 5) {
-        if (retorno.length == 6 && event.code == "Backspace") {
-            // necessário pois senão o "-" fica sempre voltando ao dar backspace
-            return;
-        }
-        retorno = retorno.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-    } else if (retorno.length > 2) {
-        retorno = retorno.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-    } else {
-        if (retorno.length != 0) {
-            retorno = retorno.replace(/^(\d*)/, "($1");
-        }
-    }
-    document.getElementById("telefone2").attributes[0].ownerElement['value'] = retorno;
-}
-
 
 //Formatar moeda
 function moeda(a, e, r, t) {

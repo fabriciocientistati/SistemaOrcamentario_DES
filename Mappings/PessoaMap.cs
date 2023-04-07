@@ -15,24 +15,24 @@ namespace SistemaOrcamentario.Mappings
                 .IsRequired();
 
             builder.Property(p => p.Cpf)
-                .HasColumnType("varchar(11)")
+                .HasColumnType("varchar(40)")
                 .IsRequired();
 
             builder.Property(p => p.Cnpj)
-                .HasColumnType("varchar(14)");
+                .HasColumnType("varchar(40)");
 
             builder.Property(p => p.NumberCellPhone)
-                .HasColumnType("varchar(11)")
+                .HasColumnType("varchar(40)")
                 .IsRequired();
 
             builder.Property(p => p.NumberFixPhone)
-                .HasColumnType("varchar(10)");
+                .HasColumnType("varchar(40)");
 
             builder.Property(p => p.Email)
                 .HasColumnType("varchar(100)");
 
             builder.Property(p => p.Cep)
-                .HasColumnType("varchar(8)")
+                .HasColumnType("varchar(20)")
                 .IsRequired();
 
             builder.Property(p => p.Rua)
