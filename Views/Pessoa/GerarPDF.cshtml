@@ -1,0 +1,16 @@
+﻿@model SistemaOrcamentario.Models.ViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Relatório</title>
+</head>
+<body>
+    <h1>Gerar Relatório</h1>
+
+    @using (Html.BeginForm("GerarPDF", "Relatorio", FormMethod.Post))
+    {
+            <input type="submit" value="Gerar Relatório em PDF" />
+    }
+</body>
+</html>

@@ -64,6 +64,35 @@ namespace SistemaOrcamentario.Migrations
                     b.ToTable("Orcamento", (string)null);
                 });
 
+            modelBuilder.Entity("SistemaOrcamentario.Models.PerfilModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
+
+                    b.ToTable("Perfil", (string)null);
+                });
+
             modelBuilder.Entity("SistemaOrcamentario.Models.PessoaModel", b =>
                 {
                     b.Property<int>("ID")
@@ -124,6 +153,37 @@ namespace SistemaOrcamentario.Migrations
                     b.ToTable("Pessoa", (string)null);
                 });
 
+            modelBuilder.Entity("SistemaOrcamentario.Models.UsuarioModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("PerfilID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("varchar(40)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Usuario", (string)null);
+                });
+
             modelBuilder.Entity("SistemaOrcamentario.Models.OrcamentoModel", b =>
                 {
                     b.HasOne("SistemaOrcamentario.Models.PessoaModel", "Pessoa")
@@ -139,9 +199,25 @@ namespace SistemaOrcamentario.Migrations
                     b.Navigation("Pessoa");
                 });
 
+            modelBuilder.Entity("SistemaOrcamentario.Models.PerfilModel", b =>
+                {
+                    b.HasOne("SistemaOrcamentario.Models.UsuarioModel", "Usuario")
+                        .WithOne("Perfil")
+                        .HasForeignKey("SistemaOrcamentario.Models.PerfilModel", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("SistemaOrcamentario.Models.PessoaModel", b =>
                 {
                     b.Navigation("Orcamentos");
+                });
+
+            modelBuilder.Entity("SistemaOrcamentario.Models.UsuarioModel", b =>
+                {
+                    b.Navigation("Perfil");
                 });
 #pragma warning restore 612, 618
         }

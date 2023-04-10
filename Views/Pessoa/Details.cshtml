@@ -4,197 +4,201 @@
     TempData["Title"] = "Detalhamento";
 }
 
-<section id="input-with-icons">
-    <form>
-        <div class="row match-height">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3 mb-3">
-                                <h3 class="mb-4">@Html.DisplayFor(model => model.Pessoa.Nome)</h3>
-                            </div>
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <form>
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3 mb-3">
+                                        <h3 class="mb-4">@Html.DisplayFor(model => model.Pessoa.Nome)</h3>
+                                    </div>
 
-                            <div class="col-sm-3 mb-3">
-                                <button class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Pessoa.ID">Editar Pessoa</button>
-                            </div>
-                            <hr />
+                                    <div class="col-sm-3 mb-3">
+                                        <button class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Pessoa.ID">Editar Pessoa</button>
+                                    </div>
+                                    <hr />
 
-                            <div class="col-sm-3 mb-3 mt-2">
-                                <h6>Data de inclusão</h6>
-                                <div class="form-group position-relative has-icon-right">
-                                    @Html.DisplayFor(Model => Model.Pessoa.DataInclusao)
-                                    <i class="bi bi-calendar-date"></i>
+                                    <div class="col-sm-3 mb-3 mt-2">
+                                        <h6>Data de inclusão</h6>
+                                        <div class="form-group position-relative has-icon-right">
+                                            @Html.DisplayFor(Model => Model.Pessoa.DataInclusao)
+                                            <i class="bi bi-calendar-date"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 mb-3">
-                                <h6>Número telefone</h6>
-                                <div class="form-group position-relative has-icon-left">
-                                    @Html.DisplayFor(Model => Model.Pessoa.NumberCellPhone)
-                                    <i class="bi bi-telephone-fill"></i>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3 mb-3">
-                                <h6>Número telefone</h6>
-                                <div class="form-group position-relative has-icon-left">
-                                    @Html.DisplayFor(Model => Model.Pessoa.NumberFixPhone)
-                                    <i class="bi bi-telephone-fill"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 mb-3">
-                                <h6>CPF</h6>
-                                <div class="form-group position-relative has-icon-left">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Cpf)
-                                    <i class="bi bi-box-arrow-right"></i>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3 mb-3">
-                                <h6>CNPJ</h6>
-                                <div class="form-group position-relative has-icon-left">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Cnpj)
-                                    <i class="bi bi-box-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6 mb-4">
-                                <h6>E-mail</h6>
-                                <div class="form-group position-relative has-icon-left">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Email)
-                                    <i class="bi bi-envelope"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <h3 class="mb-4">Endereço</h3>
-                            <div class="col-sm-3 mb-3">
-                                <h6>CEP</h6>
-                                <div class="form-group position-relative has-icon-left">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Cep)
-                                    <i class="bi bi-house"></i>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 mb-3">
-                                <h6>Número</h6>
-                                <div class="form-group position-relative">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Numero)
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 mb-3">
-                                <h6>Rua</h6>
-                                <div class="form-group position-relative">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Rua)
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3 mb-3">
-                                <h6>Bairro</h6>
-                                <div class="form-group position-relative">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Bairro)
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3 mb-3">
-                                <h6>Estado</h6>
-                                <div class="form-group position-relative">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Estado)
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3 mb-5">
-                                <h6>Cidade</h6>
-                                <div class="form-group position-relative">
-                                    @Html.DisplayFor(Model => Model.Pessoa.Cidade)
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        @foreach (var model in Model.Orcamento)
-                        {
-                            <div class="row">
-                                <div class="col-sm-3 mb-3">
-                                    <h3 class="mb-4">Orçamentos</h3>
-                                </div>
-
-                                <div class="col-sm-3 mb-3">
-                                    <button class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Orcamento">Editar Orçamento</button>
-                                </div>
-                            </div>
 
                                 <div class="row">
                                     <div class="col-sm-3 mb-3">
-                                        <h6>Data de inclusão</h6>
+                                        <h6>Número telefone</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            @Html.DisplayFor(Model => model.DataInclusao)
+                                            @Html.DisplayFor(Model => Model.Pessoa.NumberCellPhone)
+                                            <i class="bi bi-telephone-fill"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>Número telefone</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            @Html.DisplayFor(Model => Model.Pessoa.NumberFixPhone)
+                                            <i class="bi bi-telephone-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>CPF</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            @Html.DisplayFor(Model => Model.Pessoa.Cpf)
+                                            <i class="bi bi-box-arrow-right"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>CNPJ</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            @Html.DisplayFor(Model => Model.Pessoa.Cnpj)
+                                            <i class="bi bi-box-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-4">
+                                        <h6>E-mail</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            @Html.DisplayFor(Model => Model.Pessoa.Email)
+                                            <i class="bi bi-envelope"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <h3 class="mb-4">Endereço</h3>
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>CEP</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            @Html.DisplayFor(Model => Model.Pessoa.Cep)
                                             <i class="bi bi-house"></i>
                                         </div>
                                     </div>
                                     <div class="col-sm-3 mb-3">
-                                        <h6>Forma de pagamento</h6>
+                                        <h6>Número</h6>
                                         <div class="form-group position-relative">
-                                            @Html.DisplayFor(Model => model.TipoPagamento)
+                                            @Html.DisplayFor(Model => Model.Pessoa.Numero)
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-3 mb-3">
-                                        <h6>Forma de entrega</h6>
+                                        <h6>Rua</h6>
                                         <div class="form-group position-relative">
-                                            @Html.DisplayFor(Model => model.TipoEntrega)
+                                            @Html.DisplayFor(Model => Model.Pessoa.Rua)
                                         </div>
                                     </div>
 
                                     <div class="col-sm-3 mb-3">
-                                        <h6>Valor R$</h6>
+                                        <h6>Bairro</h6>
                                         <div class="form-group position-relative">
-                                            @Html.DisplayFor(Model => model.Preco)
+                                            @Html.DisplayFor(Model => Model.Pessoa.Bairro)
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-3 mb-3">
-                                        <h6>Observações</h6>
+                                        <h6>Estado</h6>
                                         <div class="form-group position-relative">
-                                            @Html.DisplayFor(Model => model.Observacoes)
+                                            @Html.DisplayFor(Model => Model.Pessoa.Estado)
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-3 mb-3">
-                                        <h6>Descrição</h6>
+                                    <div class="col-sm-3 mb-5">
+                                        <h6>Cidade</h6>
                                         <div class="form-group position-relative">
-                                            @Html.DisplayFor(Model => model.Descricao)
+                                            @Html.DisplayFor(Model => Model.Pessoa.Cidade)
                                         </div>
                                     </div>
                                 </div>
-                            <hr />
-                        }
+                                <hr />
+                                @foreach (var orcamento in Model.Orcamento)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-3">
+                                            <h3 class="mb-4">Orçamentos</h3>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-sm">
-                                <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Voltar</a>             
+                                        <div class="col-sm-3 mb-3">
+                                            <button class="btn btn-primary" asp-controller="Orcamento" asp-action="Edit" asp-route-id="@orcamento.ID">Editar Orçamento</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Data de inclusão</h6>
+                                            <div class="form-group position-relative has-icon-left">
+                                                @Html.DisplayFor(Model => orcamento.DataInclusao)
+                                                <i class="bi bi-house"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Forma de pagamento</h6>
+                                            <div class="form-group position-relative">
+                                                @Html.DisplayFor(Model => orcamento.TipoPagamento)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Forma de entrega</h6>
+                                            <div class="form-group position-relative">
+                                                @Html.DisplayFor(Model => orcamento.TipoEntrega)
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Valor R$</h6>
+                                            <div class="form-group position-relative">
+                                                @Html.DisplayFor(Model => orcamento.Preco)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Observações</h6>
+                                            <div class="form-group position-relative">
+                                                @Html.DisplayFor(Model => orcamento.Observacoes)
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Descrição</h6>
+                                            <div class="form-group position-relative">
+                                                @Html.DisplayFor(Model => orcamento.Descricao)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                }
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Voltar</a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
-</section>
+    </div>
+</div>

@@ -1,83 +1,122 @@
-﻿@model SistemaOrcamentario.Models.OrcamentoModel
+﻿    @model SistemaOrcamentario.Models.OrcamentoModel
 
-@{
-    TempData["Title"] = "Editar orçamento";
-}
+    @{
+        TempData["Title"] = "Editar orçamento";
+    }
 
-<section class="container">
-    <h4>Orçamento</h4>
+    <div class="main-content container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form asp-action="Edit">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="row">
+                                        <div class="col-sm-6 mb-3">
+                                            <h6>Nome</h6>
+                                            <div class="form-group position-relative has-icon-left">
+                                                <select asp-for="PessoaID" required class="form-control" asp-items="ViewBag.PessoaID"></select>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                            </div>
+                                        </div>
 
-    <hr />
-    <div class="row">
-        <div>
-            <form method="post" asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <div class="col-7 mb-4">
-                        <label class="control-label">Nome da Pessoa</label>
-                        <select asp-for="PessoaID" class="form-control" asp-items="ViewBag.PessoaID"></select>
-                    </div>
-                    <div class="col-3">
-                        <label class="control-label">Data de hoje</label>
-                        <input asp-for="DataInclusao" class="form-control" />
-                        <span asp-validation-for="DataInclusao" class="text-danger"></span>
+                                        <div class="col-sm-2 mb-3">
+                                            <h6>Data de hoje</h6>
+                                            <div class="form-group position-relative has-icon-right">
+                                                <input type="datetime-local" required class="form-control"
+                                                       placeholder="" asp-for="DataInclusao">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Forma de pagamento <i class="bi bi-credit-card-2-back"></i>   <i class="bi bi-wallet2"></i></h6>
+                                            <div class="form-group position-relative">
+                                                <select class="form-select col-2" asp-for="TipoPagamento" required aria-label="Selecione uma forma de pagamento">
+                                                    <option selected>Selecione</option>
+                                                    <option value="Dinheiro Ávista">Dinheiro</option>
+                                                    <option value="Dinheiro + 1x parcela - Cartão de Crédito">Dinheiro + 1x parcela - Cartão de Crédito</option>
+                                                    <option value="Parcelado - 1x Parcela + Cartão de crédito">1x parcela - Cartão de Crédito</option>
+                                                    <option value="Parcelado - 2x">2x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 3x">3x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 4x">4x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 5x">5x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 6x">6x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 7x">7x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 8x">8x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 9x">9x - parcelas no Cartão de Crédito</option>
+                                                    <option value="Parcelado - 10x">10x - parcelas no Cartão de Crédito</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 mb-3">
+                                            <h6>Valor R$</h6>
+                                            <div class="form-group position-relative">
+                                                <input id="preco" type="text" asp-for="Preco" class="form-control" placeholder="$" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2 mb-3">
+                                            <h6>Forma da entrega</h6>
+                                            <div class="form-group position-relative">
+                                                <select class="form-select" asp-for="TipoEntrega" required aria-label="Selecione uma de entrega">
+                                                    <option selected>Selecione</option>
+                                                    <option value="Lojá">Lojá</option>
+                                                    <option value="Cliente">Cliente</option>
+                                                    <option value="Transportadora">Transportadora</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 mb-3">
+                                            <h6>Observação</h6>
+                                            <div class="form-group position-relative has-icon-left">
+                                                <input type="text" class="form-control" placeholder="" asp-for="Observacoes">
+                                                <div class="form-control-icon">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-card-text"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 mb-3">
+                                            <h6>Descrição</h6>
+                                            <div class="form-group position-relative">
+                                                <textarea asp-for="Descricao" class="form-control" placeholder="Descrição do produto..." style="height: 200px"></textarea>
+                                                <div class="form-control-icon">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm mb-4">
+                                            <input type="submit" value="Editar orçamento" class="btn btn-primary" />
+                                            <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-4">
-                        <label class="control-label">Forma de pagamento</label>
-                        <select class="form-select col-2" asp-for="TipoPagamento" aria-label="Selecione uma forma de pagamento">
-                            <option selected>Selecione</option>
-                            <option value="Dinheiro">Dinheiro</option>
-                            <option value="Cartão">Cartão</option>
-                            <option value="Parcelado">Parcelado</option>
-                        </select>
-                    </div>
-
-                    <div class="col-4">
-                        <label class="control-label"> Tipo de entrega</label>
-                        <select class="form-select col-2" asp-for="TipoEntrega" aria-label="Selecione o tipo de entrega">
-                            <option selected>Selecione</option>
-                            <option asp-for="TipoEntrega" value="Loja">Loja</option>
-                            <option asp-for="TipoEntrega" value="Cliente">Cliente</option>
-                            <option asp-for="TipoEntrega" value="Transportadora">Transportadora</option>
-                        </select>
-                    </div>
-
-                    <div class="col-2">
-                        <label class="control-label">Preço</label>
-                        <input asp-for="Preco" class="form-control" />
-                        <span asp-validation-for="Preco" class="text-danger"></span>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Observacoes" class="control-label"></label>
-                    <input asp-for="Observacoes" class="form-control" />
-                    <span asp-validation-for="Observacoes" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                    <textarea asp-for="Descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Editar orçamento" class="btn btn-primary" />
-                    <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</section>
-<div>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-}
-

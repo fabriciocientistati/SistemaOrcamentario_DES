@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<PessoaModel>
 
 <div class="card-body">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <div class="d-flex justify-content-between align-items-center mb-5">
-            <a class="btn btn-success" onclick="Alert" asp-controller="Pessoa" asp-action="Create"><i class="bi bi-file-earmark-plus"></i>Cadastrar nova Pessoa</a>
-        </div>
-    </div>
+
+    <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Pessoa" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova Pessoa</a>
+
     <div class="card-body px-0 pb-0">
         <div class="table-responsive">
             <table class='table table-striped' id="table1">
@@ -31,11 +29,10 @@
                                     <span class="badge bg-success">Ativo</span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Visualizar Pessoa" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.ID"><i class="bi bi-eye mx-2"></i></a>
-                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar Pessoa" asp-controller="Pessoa" asp-action="Edit" asp-route-id="@pessoa.ID"><i class="bi bi-pencil-square mx-2"></i></a>
-                                    <a class="btn btn-info btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar Orçamento" asp-controller="Orcamento" asp-action="Edit" asp-route-id="@pessoa.ID"><i class="bi bi-pencil-square mx-2"></i></a>
-                                    <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.ID"><i class="bi bi-file-earmark-plus"></i></a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.ID"><i class="bi bi-trash3-fill mx-2"></i></a>
+                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.ID"><i class="bi bi-eye mx-2"></i>Detalhes</a>
+                                    <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.ID"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
+                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.ID"><i class="bi bi-trash mx-2"></i>Apagar</a>
+                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.ID"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
                                 </td>
                             </tr>
                         }

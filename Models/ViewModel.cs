@@ -6,5 +6,7 @@ namespace SistemaOrcamentario.Models
     {
         public PessoaModel Pessoa { get; set; }
         public List<OrcamentoModel> Orcamento { get; set; }
+        public List<OrcamentoModel> Orcamentos { get; internal set; }
     }
+
 }

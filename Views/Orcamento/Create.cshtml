@@ -3,114 +3,117 @@
 @{
     TempData["Title"] = "Incluir Orçamento";
 }
-<section id="input-with-icons">
-        <div class="row match-height">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                       <form  asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="row">
-                                <div class="col-sm-6 mb-3">
-                                    <h6>Nome</h6>
-                                    <div class="form-group position-relative has-icon-left">
-                                        <select asp-for="PessoaID" required class="form-control" asp-items="ViewBag.PessoaID"></select>
-                                        <div class="form-control-icon">
-                                            <i data-feather="user"></i>
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <h6>Nome</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <select asp-for="PessoaID" required class="form-control" asp-items="ViewBag.PessoaID"></select>
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 mb-3">
+                                        <h6>Data de hoje</h6>
+                                        <div class="form-group position-relative has-icon-right">
+                                            <input type="datetime-local" required class="form-control"
+                                                   placeholder="" asp-for="DataInclusao">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-2 mb-3">
-                                    <h6>Data de hoje</h6>
-                                    <div class="form-group position-relative has-icon-right">
-                                        <input type="datetime-local" required class="form-control"
-                                               placeholder="" asp-for="DataInclusao">
+                                <div class="row">
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>Forma de pagamento <i class="bi bi-credit-card-2-back"></i>   <i class="bi bi-wallet2"></i></h6>
+                                        <div class="form-group position-relative">
+                                            <select class="form-select col-2" asp-for="TipoPagamento" required aria-label="Selecione uma forma de pagamento">
+                                                <option selected>Selecione</option>
+                                                <option value="Dinheiro Ávista">Dinheiro</option>
+                                                <option value="Dinheiro + 1x parcela - Cartão de Crédito">Dinheiro + 1x parcela - Cartão de Crédito</option>
+                                                <option value="Parcelado - 1x Parcela + Cartão de crédito">1x parcela - Cartão de Crédito</option>
+                                                <option value="Parcelado - 2x">2x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 3x">3x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 4x">4x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 5x">5x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 6x">6x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 7x">7x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 8x">8x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 9x">9x - parcelas no Cartão de Crédito</option>
+                                                <option value="Parcelado - 10x">10x - parcelas no Cartão de Crédito</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>Valor R$</h6>
+                                        <div class="form-group position-relative">
+                                            <input id="preco" type="text" asp-for="Preco" class="form-control" placeholder="$" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 mb-3">
+                                        <h6>Forma da entrega</h6>
+                                        <div class="form-group position-relative">
+                                            <select class="form-select" asp-for="TipoEntrega" required aria-label="Selecione uma de entrega">
+                                                <option selected>Selecione</option>
+                                                <option value="Lojá">Lojá</option>
+                                                <option value="Cliente">Cliente</option>
+                                                <option value="Transportadora">Transportadora</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-sm-3 mb-3">
-                                    <h6>Forma de pagamento <i class="bi bi-credit-card-2-back"></i>   <i class="bi bi-wallet2"></i></h6>
-                                    <div class="form-group position-relative">
-                                        <select class="form-select col-2" asp-for="TipoPagamento" required aria-label="Selecione uma forma de pagamento">
-                                            <option selected>Selecione</option>
-                                            <option value="Dinheiro Ávista">Dinheiro</option>
-                                            <option value="Dinheiro + 1x parcela - Cartão de Crédito">Dinheiro + 1x parcela - Cartão de Crédito</option>
-                                            <option value="Parcelado - 1x Parcela + Cartão de crédito">1x parcela - Cartão de Crédito</option>
-                                            <option value="Parcelado - 2x">2x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 3x">3x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 4x">4x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 5x">5x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 6x">6x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 7x">7x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 8x">8x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 9x">9x - parcelas no Cartão de Crédito</option>
-                                            <option value="Parcelado - 10x">10x - parcelas no Cartão de Crédito</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3 mb-3">
-                                    <h6>Valor R$</h6>
-                                    <div class="form-group position-relative">
-                                        <input id="preco" type="text" asp-for="Preco" class="form-control" placeholder="$" />
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-2 mb-3">
-                                    <h6>Forma da entrega</h6>
-                                    <div class="form-group position-relative">
-                                        <select class="form-select" asp-for="TipoEntrega" required aria-label="Selecione uma de entrega">
-                                            <option selected>Selecione</option>
-                                            <option value="Lojá">Lojá</option>
-                                            <option value="Cliente">Cliente</option>
-                                            <option value="Transportadora">Transportadora</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-8 mb-3">
-                                    <h6>Observação</h6>
-                                    <div class="form-group position-relative has-icon-left">
-                                        <input type="text" class="form-control" placeholder="" asp-for="Observacoes">
-                                        <div class="form-control-icon">
+                                <div class="row">
+                                    <div class="col-sm-8 mb-3">
+                                        <h6>Observação</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input type="text" class="form-control" placeholder="" asp-for="Observacoes">
                                             <div class="form-control-icon">
-                                                <i class="bi bi-card-text"></i>
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-card-text"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-sm-8 mb-3">
-                                    <h6>Descrição</h6>
-                                    <div class="form-group position-relative">
-                                        <textarea asp-for="Descricao" class="form-control" placeholder="Descrição do produto..."  style="height: 200px"></textarea>
-                                        <div class="form-control-icon">
+                                <div class="row">
+                                    <div class="col-sm-8 mb-3">
+                                        <h6>Descrição</h6>
+                                        <div class="form-group position-relative">
+                                            <textarea asp-for="Descricao" class="form-control" placeholder="Descrição do produto..." style="height: 200px"></textarea>
+                                            <div class="form-control-icon">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
- 
-                            <div class="row">
-                                <div class="col-sm mb-4">
-                                    <input type="submit" value="Incluir orçamento" class="btn btn-primary" />
-                                    <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+
+                                <div class="row">
+                                    <div class="col-sm mb-4">
+                                        <input type="submit" value="Incluir orçamento" class="btn btn-primary" />
+                                        <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                     </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    
-</section>
 
+        </div>
+    </div>
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
