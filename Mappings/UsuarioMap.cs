@@ -14,17 +14,17 @@ namespace SistemaOrcamentario.Mappings
                 .HasColumnType("varchar(150)")
                 .IsRequired();
 
-            builder.Property(u => u.Senha)
-                .HasColumnType("varchar(40)")
+            builder.Property(u => u.Login)
+                .HasColumnType("varchar(80)")
                 .IsRequired();
 
             builder.Property(u => u.Email)
                 .HasColumnType("varchar(100)")
                 .IsRequired();
 
-            builder.HasOne(u => u.Perfil)
-                .WithOne(p => p.Usuario)
-                .HasForeignKey<PerfilModel>(p => p.UsuarioId);
+            builder.Property(u => u.Senha)
+                .HasColumnType("varchar(40)")
+                .IsRequired();
         }
     }
 }

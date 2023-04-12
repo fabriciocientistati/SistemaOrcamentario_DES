@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaOrcamentario.Context;
 
@@ -11,9 +12,10 @@ using SistemaOrcamentario.Context;
 namespace SistemaOrcamentario.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230411115636_removeTablesUser_Perfil")]
+    partial class removeTablesUser_Perfil
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,44 +124,6 @@ namespace SistemaOrcamentario.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Pessoa", (string)null);
-                });
-
-            modelBuilder.Entity("SistemaOrcamentario.Models.UsuarioModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<int>("Perfil")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("varchar(40)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Usuario", (string)null);
                 });
 
             modelBuilder.Entity("SistemaOrcamentario.Models.OrcamentoModel", b =>

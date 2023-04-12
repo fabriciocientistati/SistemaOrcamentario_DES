@@ -1,67 +1,46 @@
-﻿@model IEnumerable<SistemaOrcamentario.Models.UsuarioModel>
+﻿@model IEnumerable<UsuarioModel>
 
-@{
-    Layout = null;
-}
+<div class="card-body">
 
-<!DOCTYPE html>
+    <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Usuario" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova Usuário</a>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Senha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PerfilID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInclusao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Senha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PerfilID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInclusao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+    <div class="card-body px-0 pb-0">
+        <div class="table-responsive">
+            <table class='table table-striped' id="table1">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Login</th>
+                        <th>Perfil</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <th scope="row">@usuario.ID</th>
+                                <td>@usuario.Nome</td>
+                                <td>@usuario.Login</td>
+                                <td>@usuario.Perfil</td>
+                                <td>@usuario.Email</td>
+                                <td>
+                                    <span class="badge bg-success">Ativo</span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar usuário" asp-controller="Usuario" asp-action="Edit" asp-route-id="@usuario.ID"><i class="bi bi-pencil-square mx-2"></i>Editar</a>
+                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Usuario" asp-action="Delete" asp-route-id="@usuario.ID"><i class="bi bi-trash mx-2"></i>Apagar</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
