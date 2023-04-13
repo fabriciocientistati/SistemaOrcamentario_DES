@@ -17,6 +17,7 @@
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
                                             <input type="text" class="form-control" required placeholder="Insira o nome..." asp-for="Nome">
+                                            @Html.ValidationMessageFor(model => model.Nome)
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -28,6 +29,7 @@
                                         <div class="form-group position-relative has-icon-right">
                                             <input type="datetime-local" required class="form-control"
                                                    placeholder="" asp-for="DataInclusao">
+                                                   @Html.ValidationMessageFor(model => model.DataInclusao)
                                         </div>
                                     </div>
                                 </div>
@@ -37,6 +39,7 @@
                                         <h6>Número telefone</h6>
                                         <div class="form-group position-relative has-icon-left">
                                             <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" required oninput="mascaraTelefone(this)" asp-for="NumberCellPhone">
+                                            @Html.ValidationMessageFor(model => model.NumberCellPhone)
                                             <div class="form-control-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
@@ -94,6 +97,7 @@
                                         <h6>CEP</h6>
                                         <div class="form-group position-relative has-icon-left">
                                             <input id="cep" type="text" class="form-control" oninput="mascaraCep(this)" placeholder="XXXXX-XXX" asp-for="Cep">
+                                            @Html.ValidationMessageFor(model => model.Cep)
                                             <div class="form-control-icon">
                                                 <i class="bi bi-house"></i>
                                             </div>

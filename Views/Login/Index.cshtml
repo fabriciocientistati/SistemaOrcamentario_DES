@@ -44,6 +44,7 @@
                                             <i data-feather="user"></i>
                                         </div>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Login)
                                 </div>
                                 <div class="form-group position-relative has-icon-left">
                                     <label for="username">Senha</label>
@@ -53,6 +54,7 @@
                                             <i data-feather="lock"></i>
                                         </div>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Senha)
                                 </div>
 
                                 <div class='form-check clearfix my-4'>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaOrcamentario.Models
 {
@@ -28,12 +29,15 @@ namespace SistemaOrcamentario.Models
         }
 
         public int ID { get; set; }
+        [Required(ErrorMessage = "Digite o nome")]
         public string Nome { get; set; }
         public string? Cpf { get; set; }
         public string? Cnpj { get; set; }
+        [Required(ErrorMessage = "Digite ao menos 1 telefone")]
         public string NumberCellPhone { get; set; }
         public string? NumberFixPhone { get; set; }
         public string? Email { get; set; }
+        [Required(ErrorMessage = "Digite o CEP")]
         public string Cep { get; set; }
         public string Rua { get; set; }
         public string? Numero { get; set; }

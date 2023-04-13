@@ -36,8 +36,6 @@ $('#table1').DataTable({
 });
 
 
-
-
 function limpa_formulario_cep() {
     //Limpa valores do formulário de cep.
     document.getElementById('rua').value = ("");

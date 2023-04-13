@@ -3,6 +3,24 @@
 <div class="card-body">
 
     <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Pessoa" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova Pessoa</a>
+    <br /><br />
+    @if (TempData["MessageSuccess"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="btn btn-danger" data-dismiss="alert" arial-label="Close">X</button>
+            @TempData["MessageSuccess"]
+        </div>
+    
+    }
+
+    @if (TempData["ErroMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <button type="button" class="btn btn-danger" data-dismiss="alert" arial-label="Close">X</button>
+            @TempData["ErroMessage"]
+        </div>
+
+    }
 
     <div class="card-body px-0 pb-0">
         <div class="table-responsive">

@@ -87,7 +87,7 @@ namespace SistemaOrcamentario.Controllers
 
                 return RedirectToAction("Index");
             }
-            TempData["MessageError"] = "Erro: Cadastro não realizado!";
+            TempData["ErroMessage"] = "Erro: Cadastro não realizado!";
                 return View();
         }
 
@@ -103,7 +103,7 @@ namespace SistemaOrcamentario.Controllers
                 return RedirectToAction("Index");
             }
 
-            TempData["MessageError"] = "Erro: Atualização não realizada!";
+            TempData["MessageErro"] = "Erro: Atualização não realizada!";
                 return View();
         }
 
