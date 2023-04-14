@@ -1,4 +1,5 @@
 ﻿using SistemaOrcamentario.Enums;
+using SistemaOrcamentario.Helper;
 using System;
 
 namespace SistemaOrcamentario.Models
@@ -27,5 +28,10 @@ namespace SistemaOrcamentario.Models
         public PerfilEnum? Perfil { get; set; }
         public DateTime DataInclusao { get; set; } = DateTime.Now;
         public DateTime? DataAtualizacao { get; set; } = DateTime.Now;
+
+        public void SetSenhaHas()
+        {
+            Senha = Senha.GerarHash();
+        }
     }
 }

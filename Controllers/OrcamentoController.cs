@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SistemaOrcamentario.Context;
+using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Models;
 
 namespace SistemaOrcamentario.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class OrcamentoController : Controller
     {
         private readonly DataContext _context;

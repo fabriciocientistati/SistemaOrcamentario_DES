@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SistemaOrcamentario.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

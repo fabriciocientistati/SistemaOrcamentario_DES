@@ -10,9 +10,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using SistemaOrcamentario.Filters;
 
 namespace SistemaOrcamentario.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class PessoaController : Controller
     {
         private readonly DataContext _dataContext;

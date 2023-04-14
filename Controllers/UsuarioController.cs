@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaOrcamentario.Context;
+using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SistemaOrcamentario.Controllers
 {
+    [PaginaRestritaParaAdmin]
     public class UsuarioController : Controller
     {
         private readonly DataContext _dataContext;
@@ -68,6 +71,8 @@ namespace SistemaOrcamentario.Controllers
         {
             if (ModelState.IsValid)
             {
+                usuario.DataInclusao = DateTime.Now;
+                usuario.SetSenhaHas();
                 _dataContext.Usuarios.Add(usuario);
                 _dataContext.SaveChanges();
                 return RedirectToAction("Index");

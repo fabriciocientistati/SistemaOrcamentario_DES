@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaOrcamentario.Context;
+using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
 using System.Linq;
@@ -38,14 +39,13 @@ namespace SistemaOrcamentario.Controllers
             {
                 UsuarioModel usuario = _dataContext.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == loginModel.Login.ToUpper());
 
-                if (loginModel.Login == usuario.Login && loginModel.Senha == usuario.Senha)
+                if (loginModel.Login == usuario.Login && loginModel.Senha.GerarHash() == usuario.Senha)
                 {
                     _sessao.CriarSessaoDoUsuario(usuario);
                     return RedirectToAction("Index","Pessoa");
                 }
             }
-            TempData["ErrorMessage"] = "Usuário não encontrado";
-            return RedirectToAction("Index");
+            return View();
         }
     }
 }
