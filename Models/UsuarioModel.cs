@@ -33,5 +33,12 @@ namespace SistemaOrcamentario.Models
         {
             Senha = Senha.GerarHash();
         }
+
+        public string GerarNovaSenha()
+        {
+            string novaSenha = Guid.NewGuid().ToString().Substring(0, 8);
+            Senha = novaSenha.GerarHash();
+            return novaSenha;
+        }
     }
 }
