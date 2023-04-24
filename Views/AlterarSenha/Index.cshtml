@@ -1,0 +1,86 @@
+﻿@using SistemaOrcamentario.Enums;
+@model SistemaOrcamentario.Models.AlterarSenhaModel
+
+@{
+    ViewData["Title"] = "Alterar Senha";
+}
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Alterar senha do Usuários</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        @if (TempData["MessageErro"] != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+                                @TempData["MessageErro"]
+                            </div>
+                        }
+
+                        @if (TempData["MessageSuccess"] != null)
+                        {
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+                                @TempData["MessageSuccess"]
+                            </div>
+                        }
+                        <form asp-controller="AlterarSenha" asp-action="Alterar" class="form form-vertical">
+                            <div class="form-body">
+                                <div class="row">
+             
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="password-id-icon">Senha atual</label>
+                                            <div class="position-relative">
+                                                <input asp-for="senhaAtual" type="password" class="form-control" placeholder="Digite a senha atual do usuário" id="password-id-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.senhaAtual, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="password-id-icon">Nova atual</label>
+                                            <div class="position-relative">
+                                                <input asp-for="novaSenha" type="password" class="form-control" placeholder="Digite a nova senha do usuário" id="password-id-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.novaSenha, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="password-id-icon">Confirme a nova senha</label>
+                                            <div class="position-relative">
+                                                <input asp-for="confirmarNovaSenha" type="password" class="form-control" placeholder="Confirme a nova senha do usuário" id="password-id-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.confirmarNovaSenha, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Alterar usuário</button>
+                                        <button asp-controller="Pessoa" asp-action="Index" class="btn btn-danger me-1 mb-1">Voltar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

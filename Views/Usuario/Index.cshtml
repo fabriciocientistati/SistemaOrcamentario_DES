@@ -1,7 +1,21 @@
 ﻿@model IEnumerable<UsuarioModel>
 
 <div class="card-body">
+    @if (TempData["MessageErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+            @TempData["MessageErro"]
+        </div>
+    }
 
+    @if (TempData["MessageSuccess"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+            @TempData["MessageSuccess"]
+        </div>
+    }
     <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Usuario" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova Usuário</a>
 
     <div class="card-body px-0 pb-0">
