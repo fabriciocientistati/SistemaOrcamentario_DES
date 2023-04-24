@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -34,10 +33,11 @@ namespace SistemaOrcamentario.Models
         public string? Cpf { get; set; }
         public string? Cnpj { get; set; }
         [Required(ErrorMessage = "Digite ao menos 1 telefone")]
+        [Phone(ErrorMessage = "O número informado não é valido")]
         public string NumberCellPhone { get; set; }
         public string? NumberFixPhone { get; set; }
         public string? Email { get; set; }
-        [Required(ErrorMessage = "Digite o CEP")]
+        [Required(ErrorMessage = "Digite o CEP para consulta")]
         public string Cep { get; set; }
         public string Rua { get; set; }
         public string? Numero { get; set; }

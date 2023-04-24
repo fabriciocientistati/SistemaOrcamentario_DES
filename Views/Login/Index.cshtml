@@ -53,21 +53,21 @@
                                     <label for="username">Usuário</label>
                                     <div class="position-relative">
                                         <input type="text" asp-for="Login" class="form-control" id="username">
-                                        @Html.ValidationMessageFor(model => model.Login,"", new { @class = "text-danger" })
                                         <div class="form-control-icon">
                                             <i data-feather="user"></i>
                                         </div>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Login,"", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group position-relative has-icon-left">
                                     <label for="username">Senha</label>
                                     <div class="position-relative">
                                         <input type="password" asp-for="Senha" class="form-control" id="password">
-                                        @Html.ValidationMessageFor(model => model.Senha,"", new { @class = "text-danger" })
                                         <div class="form-control-icon">
                                             <i data-feather="lock"></i>
                                         </div>
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Senha,"", new { @class = "text-danger" })
                                 </div>
 
                                 <div class='form-check clearfix my-4'>

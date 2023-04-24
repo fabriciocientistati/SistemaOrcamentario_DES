@@ -12,10 +12,12 @@ namespace SistemaOrcamentario.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly ISessao _sessao;
-        public LoginController(DataContext dataContext, ISessao sessao)
+        private readonly IEmail _email;
+        public LoginController(DataContext dataContext, ISessao sessao, IEmail email)
         {
             _dataContext = dataContext;
             _sessao = sessao;
+            _email = email;
         }
         public IActionResult Index()
         {
@@ -78,9 +80,21 @@ namespace SistemaOrcamentario.Controllers
                     if (usuario != null)
                     {
                         string novaSenha = usuario.GerarNovaSenha();
-                        _dataContext.Update(usuario);
-                        _dataContext.SaveChanges();
-                        TempData["MessageSuccess"] = $"Enviamos para seu e-mail cadastrado uma nova senha.{novaSenha}";
+                        string mensagem = $"Sua nova senha é: {novaSenha}";
+
+                        bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de Cadastro - Nova Senha", mensagem);
+                       
+                        if (emailEnviado)
+                        {
+                            _dataContext.Update(usuario);
+                            _dataContext.SaveChanges();
+                            TempData["MessageSuccess"] = $"Enviamos para seu e-mail cadastrado uma nova senha.";
+                        }
+                        else
+                        {
+                            TempData["MessageErro"] = "Não conseguimos enviar o e-mail. Por favor, tente novamente.";
+                        }
+
                         return RedirectToAction("Index","Login");
                     }
                     TempData["MessageErro"] = "Não conseguimos redefinir sua senha. Por favor, verifique os dados informados.";

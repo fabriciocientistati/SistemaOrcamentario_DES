@@ -13,11 +13,11 @@
     
     }
 
-    @if (TempData["ErroMessage"] != null)
+    @if (TempData["MessageErro"] != null)
     {
         <div class="alert alert-danger">
             <button type="button" class="btn btn-danger" data-dismiss="alert" arial-label="Close">X</button>
-            @TempData["ErroMessage"]
+            @TempData["MessageErro"]
         </div>
 
     }

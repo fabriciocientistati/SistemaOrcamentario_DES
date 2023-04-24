@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using SistemaOrcamentario.Filters;
+using System;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -85,28 +86,36 @@ namespace SistemaOrcamentario.Controllers
             {
                 _dataContext.Pessoas.Add(pessoa);
                 _dataContext.SaveChanges();
-                TempData["MessageSuccess"] = "Sucesso: Cadastro realizado!";
+                TempData["MessageSuccess"] = "Cadastro realizado.";
 
                 return RedirectToAction("Index");
             }
-            TempData["ErroMessage"] = "Erro: Cadastro não realizado!";
-                return View();
+            TempData["MessageErro"] = "Não foi possível realizar o cadastro.";
+            return View();
         }
 
         [HttpPost]
         public IActionResult Edit(PessoaModel pessoa)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _dataContext.Pessoas.Update(pessoa);
-                _dataContext.SaveChanges();
-                TempData["MessageSuccess"] = "Sucesso: Atualização realizada!";
+                if (ModelState.IsValid)
+                {
+                    _dataContext.Pessoas.Update(pessoa);
+                    _dataContext.SaveChanges();
+                    TempData["MessageSuccess"] = "Cadastro atualização.";
 
+                    return RedirectToAction("Index");
+                }
+
+                TempData["MessageErro"] = "Não foi possível atualizar o cadastro.";
+                return View();
+            }
+            catch (Exception erro)
+            {
+                TempData["MessageErro"] = $"Ops, não foi possível atualizar o cadastro: detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-
-            TempData["MessageErro"] = "Erro: Atualização não realizada!";
-                return View();
         }
 
         [HttpPost]

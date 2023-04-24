@@ -16,20 +16,19 @@
                                     <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" required placeholder="Insira o nome..." asp-for="Nome">
-                                            @Html.ValidationMessageFor(model => model.Nome)
+                                            <input type="text" class="form-control"  placeholder="Insira o nome..." asp-for="Nome">
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="col-sm-2 mb-3">
                                         <h6>Data de hoje</h6>
                                         <div class="form-group position-relative has-icon-right">
-                                            <input type="datetime-local" required class="form-control"
+                                            <input type="datetime-local"  class="form-control"
                                                    placeholder="" asp-for="DataInclusao">
-                                                   @Html.ValidationMessageFor(model => model.DataInclusao)
                                         </div>
                                     </div>
                                 </div>
@@ -38,12 +37,12 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Número telefone</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" required oninput="mascaraTelefone(this)" asp-for="NumberCellPhone">
-                                            @Html.ValidationMessageFor(model => model.NumberCellPhone)
+                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX"  oninput="mascaraTelefone(this)" asp-for="NumberCellPhone">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.NumberCellPhone, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="col-sm-3 mb-3">
@@ -61,7 +60,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>CPF</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input id="cpf" type="text" class="form-control" maxlength="14" required placeholder="000.000.000-00" oninput="mascaraCpfCnpj(this)" asp-for="Cpf">
+                                            <input id="cpf" type="text" class="form-control" maxlength="14"  placeholder="000.000.000-00" oninput="mascaraCpfCnpj(this)" asp-for="Cpf">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-box-arrow-right"></i>
                                             </div>
@@ -97,11 +96,11 @@
                                         <h6>CEP</h6>
                                         <div class="form-group position-relative has-icon-left">
                                             <input id="cep" type="text" class="form-control" oninput="mascaraCep(this)" placeholder="XXXXX-XXX" asp-for="Cep">
-                                            @Html.ValidationMessageFor(model => model.Cep)
                                             <div class="form-control-icon">
                                                 <i class="bi bi-house"></i>
                                             </div>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="col-2">
                                         <button type="button" class="btn btn-primary" style="margin-top: 25px;" onclick="pesquisacep(cep.value)">

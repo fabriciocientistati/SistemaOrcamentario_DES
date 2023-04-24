@@ -28,6 +28,7 @@ namespace SistemaOrcamentario
 
             services.AddSingleton <IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ISessao, Sessao>();
+            services.AddScoped<IEmail, Email>();
 
 
             services.AddSession(options =>
