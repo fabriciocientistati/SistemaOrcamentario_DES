@@ -28,19 +28,19 @@ namespace SistemaOrcamentario.Controllers
         {
             try
             {
-                UsuarioModel usuarioDB = _dataContext.Usuarios.FirstOrDefault(x => x.ID == alterarSenha.Id);
                 UsuarioModel usuarioLogado = _sessao.BuscarSessaoDoUsuario();
                 alterarSenha.Id = usuarioLogado.ID;
 
+                UsuarioModel usuarioDB = _dataContext.Usuarios.FirstOrDefault(x => x.ID == alterarSenha.Id);
+
+                if (usuarioDB == null) throw new Exception("Houve um erro na atualização da senha, usuário não encontrado!");
+
+                if (!usuarioDB.SenhaValida(alterarSenha.senhaAtual)) throw new Exception("Senha atual não confere!");
+
+                if (usuarioDB.SenhaValida(alterarSenha.novaSenha)) throw new Exception("Nova senha deve ser diferente da senha atual!");
+
                 if (ModelState.IsValid)
                 {
-
-                    if (usuarioDB == null) throw new Exception("Houve um erro na atualização da senha, usuário não encontrado!");
-
-                    if (!usuarioDB.SenhaValida(alterarSenha.senhaAtual)) throw new Exception("Senha atual não confere!");
-
-                    if (usuarioDB.SenhaValida(alterarSenha.novaSenha)) throw new Exception("Nova senha deve ser diferente da senha atual!");
-
                     usuarioDB.SetNovaSenha(alterarSenha.novaSenha);
                     usuarioDB.DataAtualizacao = DateTime.Now;
 
