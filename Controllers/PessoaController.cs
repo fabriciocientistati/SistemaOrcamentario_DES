@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SistemaOrcamentario.Filters;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -27,7 +28,7 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<PessoaModel> pessoa = _dataContext.Pessoas;
+            List<PessoaModel> pessoa = _dataContext.Pessoas.Include(x => x.Orcamentos).ToList();
             return View(pessoa);
         }
 
@@ -84,6 +85,7 @@ namespace SistemaOrcamentario.Controllers
         {
             if (ModelState.IsValid)
             {
+                pessoa.DataInclusao = DateTime.Now;
                 _dataContext.Pessoas.Add(pessoa);
                 _dataContext.SaveChanges();
                 TempData["MessageSuccess"] = "Cadastro realizado.";

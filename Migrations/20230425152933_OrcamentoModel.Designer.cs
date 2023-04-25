@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaOrcamentario.Context;
 
@@ -11,9 +12,10 @@ using SistemaOrcamentario.Context;
 namespace SistemaOrcamentario.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230425152933_OrcamentoModel")]
+    partial class OrcamentoModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +45,9 @@ namespace SistemaOrcamentario.Migrations
                     b.Property<int>("PessoaID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PessoaModelID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(18,2)");
 
@@ -55,6 +60,8 @@ namespace SistemaOrcamentario.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("PessoaID");
+
+                    b.HasIndex("PessoaModelID");
 
                     b.ToTable("Orcamento", (string)null);
                 });
@@ -160,10 +167,14 @@ namespace SistemaOrcamentario.Migrations
             modelBuilder.Entity("SistemaOrcamentario.Models.OrcamentoModel", b =>
                 {
                     b.HasOne("SistemaOrcamentario.Models.PessoaModel", "Pessoa")
-                        .WithMany("Orcamentos")
+                        .WithMany()
                         .HasForeignKey("PessoaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SistemaOrcamentario.Models.PessoaModel", null)
+                        .WithMany("Orcamentos")
+                        .HasForeignKey("PessoaModelID");
 
                     b.Navigation("Pessoa");
                 });

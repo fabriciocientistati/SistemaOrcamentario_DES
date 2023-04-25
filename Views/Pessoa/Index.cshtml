@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PessoaModel>
+﻿@model List<PessoaModel>
 
 <div class="card-body">
 
@@ -10,7 +10,7 @@
             <button type="button" class="btn btn-danger" data-dismiss="alert" arial-label="Close">X</button>
             @TempData["MessageSuccess"]
         </div>
-    
+
     }
 
     @if (TempData["MessageErro"] != null)
@@ -22,29 +22,38 @@
 
     }
 
-    <div class="card-body px-0 pb-0">
+    <div class="card-body">
         <div class="table-responsive">
-            <table class='table table-striped' id="table1">
+            <table class='table table-sm table-striped' id="table1">
                 <thead>
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>
                         <th>Data</th>
-                        <th>Status</th>
+                        <th>Orçamentos</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if(Model != null)
+                    @if (Model != null && Model.Any())
                     {
-                        @foreach(var pessoa in Model)
+                        @foreach (var pessoa in Model)
                         {
                             <tr>
                                 <th scope="row">@pessoa.ID</th>
-                                <td>@pessoa.Nome</td>
+                                <td> @pessoa.Nome</td>
                                 <td>@pessoa.DataInclusao</td>
                                 <td>
-                                    <span class="badge bg-success">Ativo</span>
+                                    @if (pessoa.Orcamentos != null && pessoa.Orcamentos.Any())
+                                    {
+                                        <a href="#" id="abrir-modal" onclick="capturar(@pessoa.ID)" class="btn btn-info btn-sm">
+                                            @pessoa.Orcamentos.Count()
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="btn btn-secondary btn-sm btn-total-orcamentos">0</a>
+                                    }
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.ID"><i class="bi bi-eye mx-2"></i>Detalhes</a>
@@ -57,8 +66,57 @@
                     }
                 </tbody>
             </table>
+
+            <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Lista de Orçamentos</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First</th>
+                                                <th scope="col">Last</th>
+                                                <th scope="col">Handle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td colspan="2">Larry the Bird</td>
+                                                <td>twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-                              
+<!-- Incluindo as bibliotecas do Bootstrap e do JavaScript -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

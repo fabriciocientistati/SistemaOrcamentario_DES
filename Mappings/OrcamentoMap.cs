@@ -10,6 +10,9 @@ namespace SistemaOrcamentario.Mappings
         {
             builder.ToTable("Orcamento");
 
+            builder.HasKey(p => p.ID);
+            builder.HasOne(p => p.Pessoa);
+
             builder.Property(p => p.Descricao)
                 .HasColumnType("nvarchar(MAX)")
                 .IsRequired();
@@ -29,10 +32,6 @@ namespace SistemaOrcamentario.Mappings
 
             builder.Property(p => p.DataInclusao)
                 .HasColumnType("datetime");
-
-            builder.HasOne(p => p.Pessoa)
-                .WithMany()
-                .HasForeignKey(p => p.PessoaID);
 
             //builder.HasIndex(p => p.ID)
             //    .HasDatabaseName("IX_OrcamentoModel_ID");

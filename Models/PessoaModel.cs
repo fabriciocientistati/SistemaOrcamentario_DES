@@ -45,6 +45,6 @@ namespace SistemaOrcamentario.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public DateTime DataInclusao { get; set; } = DateTime.Now;
-        public virtual ICollection<OrcamentoModel> Orcamentos { get; set; }
+        public virtual List<OrcamentoModel> Orcamentos { get; set; }
     }
 }
