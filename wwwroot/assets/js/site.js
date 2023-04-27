@@ -3,8 +3,16 @@
 function capturar(id) {
     var codigoUsuario = id
 
-    var modal = new bootstrap.Modal(document.querySelector('.modal'));
-    modal.show(codigoUsuario);
+    $.ajax({
+        type: 'GET',
+        url: '/Pessoa/listarOrcamentosPessoaId/' + codigoUsuario,
+        success: function (result) {
+            console.log(result)
+            $("#listaOrcamento").html(result);
+            var modal = new bootstrap.Modal(document.querySelector('.modal'));
+            modal.show(codigoUsuario);
+        }
+    });
 }
 
 

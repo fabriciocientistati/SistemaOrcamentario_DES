@@ -80,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVzc29hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Repository/fabriciocientistati/SistemaOrcamentario_DES/Views/Pessoa/_PessoaOrcamentosIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVzc29hXF9QZXNzb2FPcmNhbWVudG9zSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Repository/fabriciocientistati/SistemaOrcamentario_DES/Views/Restrito/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdHJpdG9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

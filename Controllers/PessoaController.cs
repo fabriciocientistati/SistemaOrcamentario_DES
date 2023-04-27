@@ -80,6 +80,12 @@ namespace SistemaOrcamentario.Controllers
             return View(viewModel);
         }
 
+        public IActionResult listarOrcamentosPessoaId(int? id)
+        {
+            List<OrcamentoModel> orcamentos = _dataContext.Orcamentos.Where(x => x.PessoaID == id).ToList();
+            return PartialView("_PessoaOrcamentosIndex", orcamentos);
+        }
+
         [HttpPost]
         public IActionResult Create(PessoaModel pessoa)
         {
