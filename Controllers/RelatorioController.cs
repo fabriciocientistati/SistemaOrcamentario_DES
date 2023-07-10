@@ -65,33 +65,33 @@ namespace SistemaOrcamentario.Controllers
             descricaoHeader.HorizontalAlignment = Element.ALIGN_CENTER;
             table.AddCell(TipoPagamentoHeader);
 
-            PdfPCell valorHeader = new PdfPCell(new Phrase("Valor"));
+            PdfPCell valorHeader = new PdfPCell(new Phrase("Valor", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
             valorHeader.HorizontalAlignment = Element.ALIGN_CENTER;
             table.AddCell(valorHeader);
 
-            PdfPCell TipoEntrega = new PdfPCell(new Phrase("Forma de Entrega"));
-            TipoEntrega.HorizontalAlignment = Element.ALIGN_CENTER;
-            table.AddCell(TipoEntrega);
+            PdfPCell TipoEntregaHeader = new PdfPCell(new Phrase("Forma de Entrega", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
+            TipoEntregaHeader.HorizontalAlignment = Element.ALIGN_CENTER;
+            table.AddCell(TipoEntregaHeader);
 
-            // Adicione os detalhes de cada orçamento como células da tabela
+            // Adicione os detalhes de cada orçamento como células da tabela com estilo
             foreach (var orcamento in viewModel.Orcamentos)
             {
-                PdfPCell dataCell = new PdfPCell(new Phrase(orcamento.DataInclusao.ToString()));
+                PdfPCell dataCell = new PdfPCell(new Phrase(orcamento.DataInclusao.ToString(), new Font(Font.FontFamily.HELVETICA, 10)));
                 table.AddCell(dataCell);
 
-                PdfPCell observacaoCell = new PdfPCell(new Phrase(orcamento.Observacoes));
+                PdfPCell observacaoCell = new PdfPCell(new Phrase(orcamento.Observacoes, new Font(Font.FontFamily.HELVETICA, 10)));
                 table.AddCell(observacaoCell);
 
-                PdfPCell descricaoCell = new PdfPCell(new Phrase(orcamento.Descricao));
+                PdfPCell descricaoCell = new PdfPCell(new Phrase(orcamento.Descricao, new Font(Font.FontFamily.HELVETICA, 10)));
                 table.AddCell(descricaoCell);
 
-                PdfPCell TipoPagamentoCell = new PdfPCell(new Phrase(orcamento.TipoPagamento));
+                PdfPCell TipoPagamentoCell = new PdfPCell(new Phrase(orcamento.TipoPagamento, new Font(Font.FontFamily.HELVETICA, 10)));
                 table.AddCell(TipoPagamentoCell);
 
-                PdfPCell valorCell = new PdfPCell(new Phrase(orcamento.Preco.ToString()));
+                PdfPCell valorCell = new PdfPCell(new Phrase(orcamento.Preco.ToString(), new Font(Font.FontFamily.HELVETICA, 10)));
                 table.AddCell(valorCell);
 
-                PdfPCell TipoEntregaCell = new PdfPCell(new Phrase(orcamento.TipoEntrega));
+                PdfPCell TipoEntregaCell = new PdfPCell(new Phrase(orcamento.TipoEntrega, new Font(Font.FontFamily.HELVETICA, 10)));
                 table.AddCell(TipoEntregaCell);
             }
 
@@ -107,3 +107,4 @@ namespace SistemaOrcamentario.Controllers
         }
     }
 }
+
