@@ -13,8 +13,10 @@ namespace SistemaOrcamentario.Context
             modelBuilder.ApplyConfiguration(new PessoaMap());
             modelBuilder.ApplyConfiguration(new OrcamentoMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new ProdutoMap());
         }
 
+        public DbSet<ProdutoModel> Produtos { get; set; }
         public DbSet<OrcamentoModel> Orcamentos { get; set; }
         public DbSet<PessoaModel> Pessoas { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaOrcamentario.Models.ProdutoModel>
+
+<a class="btn btn-success btn-lg " asp-controller="Produto" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar Produto</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeEmEstoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdutoIncEm)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null) {
+            @foreach (var produto in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(produtoItem => produto.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(produtoItem => produto.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(produtoItem => produto.Preco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(produtoItem => produto.QuantidadeEmEstoque)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(produtoItem => produto.ProdutoIncEm)
+                    </td>
+                </tr>
+            }
+        }
+   
+    </tbody>
+</table>

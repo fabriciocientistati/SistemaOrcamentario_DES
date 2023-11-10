@@ -1,0 +1,49 @@
+﻿@model SistemaOrcamentario.Models.ProdutoModel
+
+@{
+    TempData["Title"] = "Cadastrar Produto";
+}
+
+<h2>Cadastrar Produto</h2>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Nome"></label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Descricao"></label>
+        <input asp-for="Descricao" class="form-control" />
+        <span asp-validation-for="Descricao" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Preco"></label>
+        <input asp-for="Preco" class="form-control" />
+        <span asp-validation-for="Preco" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="QuantidadeEmEstoque"></label>
+        <input asp-for="QuantidadeEmEstoque" class="form-control" />
+        <span asp-validation-for="QuantidadeEmEstoque" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProdutoIncPor"></label>
+        <input asp-for="ProdutoIncPor" class="form-control" />
+        <span asp-validation-for="ProdutoIncPor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProdutoIncEm"></label>
+        <input asp-for="ProdutoIncEm" type="date" class="form-control" />
+        <span asp-validation-for="ProdutoIncEm" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>

@@ -50,7 +50,7 @@ namespace SistemaOrcamentario.Controllers
                     UsuarioModel usuario = _dataContext.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == loginModel.Login.ToUpper());
                     if (usuario != null)
                     {
-                        if (loginModel.Login == usuario.Login && loginModel.Senha.GerarHash() == usuario.Senha)
+                        if (loginModel.Login.ToUpper() == usuario.Login.ToUpper() && loginModel.Senha.GerarHash() == usuario.Senha)
                         {
                             _sessao.CriarSessaoDoUsuario(usuario);
                             return RedirectToAction("Index", "Pessoa");

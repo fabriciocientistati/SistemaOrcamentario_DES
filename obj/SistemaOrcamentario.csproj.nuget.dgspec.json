@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj": {}
+    "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj": {}
   },
   "projects": {
-    "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj": {
+    "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
+        "projectUniqueName": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
         "projectName": "SistemaOrcamentario",
-        "projectPath": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
-        "packagesPath": "C:\\Users\\05178722183\\.nuget\\packages\\",
-        "outputPath": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\obj\\",
+        "projectPath": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
+        "packagesPath": "C:\\Users\\fabri\\.nuget\\packages\\",
+        "outputPath": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\05178722183\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
