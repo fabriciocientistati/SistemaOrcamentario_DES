@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Net;
 using System.Net.Mail;
 
@@ -34,15 +35,19 @@ namespace SistemaOrcamentario.Helper
                 mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.High;
 
-                using (SmtpClient smtp = new SmtpClient(host, porta))
+                using (SmtpClient smtp = new SmtpClient(host, porta)
                 {
-                    smtp.Credentials = new NetworkCredential(username, senha);
-                    smtp.EnableSsl = true; //Envio de email seguro
+                    Credentials = new NetworkCredential(username, senha),
+                    EnableSsl = true //Envio de email seguro
+                })
+                {
                     smtp.Send(mail);
                     return true;
                 }
+
+
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
                 //Gravar log de erro ao enviar e-mail
                 return false;

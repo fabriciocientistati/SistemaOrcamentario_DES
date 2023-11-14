@@ -8,21 +8,23 @@ namespace SistemaOrcamentario.Mappings
     {
         public void Configure(EntityTypeBuilder<UsuarioModel> builder)
         {
-            builder.ToTable("Usuario");
+            builder.ToTable("TBUSUARIO");
 
-            builder.Property(u => u.Nome)
+            builder.HasKey(u => u.UsuId);
+
+            builder.Property(u => u.UsuNome)
                 .HasColumnType("varchar(150)")
                 .IsRequired();
 
-            builder.Property(u => u.Login)
+            builder.Property(u => u.UsuLogin)
                 .HasColumnType("varchar(80)")
                 .IsRequired();
 
-            builder.Property(u => u.Email)
+            builder.Property(u => u.UsuEmail)
                 .HasColumnType("varchar(100)")
                 .IsRequired();
 
-            builder.Property(u => u.Senha)
+            builder.Property(u => u.UsuSenha)
                 .HasColumnType("varchar(40)")
                 .IsRequired();
         }

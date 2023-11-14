@@ -21,7 +21,7 @@
                                             <label for="first-name-icon">Perfil</label>
                                             <div class="position-relative">
                                                 <fieldset class="form-group">
-                                                    <select readonly asp-for="Perfil" class="form-select" id="basicSelect">
+                                                    <select readonly asp-for="UsuPerfil" class="form-select" id="basicSelect">
                                                         <option value="">Selecione</option>
                                                         <option value="@PerfilEnum.Administrador">Administrador</option>
                                                         <option value="@PerfilEnum.Consultor">Consultor</option>
@@ -35,7 +35,7 @@
                                         <div class="form-group has-icon-left">
                                             <label for="first-name-icon">Nome</label>
                                             <div class="position-relative">
-                                                <input asp-for="Nome" type="text" readonly class="form-control" placeholder="Nome" id="first-name-icon">
+                                                <input asp-for="UsuNome" type="text" readonly class="form-control" placeholder="Nome" id="first-name-icon">
                                                 <div class="form-control-icon">
                                                     <i data-feather="user"></i>
                                                 </div>
@@ -46,7 +46,7 @@
                                         <div class="form-group has-icon-left">
                                             <label for="first-name-icon">Login</label>
                                             <div class="position-relative">
-                                                <input asp-for="Login" type="text" readonly class="form-control" placeholder="Login de usuário" id="first-name-icon">
+                                                <input asp-for="UsuLogin" type="text" readonly class="form-control" placeholder="Login de usuário" id="first-name-icon">
                                                 <div class="form-control-icon">
                                                     <i data-feather="user"></i>
                                                 </div>
@@ -57,7 +57,7 @@
                                         <div class="form-group has-icon-left">
                                             <label for="email-id-icon">Email</label>
                                             <div class="position-relative">
-                                                <input asp-for="Email" type="text" readonly class="form-control" placeholder="Email" id="email-id-icon">
+                                                <input asp-for="UsuEmail" type="text" readonly class="form-control" placeholder="Email" id="email-id-icon">
                                                 <div class="form-control-icon">
                                                     <i data-feather="mail"></i>
                                                 </div>

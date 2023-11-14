@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaOrcamentario.Models
 {
     public class OrcamentoModel
     {
         public OrcamentoModel() =>
-            DataInclusao = DateTime.Now;
+            OrcIncEm = DateTime.Now;
 
-        public OrcamentoModel(int iD, int pessoaID, string descricao, string observacoes, decimal preco, string tipoPagamento, string tipoEntrega, DateTime dataInclusao, ProdutoModel? produto) : this()
+        public OrcamentoModel(int orcId, int pesId, string orcDesc, string orcObservacao, decimal orcPreco, string orcTipoPagamento, string orcTipoEntrega, DateTime orcIncEm, PessoaModel orcamentoPessoa) : this()
         {
-            ID = iD;
-            PessoaID = pessoaID;
-            Descricao = descricao;
-            Observacoes = observacoes;
-            Preco = preco;
-            TipoPagamento = tipoPagamento;
-            TipoEntrega = tipoEntrega;
-            DataInclusao = dataInclusao;
-            Produto = produto;
+            OrcId = orcId;
+            PesId = pesId;
+            OrcDesc = orcDesc;
+            OrcObservacao = orcObservacao;
+            OrcPreco = orcPreco;
+            OrcTipoPagamento = orcTipoPagamento;
+            OrcTipoEntrega = orcTipoEntrega;
+            OrcIncEm = orcIncEm;
+            OrcamentoPessoa = orcamentoPessoa;
         }
-        //[Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        public int PessoaID { get; set; }
-        public int ProdutoId { get; set; }
-        public string Descricao { get; set; }
-        public string Observacoes { get; set; }
-        public decimal Preco { get; set; }
-        public string TipoPagamento { get; set; }
-        public string TipoEntrega { get; set; }
-        public DateTime DataInclusao { get; set; } = DateTime.Now;
-        public PessoaModel Pessoa { get; set; }
 
-        public ProdutoModel? Produto { get; set; }
+        [Key]
+        public int OrcId { get; set; }
+        public int PesId { get; set; }
+        //public int CatId { get; set; }
+        public string OrcDesc { get; set; }
+        public string OrcObservacao { get; set; }
+        public decimal OrcPreco { get; set; }
+        public string OrcTipoPagamento { get; set; }
+        public string OrcTipoEntrega { get; set; }
+        public DateTime OrcIncEm { get; set; } = DateTime.Now;
+        public PessoaModel OrcamentoPessoa { get; set; }
+        //public List<ProdutoModel> OrcamentoProduto { get; set; }
     }
 }

@@ -37,17 +37,17 @@
                         @foreach (var usuario in Model)
                         {
                             <tr>
-                                <th scope="row">@usuario.ID</th>
-                                <td>@usuario.Nome</td>
-                                <td>@usuario.Login</td>
-                                <td>@usuario.Perfil</td>
-                                <td>@usuario.Email</td>
+                                <th scope="row">@usuario.UsuId</th>
+                                <td>@usuario.UsuNome</td>
+                                <td>@usuario.UsuLogin</td>
+                                <td>@usuario.UsuPerfil</td>
+                                <td>@usuario.UsuEmail</td>
                                 <td>
                                     <span class="badge bg-success">Ativo</span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar usuário" asp-controller="Usuario" asp-action="Edit" asp-route-id="@usuario.ID"><i class="bi bi-pencil-square mx-2"></i>Editar</a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Usuario" asp-action="Delete" asp-route-id="@usuario.ID"><i class="bi bi-trash mx-2"></i>Apagar</a>
+                                    <a class="btn btn-primary btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar usuário" asp-controller="Usuario" asp-action="Edit" asp-route-id="@usuario.UsuId"><i class="bi bi-pencil-square mx-2"></i>Editar</a>
+                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Usuario" asp-action="Delete" asp-route-id="@usuario.UsuId"><i class="bi bi-trash mx-2"></i>Apagar</a>
                                 </td>
                             </tr>
                         }

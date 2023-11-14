@@ -24,21 +24,21 @@ namespace SistemaOrcamentario.Controllers
         // GET: Orcamento
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.Orcamentos.Include(o => o.Pessoa);
+            var dataContext = _context.TBORCAMENTO.Include(o => o.OrcamentoPessoa);
             return View(await dataContext.ToListAsync());
         }
 
         // GET: Orcamento/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Orcamentos == null)
+            if (id == null || _context.TBORCAMENTO == null)
             {
                 return NotFound();
             }
 
-            var orcamentoModel = await _context.Orcamentos
-                .Include(o => o.Pessoa)
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var orcamentoModel = await _context.TBORCAMENTO
+                .Include(o => o.OrcamentoPessoa)
+                .FirstOrDefaultAsync(m => m.PesId == id);
             if (orcamentoModel == null)
             {
                 return NotFound();
@@ -52,11 +52,11 @@ namespace SistemaOrcamentario.Controllers
         {
             if (id == null || id == 0)
             {
-                ViewData["PessoaID"] = new SelectList(_context.Pessoas, "ID", "Nome"); //Lista nomes no select aleatório
+                ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "Nome"); //Lista nomes no select aleatório
 
                 return View();
             }
-            ViewBag.PessoaID = new SelectList(_context.Pessoas, "ID", "Nome", id); //Lista nome no select por parametro
+            ViewBag.PessoaID = new SelectList(_context.TBPESSOA, "PesId", "Nome", id); //Lista nome no select por parametro
             return View();
         }
 
@@ -69,24 +69,24 @@ namespace SistemaOrcamentario.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PessoaID"] = new SelectList(_context.Pessoas, "ID", "Nome", orcamento.PessoaID);
+            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "Nome", orcamento.PesId);
             return View(orcamento);
         }
 
         // GET: Orcamento/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Orcamentos == null)
+            if (id == null || _context.TBORCAMENTO == null)
             {
                 return NotFound();
             }
 
-            var orcamentoModel = await _context.Orcamentos.FindAsync(id);
+            var orcamentoModel = await _context.TBORCAMENTO.FindAsync(id);
             if (orcamentoModel == null)
             {
                 return NotFound();
             }
-            ViewData["PessoaID"] = new SelectList(_context.Pessoas, "ID", "Nome", orcamentoModel.PessoaID);
+            ViewData["PessoaId"] = new SelectList(_context.TBPESSOA, "OrcamentoId", "Nome", orcamentoModel.PesId);
             return View(orcamentoModel);
         }
 
@@ -95,9 +95,9 @@ namespace SistemaOrcamentario.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,PessoaID,Descricao,Observacoes,Preco,TipoPagamento,TipoEntrega,DataInclusao")] OrcamentoModel orcamentoModel)
+        public async Task<IActionResult> Edit(int id, [Bind("OrcamentoId,PessoaId,Descricao,Observacoes,Preco,TipoPagamento,TipoEntrega,DataInclusao")] OrcamentoModel orcamentoModel)
         {
-            if (id != orcamentoModel.ID)
+            if (id != orcamentoModel.OrcId)
             {
                 return NotFound();
             }
@@ -111,7 +111,7 @@ namespace SistemaOrcamentario.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrcamentoModelExists(orcamentoModel.ID))
+                    if (!OrcamentoModelExists(orcamentoModel.OrcId))
                     {
                         return NotFound();
                     }
@@ -122,21 +122,21 @@ namespace SistemaOrcamentario.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PessoaID"] = new SelectList(_context.Pessoas, "ID", "Nome", orcamentoModel.PessoaID);
+            ViewData["PessoaID"] = new SelectList(_context.TBPESSOA, "OrcamentoId", "Nome", orcamentoModel.PesId);
             return View(orcamentoModel);
         }
 
         // GET: Orcamento/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Orcamentos == null)
+            if (id == null || _context.TBORCAMENTO == null)
             {
                 return NotFound();
             }
 
-            var orcamentoModel = await _context.Orcamentos
-                .Include(o => o.Pessoa)
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var orcamentoModel = await _context.TBORCAMENTO
+                .Include(o => o.OrcamentoPessoa)
+                .FirstOrDefaultAsync(m => m.OrcId == id);
             if (orcamentoModel == null)
             {
                 return NotFound();
@@ -150,14 +150,14 @@ namespace SistemaOrcamentario.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Orcamentos == null)
+            if (_context.TBORCAMENTO == null)
             {
                 return Problem("Entity set 'DataContext.Orcamentos'  is null.");
             }
-            var orcamentoModel = await _context.Orcamentos.FindAsync(id);
+            var orcamentoModel = await _context.TBORCAMENTO.FindAsync(id);
             if (orcamentoModel != null)
             {
-                _context.Orcamentos.Remove(orcamentoModel);
+                _context.TBORCAMENTO.Remove(orcamentoModel);
             }
             
             await _context.SaveChangesAsync();
@@ -166,7 +166,7 @@ namespace SistemaOrcamentario.Controllers
 
         private bool OrcamentoModelExists(int id)
         {
-          return _context.Orcamentos.Any(e => e.ID == id);
+          return _context.TBORCAMENTO.Any(e => e.OrcId == id);
         }
     }
 }

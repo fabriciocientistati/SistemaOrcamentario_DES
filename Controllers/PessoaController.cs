@@ -1,15 +1,10 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text;
+﻿//using iTextSharp.text.pdf;
+//using iTextSharp.text;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.VisualBasic;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Models;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using SistemaOrcamentario.Filters;
 using System;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +23,7 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Index()
         {
-            List<PessoaModel> pessoa = _dataContext.Pessoas.Include(x => x.Orcamentos).ToList();
+            List<PessoaModel> pessoa = _dataContext.TBPESSOA.Include(x => x.Orcamentos).ToList();
             return View(pessoa);
         }
 
@@ -44,7 +39,7 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            PessoaModel pessoa = _dataContext.Pessoas.FirstOrDefault(x => x.ID == id);
+            PessoaModel pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
 
             if (pessoa == null)
             {
@@ -61,7 +56,7 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            PessoaModel pessoa = _dataContext.Pessoas.FirstOrDefault(x => x.ID == id);
+            PessoaModel pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
 
             if (pessoa == null)
             {
@@ -73,8 +68,8 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Details(int? id)
         {
-            PessoaModel pessoa = _dataContext.Pessoas.FirstOrDefault(x => x.ID == id);
-            List<OrcamentoModel> orcamentos = _dataContext.Orcamentos.Where(x => x.PessoaID == id).ToList();
+            PessoaModel pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
+            List<OrcamentoModel> orcamentos = _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToList();
             var viewModel = new ViewModel { Pessoa = pessoa, Orcamento = orcamentos };
 
             return View(viewModel);
@@ -82,7 +77,7 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult listarOrcamentosPessoaId(int? id)
         {
-            List<OrcamentoModel> orcamentos = _dataContext.Orcamentos.Where(x => x.PessoaID == id).ToList();
+            List<OrcamentoModel> orcamentos = _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToList();
             return PartialView("_PessoaOrcamentosIndex", orcamentos);
         }
 
@@ -91,8 +86,8 @@ namespace SistemaOrcamentario.Controllers
         {
             if (ModelState.IsValid)
             {
-                pessoa.DataInclusao = DateTime.Now;
-                _dataContext.Pessoas.Add(pessoa);
+                pessoa.PesIncEm = DateTime.Now;
+                _dataContext.TBPESSOA.Add(pessoa);
                 _dataContext.SaveChanges();
                 TempData["MessageSuccess"] = "Cadastro realizado.";
 
@@ -109,7 +104,7 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _dataContext.Pessoas.Update(pessoa);
+                    _dataContext.TBPESSOA.Update(pessoa);
                     _dataContext.SaveChanges();
                     TempData["MessageSuccess"] = "Cadastro atualização.";
 
@@ -134,7 +129,7 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            _dataContext.Pessoas.Remove(pessoa);
+            _dataContext.TBPESSOA.Remove(pessoa);
             _dataContext.SaveChanges();
             TempData["MessageSuccess"] = "Sucesso: Deletado com sucesso!";
 

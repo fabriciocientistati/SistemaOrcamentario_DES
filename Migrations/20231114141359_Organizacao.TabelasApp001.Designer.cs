@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaOrcamentario.Context;
 
@@ -11,9 +12,11 @@ using SistemaOrcamentario.Context;
 namespace SistemaOrcamentario.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231114141359_Organizacao.TabelasApp001")]
+    partial class OrganizacaoTabelasApp001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,23 +34,22 @@ namespace SistemaOrcamentario.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrcId"));
 
                     b.Property<string>("OrcDesc")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(MAX)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrcIncEm")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrcObservacao")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("OrcPreco")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("OrcTipoEntrega")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrcTipoPagamento")
-                        .HasColumnType("varchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OrcamentoPessoaPesId")
                         .HasColumnType("int");
@@ -59,7 +61,7 @@ namespace SistemaOrcamentario.Migrations
 
                     b.HasIndex("OrcamentoPessoaPesId");
 
-                    b.ToTable("TBORCAMENTO", (string)null);
+                    b.ToTable("TBORCAMENTO");
                 });
 
             modelBuilder.Entity("SistemaOrcamentario.Models.PessoaModel", b =>
@@ -71,56 +73,51 @@ namespace SistemaOrcamentario.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PesId"));
 
                     b.Property<string>("PesBairro")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesCep")
                         .IsRequired()
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesCidade")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesCnpj")
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesCpf")
-                        .IsRequired()
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesEmail")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesEstado")
-                        .IsRequired()
-                        .HasColumnType("char(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PesIncEm")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PesNome")
                         .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesNumCelular")
                         .IsRequired()
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesNumTelefone")
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesNumero")
                         .IsRequired()
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PesRua")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PesId");
 
-                    b.ToTable("TBPESSOA", (string)null);
+                    b.ToTable("TBPESSOA");
                 });
 
             modelBuilder.Entity("SistemaOrcamentario.Models.UsuarioModel", b =>
@@ -135,30 +132,26 @@ namespace SistemaOrcamentario.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UsuEmail")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UsuIncEm")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UsuLogin")
-                        .IsRequired()
-                        .HasColumnType("varchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UsuNome")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UsuPerfil")
                         .HasColumnType("int");
 
                     b.Property<string>("UsuSenha")
-                        .IsRequired()
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UsuId");
 
-                    b.ToTable("TBUSUARIO", (string)null);
+                    b.ToTable("TBUSUARIO");
                 });
 
             modelBuilder.Entity("SistemaOrcamentario.Models.OrcamentoModel", b =>

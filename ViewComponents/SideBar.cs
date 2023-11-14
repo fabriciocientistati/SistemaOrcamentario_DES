@@ -16,7 +16,7 @@ namespace SistemaOrcamentario.ViewComponents
 
             UsuarioModel usuario = JsonConvert.DeserializeObject<UsuarioModel>(sessaoUsuario);
 
-            return View(usuario);
+            return await Task.FromResult(View(usuario));
         }
     }
 }

@@ -8,53 +8,55 @@ namespace SistemaOrcamentario.Mappings
     {
         public void Configure(EntityTypeBuilder<PessoaModel> builder)
         {
-            builder.ToTable("Pessoa");
+            builder.ToTable("TBPESSOA");
 
-            builder.Property(p => p.Nome)
+            builder.HasKey(p => p.PesId);
+
+            builder.Property(p => p.PesNome)
                 .HasColumnType("varchar(150)")
                 .IsRequired();
 
-            builder.Property(p => p.Cpf)
+            builder.Property(p => p.PesCpf)
                 .HasColumnType("varchar(40)")
                 .IsRequired();
 
-            builder.Property(p => p.Cnpj)
+            builder.Property(p => p.PesCnpj)
                 .HasColumnType("varchar(40)");
 
-            builder.Property(p => p.NumberCellPhone)
+            builder.Property(p => p.PesNumCelular)
                 .HasColumnType("varchar(40)")
                 .IsRequired();
 
-            builder.Property(p => p.NumberFixPhone)
+            builder.Property(p => p.PesNumTelefone)
                 .HasColumnType("varchar(40)");
 
-            builder.Property(p => p.Email)
+            builder.Property(p => p.PesEmail)
                 .HasColumnType("varchar(100)");
 
-            builder.Property(p => p.Cep)
+            builder.Property(p => p.PesCep)
                 .HasColumnType("varchar(20)")
                 .IsRequired();
 
-            builder.Property(p => p.Rua)
+            builder.Property(p => p.PesRua)
                 .HasColumnType("varchar(150)")
                 .IsRequired();
 
-            builder.Property(p => p.Numero)
+            builder.Property(p => p.PesNumero)
                 .HasColumnType("varchar(5)");
 
-            builder.Property(p => p.Bairro)
+            builder.Property(p => p.PesBairro)
                 .HasColumnType("varchar(100)")
                 .IsRequired();
 
-            builder.Property(p => p.Cidade)
+            builder.Property(p => p.PesCidade)
                 .HasColumnType("varchar(100)")
                 .IsRequired();
 
-            builder.Property(p => p.Estado)
+            builder.Property(p => p.PesEstado)
                 .HasColumnType("char(2)")
                 .IsRequired();
 
-            builder.Property(p => p.DataInclusao)
+            builder.Property(p => p.PesIncEm)
                 .HasColumnType("datetime");
         }
     }

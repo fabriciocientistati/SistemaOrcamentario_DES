@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Ocsp;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
@@ -29,9 +28,9 @@ namespace SistemaOrcamentario.Controllers
             try
             {
                 UsuarioModel usuarioLogado = _sessao.BuscarSessaoDoUsuario();
-                alterarSenha.Id = usuarioLogado.ID;
+                alterarSenha.Id = usuarioLogado.UsuId;
 
-                UsuarioModel usuarioDB = _dataContext.Usuarios.FirstOrDefault(x => x.ID == alterarSenha.Id);
+                UsuarioModel usuarioDB = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuId == alterarSenha.Id);
 
                 if (usuarioDB == null) throw new Exception("Houve um erro na atualização da senha, usuário não encontrado!");
 
@@ -42,9 +41,9 @@ namespace SistemaOrcamentario.Controllers
                 if (ModelState.IsValid)
                 {
                     usuarioDB.SetNovaSenha(alterarSenha.novaSenha);
-                    usuarioDB.DataAtualizacao = DateTime.Now;
+                    usuarioDB.UsuIncEm = DateTime.Now;
 
-                    _dataContext.Usuarios.Update(usuarioDB);
+                    _dataContext.TBUSUARIO.Update(usuarioDB);
                     _dataContext.SaveChanges();
 
                     TempData["MessageSuccess"] = "Senha alterada com sucesso!";

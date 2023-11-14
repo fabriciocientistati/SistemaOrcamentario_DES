@@ -7,44 +7,61 @@ namespace SistemaOrcamentario.Models
     public class PessoaModel
     {
         public PessoaModel() =>
-            Orcamentos = new List<OrcamentoModel>();
+            PesIncEm = DateTime.Now;
 
-        public PessoaModel(int iD, string nome, string cpf, string cnpj, string numberCellPhone, string numberFixPhone, string email, string cep, string rua, string numero, string bairro, string cidade, string estado, DateTime dataInclusao) : this()
+        public PessoaModel(int pesId, string pesNome, string pesCpf, string pesCnpj, string pesNumCelular, string pesNumTelefone, string pesEmail, string pesCep, string pesRua, string pesNumero, string pesBairro, string pesCidade, string pesEstado, DateTime pesIncEm, List<OrcamentoModel> orcamentos) : this()
         {
-            ID = iD;
-            Nome = nome;
-            Cpf = cpf;
-            Cnpj = cnpj;
-            NumberCellPhone = numberCellPhone;
-            NumberFixPhone = numberFixPhone;
-            Email = email;
-            Cep = cep;
-            Rua = rua;
-            Numero = numero;
-            Bairro = bairro;
-            Cidade = cidade;
-            Estado = estado;
-            DataInclusao = dataInclusao;
+            PesId = pesId;
+            PesNome = pesNome;
+            PesCpf = pesCpf;
+            PesCnpj = pesCnpj;
+            PesNumCelular = pesNumCelular;
+            PesNumTelefone = pesNumTelefone;
+            PesEmail = pesEmail;
+            PesCep = pesCep;
+            PesRua = pesRua;
+            PesNumero = pesNumero;
+            PesBairro = pesBairro;
+            PesCidade = pesCidade;
+            PesEstado = pesEstado;
+            PesIncEm = pesIncEm;
+            Orcamentos = orcamentos;
         }
 
-        public int ID { get; set; }
-        [Required(ErrorMessage = "Digite o nome")]
-        public string Nome { get; set; }
-        public string? Cpf { get; set; }
-        public string? Cnpj { get; set; }
-        [Required(ErrorMessage = "Digite ao menos 1 telefone")]
+        [Key]
+        public int PesId { get; set; }
+
+        [Required(ErrorMessage = "O campo nome é obrigatório.")]
+        public string PesNome { get; set; }
+
+        public string? PesCpf { get; set; } = null;
+
+        public string? PesCnpj { get; set; }
+
+        [Required(ErrorMessage = "O campo telefone é obrigatório.")]
         [Phone(ErrorMessage = "O número informado não é valido")]
-        public string NumberCellPhone { get; set; }
-        public string? NumberFixPhone { get; set; }
-        public string? Email { get; set; }
-        [Required(ErrorMessage = "Digite o CEP para consulta")]
-        public string Cep { get; set; }
-        public string Rua { get; set; }
-        public string? Numero { get; set; }
-        public string Bairro { get; set; }
-        public string Cidade { get; set; }
-        public string Estado { get; set; }
-        public DateTime DataInclusao { get; set; } = DateTime.Now;
+        public string PesNumCelular { get; set; }
+
+        public string? PesNumTelefone { get; set; }
+
+        public string? PesEmail { get; set; }
+
+        [Required(ErrorMessage = "Informe o CEP para consultar o endereço")]
+        public string PesCep { get; set; }
+
+        public string PesRua { get; set; }
+
+        [Required(ErrorMessage = "O campo Número é obrigatório")]
+        public string PesNumero { get; set; }
+
+        public string PesBairro { get; set; }
+
+        public string PesCidade { get; set; }
+
+        public string PesEstado { get; set; }
+
+        public DateTime PesIncEm { get; set; } = DateTime.Now;
+
         public virtual List<OrcamentoModel> Orcamentos { get; set; }
     }
 }

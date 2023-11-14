@@ -19,51 +19,51 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.OrcDesc)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
+                @Html.DisplayFor(model => model.OrcDesc)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Observacoes)
+            @Html.DisplayNameFor(model => model.OrcObservacao)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Observacoes)
+                @Html.DisplayFor(model => model.OrcObservacao)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Preco)
+            @Html.DisplayNameFor(model => model.OrcPreco)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Preco)
+                @Html.DisplayFor(model => model.OrcPreco)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoPagamento)
+                @Html.DisplayNameFor(model => model.OrcTipoPagamento)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoPagamento)
+                @Html.DisplayFor(model => model.OrcTipoPagamento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoEntrega)
+                @Html.DisplayNameFor(model => model.OrcTipoEntrega)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoEntrega)
+                @Html.DisplayFor(model => model.OrcTipoEntrega)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInclusao)
+                @Html.DisplayNameFor(model => model.OrcIncEm)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataInclusao)
+            @Html.DisplayFor(model => model.OrcIncEm)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pessoa)
+            @Html.DisplayNameFor(model => model.OrcamentoPessoa)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pessoa.Bairro)
+                @Html.DisplayFor(model => model.OrcamentoPessoa.PesNome)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="OrcId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

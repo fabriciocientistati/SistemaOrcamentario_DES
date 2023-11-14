@@ -40,13 +40,13 @@
                         @foreach (var pessoa in Model)
                         {
                             <tr>
-                                <th scope="row">@pessoa.ID</th>
-                                <td> @pessoa.Nome</td>
-                                <td>@pessoa.DataInclusao</td>
+                                <th scope="row">@pessoa.PesId</th>
+                                <td> @pessoa.PesNome</td>
+                                <td>@pessoa.PesIncEm</td>
                                 <td>
                                     @if (pessoa.Orcamentos != null && pessoa.Orcamentos.Any())
                                     {
-                                        <a href="#" id="abrir-modal" onclick="capturar(@pessoa.ID)" class="btn btn-info btn-sm">
+                                        <a href="#" id="abrir-modal" onclick="capturar(@pessoa.PesId)" class="btn btn-info btn-sm">
                                             @pessoa.Orcamentos.Count()
                                         </a>
                                     }
@@ -56,10 +56,10 @@
                                     }
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.ID"><i class="bi bi-eye mx-2"></i>Detalhes</a>
-                                    <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.ID"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.ID"><i class="bi bi-trash mx-2"></i>Apagar</a>
-                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.ID"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
+                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.PesId"><i class="bi bi-eye mx-2"></i>Detalhes</a>
+                                    <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.PesId"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
+                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.PesId"><i class="bi bi-trash mx-2"></i>Apagar</a>
+                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.PesId"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
                                 </td>
                             </tr>
                         }

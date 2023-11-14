@@ -47,10 +47,10 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    UsuarioModel usuario = _dataContext.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == loginModel.Login.ToUpper());
+                    UsuarioModel usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuLogin.ToUpper() == loginModel.Login.ToUpper());
                     if (usuario != null)
                     {
-                        if (loginModel.Login.ToUpper() == usuario.Login.ToUpper() && loginModel.Senha.GerarHash() == usuario.Senha)
+                        if (loginModel.Login.ToUpper() == usuario.UsuLogin.ToUpper() && loginModel.Senha.GerarHash() == usuario.UsuSenha)
                         {
                             _sessao.CriarSessaoDoUsuario(usuario);
                             return RedirectToAction("Index", "Pessoa");
@@ -75,14 +75,14 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    UsuarioModel usuario = _dataContext.Usuarios.FirstOrDefault(x => x.Email.ToUpper() == redefinirSenha.Email.ToUpper() && x.Login.ToUpper() == redefinirSenha.Login.ToUpper());
+                    UsuarioModel usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuEmail.ToUpper() == redefinirSenha.Email.ToUpper() && x.UsuLogin.ToUpper() == redefinirSenha.Login.ToUpper());
                 
                     if (usuario != null)
                     {
                         string novaSenha = usuario.GerarNovaSenha();
                         string mensagem = $"Sua nova senha é: {novaSenha}";
 
-                        bool emailEnviado = _email.Enviar(usuario.Email, "Sistema de Cadastro - Nova Senha", mensagem);
+                        bool emailEnviado = _email.Enviar(usuario.UsuEmail, "Sistema de Cadastro - Nova Senha", mensagem);
                        
                         if (emailEnviado)
                         {

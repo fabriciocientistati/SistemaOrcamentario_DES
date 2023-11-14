@@ -27,7 +27,7 @@ namespace SistemaOrcamentario.Filters
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
                 }
 
-                if (usuario.Perfil != Enums.PerfilEnum.Administrador)
+                if (usuario.UsuPerfil != Enums.PerfilEnum.Administrador)
                 {
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { {"controller", "Restrito" }, {"action", "Index"} });
                 }

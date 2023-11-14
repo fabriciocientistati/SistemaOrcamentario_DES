@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj": {}
+    "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario\\SistemaOrcamentario.csproj": {}
   },
   "projects": {
-    "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj": {
+    "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario\\SistemaOrcamentario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
+        "projectUniqueName": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario\\SistemaOrcamentario.csproj",
         "projectName": "SistemaOrcamentario",
-        "projectPath": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
-        "packagesPath": "C:\\Users\\fabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\obj\\",
+        "projectPath": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario\\SistemaOrcamentario.csproj",
+        "packagesPath": "C:\\Users\\05178722183\\.nuget\\packages\\",
+        "outputPath": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\05178722183\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -37,48 +37,32 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
-            "ExcelDataReader": {
-              "target": "Package",
-              "version": "[3.6.0, )"
-            },
-            "FastReport.OpenSource": {
-              "target": "Package",
-              "version": "[2023.2.7, )"
-            },
-            "FastReport.OpenSource.Export.PdfSimple": {
-              "target": "Package",
-              "version": "[2023.2.7, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.15, )"
+              "version": "[7.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.15, )"
+              "version": "[7.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.15, )"
+              "version": "[7.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.15, )"
+              "version": "[7.0.13, )"
             },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[6.0.13, )"
-            },
-            "iTextSharp": {
-              "target": "Package",
-              "version": "[5.5.13.3, )"
+              "version": "[13.0.3, )"
             }
           },
           "imports": [

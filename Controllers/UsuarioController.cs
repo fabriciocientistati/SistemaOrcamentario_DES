@@ -21,7 +21,7 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<UsuarioModel> usuario = _dataContext.Usuarios;
+            IEnumerable<UsuarioModel> usuario = _dataContext.TBUSUARIO;
 
             return View(usuario);
         }
@@ -38,7 +38,7 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            UsuarioModel usuario = _dataContext.Usuarios.FirstOrDefault(x => x.ID == id);
+            UsuarioModel usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuId == id);
 
             if (usuario == null)
             {
@@ -55,7 +55,7 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            UsuarioModel usuario = _dataContext.Usuarios.FirstOrDefault(x => x.ID == id);
+            UsuarioModel usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuId == id);
 
             if (usuario == null)
             {
@@ -71,9 +71,9 @@ namespace SistemaOrcamentario.Controllers
         {
             if (ModelState.IsValid)
             {
-                usuario.DataInclusao = DateTime.Now;
+                usuario.UsuIncEm = DateTime.Now;
                 usuario.SetSenhaHas();
-                _dataContext.Usuarios.Add(usuario);
+                _dataContext.TBUSUARIO.Add(usuario);
                 _dataContext.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -85,7 +85,7 @@ namespace SistemaOrcamentario.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dataContext.Usuarios.Update(usuario);
+                _dataContext.TBUSUARIO.Update(usuario);
                 _dataContext.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -99,7 +99,7 @@ namespace SistemaOrcamentario.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dataContext.Usuarios.Remove(usuario);
+                _dataContext.TBUSUARIO.Remove(usuario);
                 _dataContext.SaveChanges();
 
                 return RedirectToAction("Index");

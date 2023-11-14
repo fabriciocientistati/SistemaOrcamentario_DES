@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaOrcamentario.Models;
+using System.Reflection.Emit;
 
 namespace SistemaOrcamentario.Mappings
 {
@@ -8,38 +9,28 @@ namespace SistemaOrcamentario.Mappings
     {
         public void Configure(EntityTypeBuilder<OrcamentoModel> builder)
         {
-            builder.ToTable("Orcamento");
+            builder.ToTable("TBORCAMENTO");
 
-            builder.HasKey(p => p.ID);
-            builder.HasOne(p => p.Pessoa);
+            builder.HasKey(o => o.OrcId);
 
-            builder.Property(p => p.Descricao)
+            builder.Property(p => p.OrcDesc)
                 .HasColumnType("nvarchar(MAX)")
                 .IsRequired();
 
-            builder.Property(p => p.Observacoes)
+            builder.Property(p => p.OrcObservacao)
                 .HasColumnType("varchar(250)");
 
-            builder.Property(p => p.Preco)
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
+            builder.Property(o => o.OrcPreco)
+                .HasColumnType("decimal(18,2)");
 
-            builder.Property(p => p.TipoPagamento)
+            builder.Property(p => p.OrcTipoPagamento)
                 .HasColumnType("varchar(80)");
 
-            builder.Property(p => p.TipoEntrega)
+            builder.Property(p => p.OrcTipoEntrega)
                 .HasColumnType("varchar(50)");
 
-            builder.Property(p => p.DataInclusao)
+            builder.Property(p => p.OrcIncEm)
                 .HasColumnType("datetime");
-
-            //builder.HasIndex(p => p.ID)
-            //    .HasDatabaseName("IX_OrcamentoModel_ID");
-
-            //builder.HasOne(p => p.Pessoa)
-            //    .WithMany(p => p.Orcamentos)
-            //    .HasForeignKey(p => p.PessoaID)
-            //    .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -1,59 +1,64 @@
-﻿using iTextSharp.text;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel.DataAnnotations;
 
-namespace SistemaOrcamentario.Models
-{
-    public class ProdutoModel
-    {
-        public ProdutoModel() =>
-            ProdutoIncEm = DateTime.Now;
+//namespace SistemaOrcamentario.Models
+//{
+//    public class ProdutoModel
+//    {
+//        public ProdutoModel() =>
+//            ProIncEm = DateTime.Now;
 
-        public ProdutoModel(int produtoId, string nome, string descricao, decimal preco, int quantidadeEmEstoque, int produtoIncPor, DateTime produtoIncEm, int? produtoAltPor, DateTime? produtoAltEm, List<OrcamentoModel> produtoOrcamento) : this()
-        {
-            ProdutoId = produtoId;
-            Nome = nome;
-            Descricao = descricao;
-            Preco = preco;
-            QuantidadeEmEstoque = quantidadeEmEstoque;
-            ProdutoIncPor = produtoIncPor;
-            ProdutoIncEm = produtoIncEm;
-            ProdutoAltPor = produtoAltPor;
-            ProdutoAltEm = produtoAltEm;
-            ProdutoOrcamento = produtoOrcamento;
-        }
+//        public ProdutoModel(int proId, string proNome, string proDesc, decimal proPreco, int proQuantidadeEmEstoque, string proImagemUrl, int catId, int proIncPor, DateTime proIncEm, int? proAltPor, DateTime? proAltEm, CategoriaModel categoria, List<OrcamentoModel> produtoOrcamento) : this()
+//        {
+//            ProId = proId;
+//            ProNome = proNome;
+//            ProDesc = proDesc;
+//            ProPreco = proPreco;
+//            ProQuantidadeEmEstoque = proQuantidadeEmEstoque;
+//            ProImagemUrl = proImagemUrl;
+//            CatId = catId;
+//            ProIncPor = proIncPor;
+//            ProIncEm = proIncEm;
+//            ProAltPor = proAltPor;
+//            ProAltEm = proAltEm;
+//            Categoria = categoria;
+//            ProdutoOrcamento = produtoOrcamento;
+//        }
 
-        [Key]
-        public int ProdutoId { get; set; }
+//        [Key]
+//        public int ProId { get; set; }
 
-        [Required(ErrorMessage = "O campo nome é obrigatório.")]
-        public string Nome { get; set; }
+//        [Required(ErrorMessage = "O campo nome é obrigatório.")]
+//        public string ProNome { get; set; }
 
-        [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
-        public string Descricao { get; set; }
+//        [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
+//        public string ProDesc { get; set; }
 
-        [Range(0.01, double.MaxValue, ErrorMessage = "O Preço deve ser maior que zero.")]
+//        [Range(0.01, double.MaxValue, ErrorMessage = "O Preço deve ser maior que zero.")]
 
-        public decimal Preco { get; set; }
+//        public decimal ProPreco { get; set; }
 
-        public string GetFormattedBasePrice() => Preco.ToString("0.00");
+//        public string GetFormattedBasePrice() => ProPreco.ToString("0.00");
 
-        [Range(1, int.MaxValue, ErrorMessage = "A Quantidade deve ser maior que zero.")]
-        public int QuantidadeEmEstoque {  get; set; }
+//        [Range(1, int.MaxValue, ErrorMessage = "A Quantidade deve ser maior que zero.")]
+//        public int ProQuantidadeEmEstoque {  get; set; }
 
-        public string ImagemUrl { get; set; }
+//        public string ProImagemUrl { get; set; }
 
-        public int ProdutoIncPor {  get; set; }
+//        public int CatId { get; set; }
 
-        public DateTime ProdutoIncEm {  get; set; } = DateTime.Now;
+//        public int ProIncPor {  get; set; }
 
-        public int? ProdutoAltPor { get; set; }
+//        public DateTime ProIncEm {  get; set; } = DateTime.Now;
 
-        public DateTime? ProdutoAltEm { get; set; }
+//        public int? ProAltPor { get; set; }
 
-        public List<OrcamentoModel> ProdutoOrcamento { get; set; }
+//        public DateTime? ProAltEm { get; set; }
 
-    }
-}
+//        public CategoriaModel Categoria { get; set; } 
+
+//        public List<OrcamentoModel> ProdutoOrcamento { get; set; }
+
+//    }
+//}

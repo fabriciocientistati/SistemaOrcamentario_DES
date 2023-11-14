@@ -15,7 +15,7 @@
                                     <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" required placeholder="" asp-for="Nome">
+                                            <input type="text" class="form-control" required placeholder="" asp-for="PesNome">
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -26,7 +26,7 @@
                                         <h6>Data de hoje</h6>
                                         <div class="form-group position-relative has-icon-right">
                                             <input type="datetime-local" required class="form-control"
-                                                   placeholder="" asp-for="DataInclusao">
+                                                   placeholder="" asp-for="PesIncEm">
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Número telefone</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" required oninput="mascaraTelefone(this)" asp-for="NumberCellPhone">
+                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" required oninput="mascaraTelefone(this)" asp-for="PesNumCelular">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
@@ -45,7 +45,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Número telefone</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" oninput="mascaraTelefone(this)" asp-for="NumberFixPhone">
+                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" oninput="mascaraTelefone(this)" asp-for="PesNumTelefone">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
@@ -57,7 +57,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>CPF</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input id="cpf" type="text" class="form-control" maxlength="14" required placeholder="000.000.000-00" oninput="mascaraCpfCnpj(this)" asp-for="Cpf">
+                                            <input id="cpf" type="text" class="form-control" maxlength="14" required placeholder="000.000.000-00" oninput="mascaraCpfCnpj(this)" asp-for="PesCpf">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-box-arrow-right"></i>
                                             </div>
@@ -67,7 +67,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>CNPJ</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input id="cnpj" type="text" class="form-control" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCpfCnpj(this)" asp-for="Cnpj">
+                                            <input id="cnpj" type="text" class="form-control" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCpfCnpj(this)" asp-for="PesCnpj">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-box-arrow-right"></i>
                                             </div>
@@ -79,7 +79,7 @@
                                     <div class="col-sm-6 mb-5">
                                         <h6>E-mail</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input id="email" type="email" class="form-control" placeholder="email@email.com.br" asp-for="Email">
+                                            <input id="email" type="email" class="form-control" placeholder="email@email.com.br" asp-for="PesEmail">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-envelope"></i>
                                             </div>
@@ -92,7 +92,7 @@
                                     <div class="col-sm-2">
                                         <h6>CEP</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input id="cep" type="text" class="form-control" oninput="mascaraCep(this)" placeholder="XXXXX-XXX" asp-for="Cep">
+                                            <input id="cep" type="text" class="form-control" oninput="mascaraCep(this)" placeholder="XXXXX-XXX" asp-for="PesCep">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-house"></i>
                                             </div>
@@ -109,14 +109,14 @@
                                     <div class="col-sm-6">
                                         <h6>Rua</h6>
                                         <div class="form-group position-relative">
-                                            <input id="rua" type="text" class="form-control" readonly placeholder="" asp-for="Rua">
+                                            <input id="rua" type="text" class="form-control" readonly placeholder="" asp-for="PesRua">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2">
                                         <h6>Número</h6>
                                         <div class="form-group position-relative">
-                                            <input id="numero" type="text" class="form-control" placeholder="" asp-for="Numero">
+                                            <input id="numero" type="text" class="form-control" placeholder="" asp-for="PesNumero">
                                         </div>
                                     </div>
                                 </div>
@@ -125,21 +125,21 @@
                                     <div class="col-sm-3 mb-4">
                                         <h6>Bairro</h6>
                                         <div class="form-group position-relative">
-                                            <input id="bairro" type="text" class="form-control" readonly placeholder="" asp-for="Bairro">
+                                            <input id="bairro" type="text" class="form-control" readonly placeholder="" asp-for="PesBairro">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2 mb-4">
                                         <h6>Estado</h6>
                                         <div class="form-group position-relative">
-                                            <input id="estado" type="text" class="form-control" readonly placeholder="" asp-for="Estado">
+                                            <input id="estado" type="text" class="form-control" readonly placeholder="" asp-for="PesEstado">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-3 mb-4">
                                         <h6>Cidade</h6>
                                         <div class="form-group position-relative">
-                                            <input id="cidade" type="text" class="form-control" readonly placeholder="" asp-for="Cidade">
+                                            <input id="cidade" type="text" class="form-control" readonly placeholder="" asp-for="PesCidade">
                                         </div>
                                     </div>
                                 </div>
