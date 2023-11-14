@@ -47,21 +47,20 @@ namespace SistemaOrcamentario.Controllers
             return View(orcamentoModel);
         }
 
-        // GET: Orcamento/Create
         public IActionResult Create(int? id) //Carrega o ID que vem por parametro
         {
             if (id == null || id == 0)
             {
-                ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "Nome"); //Lista nomes no select aleatório
+                ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome"); //Lista nomes no select aleatório
 
                 return View();
             }
-            ViewBag.PessoaID = new SelectList(_context.TBPESSOA, "PesId", "Nome", id); //Lista nome no select por parametro
+            ViewBag.PesId = new SelectList(_context.TBPESSOA, "PesId", "PesNome", id); //Lista nome no select por parametro
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("PessoaID,Descricao,Observacoes,Preco,TipoPagamento,TipoEntrega,DataInclusao")] OrcamentoModel orcamento)
+        public async Task<IActionResult> Create([Bind("PesId,OrcDesc,OrcObservacao,OrcPreco,OrcTipoPagamento,OrcTipoEntrega,OrcIncEm")] OrcamentoModel orcamento)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +68,7 @@ namespace SistemaOrcamentario.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "Nome", orcamento.PesId);
+            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", orcamento.PesId);
             return View(orcamento);
         }
 

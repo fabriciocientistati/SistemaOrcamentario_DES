@@ -12,12 +12,10 @@ namespace SistemaOrcamentario.Mappings
 
             builder.HasKey(u => u.UsuId);
 
+            builder.HasIndex(u => u.UsuLogin).IsUnique();
+
             builder.Property(u => u.UsuNome)
                 .HasColumnType("varchar(150)")
-                .IsRequired();
-
-            builder.Property(u => u.UsuLogin)
-                .HasColumnType("varchar(80)")
                 .IsRequired();
 
             builder.Property(u => u.UsuEmail)

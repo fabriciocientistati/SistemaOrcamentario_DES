@@ -69,14 +69,23 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public IActionResult Create(UsuarioModel usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                usuario.UsuIncEm = DateTime.Now;
-                usuario.SetSenhaHas();
-                _dataContext.TBUSUARIO.Add(usuario);
-                _dataContext.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    usuario.UsuIncEm = DateTime.Now;
+                    usuario.SetSenhaHas();
+                    _dataContext.TBUSUARIO.Add(usuario);
+                    _dataContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (Exception)
+            {
+                TempData["MessageErro"] = $"Ops, Login de usuário já existente.";
+                return RedirectToAction("Create");
+            }
+
             return View();
         }
 
