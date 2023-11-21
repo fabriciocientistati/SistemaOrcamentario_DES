@@ -9,6 +9,8 @@ using SistemaOrcamentario.Filters;
 using System;
 using Microsoft.EntityFrameworkCore;
 using SistemaOrcamentario.Helper;
+using SistemaOrcamentario.Services;
+using System.Threading.Tasks;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -17,17 +19,19 @@ namespace SistemaOrcamentario.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly ISessao _sessao;
+        private readonly IService<PessoaModel> _service;
 
-        public PessoaController(DataContext dataContext, ISessao sessao)
+        public PessoaController(DataContext dataContext, ISessao sessao, IService<PessoaModel> service)
         {
             _dataContext = dataContext;
             _sessao = sessao;
+            _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<PessoaModel> pessoa = _dataContext.TBPESSOA.Include(x => x.Orcamentos).ToList();
-            return View(pessoa);
+            var pessoas = await _service.FindAll();
+            return View(pessoas);
         }
 
         public IActionResult Create()
@@ -36,23 +40,6 @@ namespace SistemaOrcamentario.Controllers
         }
 
         public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            PessoaModel pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
-
-            if (pessoa == null)
-            {
-                return NotFound();
-            }
-
-            return View(pessoa);
-        }
-
-        public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
@@ -78,14 +65,14 @@ namespace SistemaOrcamentario.Controllers
             return View(viewModel);
         }
 
-        public IActionResult listarOrcamentosPessoaId(int? id)
+        public async Task<IActionResult> ListarOrcamentosPessoaId(int? id)
         {
-            List<OrcamentoModel> orcamentos = _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToList();
+            List<OrcamentoModel> orcamentos = await _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToListAsync();
             return PartialView("_PessoaOrcamentosIndex", orcamentos);
         }
 
         [HttpPost]
-        public IActionResult Create(PessoaModel pessoa)
+        public async Task<IActionResult> Create(PessoaModel pessoa)
         {
             try
             {
@@ -102,11 +89,10 @@ namespace SistemaOrcamentario.Controllers
                     if (int.TryParse(UsuId, out int parsedUsuId))
                     {
                         pessoa.PesIncPor = parsedUsuId;
+                        pessoa.PesIncEm = DateTime.Now;
                     }
 
-                    pessoa.PesIncEm = DateTime.Now;
-                    _dataContext.TBPESSOA.Add(pessoa);
-                    _dataContext.SaveChanges();
+                    await _service.Create(pessoa);
                     TempData["MessageSuccess"] = "Cliente cadastrado com sucesso.";
 
                     return RedirectToAction("Index");
@@ -127,11 +113,13 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _dataContext.TBPESSOA.Update(pessoa);
-                    _dataContext.SaveChanges();
-                    TempData["MessageSuccess"] = "Cadastro atualização.";
+                    if (pessoa != null)
+                    {
+                        _service.Update(pessoa);
+                        TempData["MessageSuccess"] = "Cadastro atualização.";
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
                 }
 
                 TempData["MessageErro"] = "Não foi possível atualizar o cadastro.";
@@ -144,16 +132,15 @@ namespace SistemaOrcamentario.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Delete(PessoaModel pessoa)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (pessoa == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            _dataContext.TBPESSOA.Remove(pessoa);
-            _dataContext.SaveChanges();
+            await _service.Delete(id);
+
             TempData["MessageSuccess"] = "Sucesso: Deletado com sucesso!";
 
             return RedirectToAction("Index");

@@ -15,9 +15,9 @@ namespace SistemaOrcamentario.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly ISessao _sessao;
-        private readonly IService _service;
+        private readonly IService<UsuarioModel> _service;
 
-        public UsuarioController(DataContext dataContext, ISessao sessao, IService service)
+        public UsuarioController(DataContext dataContext, ISessao sessao, IService<UsuarioModel> service)
         {
             _dataContext = dataContext;
             _sessao = sessao;
@@ -51,24 +51,6 @@ namespace SistemaOrcamentario.Controllers
 
             return View(usuario);
         }
-
-        //public IActionResult Delete(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    UsuarioModel usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuId == id);
-
-        //    if (usuario == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(usuario);
-        //}
-
 
         [HttpPost]
         public async Task<IActionResult> Create(UsuarioModel usuario)

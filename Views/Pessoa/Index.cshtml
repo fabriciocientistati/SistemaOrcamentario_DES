@@ -1,4 +1,4 @@
-﻿@model List<PessoaModel>
+﻿@model IEnumerable<PessoaModel>
 
 <div class="card-body">
 
@@ -46,7 +46,7 @@
                                 <td>
                                     @if (pessoa.Orcamentos != null && pessoa.Orcamentos.Any())
                                     {
-                                        <a href="#" id="abrir-modal" onclick="capturar(@pessoa.PesId)" class="btn btn-info btn-sm">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#info" onclick="capturar(@pessoa.PesId)" class="btn btn-info btn-sm">
                                             @pessoa.Orcamentos.Count()
                                         </a>
                                     }
@@ -58,8 +58,36 @@
                                 <td>
                                     <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.PesId"><i class="bi bi-eye mx-2"></i>Detalhes</a>
                                     <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.PesId"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Deletar Pessoa" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.PesId"><i class="bi bi-trash mx-2"></i>Apagar</a>
+                                    <a class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#apagar-@pessoa.PesId"><i class="bi bi-trash mx-2"></i>Excluir</a>
                                     <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.PesId"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
+
+                                    <!--Modal de exclusão-->
+                                    <div class="modal fade text-left" id="apagar-@pessoa.PesId" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel120" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-danger">
+                                                    <h5 class="modal-title white" id="myModalLabel120"><b>Excluir cliente</b></h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <i data-feather="x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Deseja realmente excluir cliente <b>@pessoa.PesNome ?</b>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Não</span>
+                                                    </button>
+                                                    <a class="btn btn-danger ml-1" data-toggle="tooltip" data-placement="top" title="Excluir usuário" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.PesId">
+                                                        <i class="bx bx-check d-block d-sm-none"></i>Sim
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </td>
                             </tr>
                         }
@@ -67,17 +95,25 @@
                 </tbody>
             </table>
 
-            <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+            <!--info theme Modal -->
+            <div class="modal fade text-left" id="info" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel130" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Lista de Orçamentos</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title white" id="myModalLabel130">Info Modal</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <i data-feather="x"></i>
+                            </button>
                         </div>
                         <div class="modal-body">
-                           <div id="listaOrcamento">
-
-                           </div>
+                            <div id="ListaOrcamento"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info ml-1" data-bs-dismiss="modal">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Voltar</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -85,13 +121,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!-- Incluindo as bibliotecas do Bootstrap e do JavaScript -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Helper;
+using SistemaOrcamentario.Models;
 using SistemaOrcamentario.Services;
 
 namespace SistemaOrcamentario
@@ -32,7 +33,8 @@ namespace SistemaOrcamentario
 
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<IEmail, Email>();
-            services.AddScoped<IService, Service>();
+            services.AddScoped<IService<UsuarioModel>, UsuarioService>();
+            services.AddScoped<IService<PessoaModel>, PessoaService>();
 
             services.AddSession(options =>
             {

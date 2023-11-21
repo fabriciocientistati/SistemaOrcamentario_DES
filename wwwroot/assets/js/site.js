@@ -5,10 +5,10 @@ function capturar(id) {
 
     $.ajax({
         type: 'GET',
-        url: '/Pessoa/listarOrcamentosPessoaId/' + codigoUsuario,
+        url: '/Pessoa/ListarOrcamentosPessoaId/' + codigoUsuario,
         success: function (result) {
-            console.log(result)
-            $("#listaOrcamento").html(result);
+            console.log(result);
+            $("#ListaOrcamento").html(result);
             var modal = new bootstrap.Modal(document.querySelector('.modal'));
             modal.show(codigoUsuario);
         }
