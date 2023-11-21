@@ -30,11 +30,15 @@ namespace SistemaOrcamentario.Services
 
         public async Task Delete(int id)
         {
-            var usuId = _dbContext.TBUSUARIO.FirstOrDefaultAsync(u => u.UsuId == id);
+            var usuario = await _dbContext.TBUSUARIO.FirstOrDefaultAsync(u => u.UsuId == id);
 
-            _dbContext.Remove(usuId);
-            await _dbContext.SaveChangesAsync();
+            if (usuario != null)
+            {
+                _dbContext.TBUSUARIO.Remove(usuario);
+                await _dbContext.SaveChangesAsync();
+            }
         }
+
 
         public async Task<IEnumerable<UsuarioModel>> FindAll()
         {

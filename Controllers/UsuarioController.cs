@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SistemaOrcamentario.Context;
-using SistemaOrcamentario.Enums;
 using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
 using SistemaOrcamentario.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -146,11 +143,8 @@ namespace SistemaOrcamentario.Controllers
             return View(usuario);
         }
 
-
         public async Task<IActionResult> Delete(int id)
         {
-
-
             if (id == 0)
             {
                 return NotFound();
