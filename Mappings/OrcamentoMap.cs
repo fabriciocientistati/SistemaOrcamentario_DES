@@ -13,6 +13,10 @@ namespace SistemaOrcamentario.Mappings
 
             builder.HasKey(o => o.OrcId);
 
+            builder.HasOne(o => o.OrcamentoPessoa)
+                .WithMany(p => p.Orcamentos)
+                .HasForeignKey(o => o.PesId);
+
             builder.Property(p => p.OrcDesc)
                 .HasColumnType("nvarchar(MAX)")
                 .IsRequired();

@@ -5,22 +5,9 @@
 }
 
 @{
-    Layout = null;
+    Layout = "_LayoutLogin";
 }
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password - Voler Admin Dashboard</title>
-    <link rel="stylesheet" href="~/assets/css/bootstrap.css">
-
-    <link rel="shortcut icon" href="~/assets/images/favicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="~/assets/css/app.css">
-</head>
-
-<body>
     <div id="auth">
 
         <div class="container">
@@ -44,8 +31,7 @@
                                 </div>
                             }
                             <div class="text-center mb-5">
-                                <img src="assets/images/favicon.svg" height="48" class='mb-4'>
-                                <h3>Esqueceu sua senha</h3>
+                                <h3>Esqueceu sua senha?</h3>
                                 <p>Preencha os campos abaixo para receber o link de redefinição de senha.</p>
                             </div>
                             <form asp-controller="Login" asp-action="EnviarLinkRedefinirSenha">
@@ -70,10 +56,3 @@
         </div>
 
     </div>
-    <script src="~/assets/js/feather-icons/feather.min.js"></script>
-    <script src="~/assets/js/app.js"></script>
-
-    <script src="~/assets/js/main.js"></script>
-</body>
-
-</html>

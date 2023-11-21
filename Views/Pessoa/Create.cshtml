@@ -4,6 +4,18 @@
     TempData["Title"] = "Cadastrar Pessoa";
 }
 
+@{
+    Layout = "_Layout";
+}
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
@@ -16,7 +28,7 @@
                                     <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control"  placeholder="Insira o nome..." asp-for="PesNome">
+                                            <input type="text" class="form-control" placeholder="Insira o nome..." asp-for="PesNome">
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -29,12 +41,13 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Número telefone</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX"  oninput="mascaraTelefone(this)" asp-for="PesNumCelular">
+                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" oninput="mascaraTelefone(this)" asp-for="PesNumCelular">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
                                         </div>
                                         @Html.ValidationMessageFor(model => model.PesNumCelular, "", new { @class = "text-danger" })
+
                                     </div>
 
                                     <div class="col-sm-3 mb-3">
@@ -114,6 +127,7 @@
                                         <div class="form-group position-relative">
                                             <input id="numero" type="text" class="form-control" placeholder="" asp-for="PesNumero">
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.PesNumero, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 

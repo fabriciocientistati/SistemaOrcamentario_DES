@@ -9,7 +9,7 @@ namespace SistemaOrcamentario.Models
         public PessoaModel() =>
             PesIncEm = DateTime.Now;
 
-        public PessoaModel(int pesId, string pesNome, string pesCpf, string pesCnpj, string pesNumCelular, string pesNumTelefone, string pesEmail, string pesCep, string pesRua, string pesNumero, string pesBairro, string pesCidade, string pesEstado, DateTime pesIncEm, List<OrcamentoModel> orcamentos) : this()
+        public PessoaModel(int pesId, string pesNome, string pesCpf, string pesCnpj, string pesNumCelular, string pesNumTelefone, string pesEmail, string pesCep, string pesRua, string pesNumero, string pesBairro, string pesCidade, string pesEstado, int pesIncPor, DateTime pesIncEm, int? pesAltPor, DateTime? pesAltEm, List<OrcamentoModel> orcamentos) : this()
         {
             PesId = pesId;
             PesNome = pesNome;
@@ -24,21 +24,24 @@ namespace SistemaOrcamentario.Models
             PesBairro = pesBairro;
             PesCidade = pesCidade;
             PesEstado = pesEstado;
+            PesIncPor = pesIncPor;
             PesIncEm = pesIncEm;
+            PesAltPor = pesAltPor;
+            PesAltEm = pesAltEm;
             Orcamentos = orcamentos;
         }
 
         [Key]
         public int PesId { get; set; }
 
-        [Required(ErrorMessage = "O campo nome é obrigatório.")]
+        [Required(ErrorMessage = "Preenchao campo Nome")]
         public string PesNome { get; set; }
 
         public string? PesCpf { get; set; } = null;
 
         public string? PesCnpj { get; set; }
 
-        [Required(ErrorMessage = "O campo telefone é obrigatório.")]
+        [Required(ErrorMessage = "Preenchao campo Telefone")]
         [Phone(ErrorMessage = "O número informado não é valido")]
         public string PesNumCelular { get; set; }
 
@@ -46,12 +49,12 @@ namespace SistemaOrcamentario.Models
 
         public string? PesEmail { get; set; }
 
-        [Required(ErrorMessage = "Informe o CEP para consultar o endereço")]
+        [Required(ErrorMessage = "Preenchao campo CEP para consulta")]
         public string PesCep { get; set; }
 
         public string PesRua { get; set; }
 
-        [Required(ErrorMessage = "O campo Número é obrigatório")]
+        [Required(ErrorMessage = "Preenchao campo Número")]
         public string PesNumero { get; set; }
 
         public string PesBairro { get; set; }
@@ -60,7 +63,13 @@ namespace SistemaOrcamentario.Models
 
         public string PesEstado { get; set; }
 
+        public int PesIncPor {  get; set; }
+
         public DateTime PesIncEm { get; set; } = DateTime.Now;
+
+        public int? PesAltPor {  get; set; }
+
+        public DateTime? PesAltEm { get; set; }
 
         public virtual List<OrcamentoModel> Orcamentos { get; set; }
     }

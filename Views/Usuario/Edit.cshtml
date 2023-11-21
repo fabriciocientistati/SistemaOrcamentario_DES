@@ -2,20 +2,37 @@
 @model SistemaOrcamentario.Models.UsuarioModel
 
 @{
-    ViewData["Title"] = "Editar Usuário";
+    ViewData["Title"] = "Editar usuário";
 }
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
 <section id="basic-vertical-layouts">
     <div class="row match-height">
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Cadastro de Usuários</h4>
+                    <h4 class="card-title">Editar usuário</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
                         <form asp-action="Edit" class="form form-vertical">
                             <div class="form-body">
                                 <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Código</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuId" type="text" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="first-name-icon">Perfil</label>

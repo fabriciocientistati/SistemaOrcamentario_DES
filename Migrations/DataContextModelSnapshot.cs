@@ -30,12 +30,21 @@ namespace SistemaOrcamentario.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrcId"));
 
+                    b.Property<DateTime?>("OrcAltEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("OrcAltPor")
+                        .HasColumnType("int");
+
                     b.Property<string>("OrcDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(MAX)");
 
                     b.Property<DateTime>("OrcIncEm")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("OrcIncPor")
+                        .HasColumnType("int");
 
                     b.Property<string>("OrcObservacao")
                         .HasColumnType("varchar(250)");
@@ -44,20 +53,19 @@ namespace SistemaOrcamentario.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("OrcTipoEntrega")
+                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("OrcTipoPagamento")
+                        .IsRequired()
                         .HasColumnType("varchar(80)");
-
-                    b.Property<int?>("OrcamentoPessoaPesId")
-                        .HasColumnType("int");
 
                     b.Property<int>("PesId")
                         .HasColumnType("int");
 
                     b.HasKey("OrcId");
 
-                    b.HasIndex("OrcamentoPessoaPesId");
+                    b.HasIndex("PesId");
 
                     b.ToTable("TBORCAMENTO", (string)null);
                 });
@@ -69,6 +77,12 @@ namespace SistemaOrcamentario.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PesId"));
+
+                    b.Property<DateTime?>("PesAltEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PesAltPor")
+                        .HasColumnType("int");
 
                     b.Property<string>("PesBairro")
                         .IsRequired()
@@ -99,6 +113,9 @@ namespace SistemaOrcamentario.Migrations
                     b.Property<DateTime>("PesIncEm")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("PesIncPor")
+                        .HasColumnType("int");
+
                     b.Property<string>("PesNome")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
@@ -120,6 +137,9 @@ namespace SistemaOrcamentario.Migrations
 
                     b.HasKey("PesId");
 
+                    b.HasIndex("PesCpf")
+                        .IsUnique();
+
                     b.ToTable("TBPESSOA", (string)null);
                 });
 
@@ -134,6 +154,9 @@ namespace SistemaOrcamentario.Migrations
                     b.Property<DateTime?>("UsuAltEm")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UsuAltPor")
+                        .HasColumnType("int");
+
                     b.Property<string>("UsuEmail")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
@@ -141,7 +164,11 @@ namespace SistemaOrcamentario.Migrations
                     b.Property<DateTime>("UsuIncEm")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UsuIncPor")
+                        .HasColumnType("int");
+
                     b.Property<string>("UsuLogin")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UsuNome")
@@ -158,8 +185,7 @@ namespace SistemaOrcamentario.Migrations
                     b.HasKey("UsuId");
 
                     b.HasIndex("UsuLogin")
-                        .IsUnique()
-                        .HasFilter("[UsuLogin] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("TBUSUARIO", (string)null);
                 });
@@ -168,7 +194,9 @@ namespace SistemaOrcamentario.Migrations
                 {
                     b.HasOne("SistemaOrcamentario.Models.PessoaModel", "OrcamentoPessoa")
                         .WithMany("Orcamentos")
-                        .HasForeignKey("OrcamentoPessoaPesId");
+                        .HasForeignKey("PesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OrcamentoPessoa");
                 });

@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using SistemaOrcamentario.Context;
-using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -106,6 +110,12 @@ namespace SistemaOrcamentario.Controllers
                 TempData["MessageErro"] = $"Ops, Não conseguimos redefinir sua senha, tente novamente: {erro.Message}";
                 return RedirectToAction("Index");
             }
+        }
+
+        // Adicionado método para obter o ID do usuário logado
+        private int? ObterIdUsuarioLogado()
+        {
+            return _sessao.ObterIdUsuarioLogado();
         }
     }
 }

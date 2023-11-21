@@ -8,6 +8,7 @@ using System.Linq;
 using SistemaOrcamentario.Filters;
 using System;
 using Microsoft.EntityFrameworkCore;
+using SistemaOrcamentario.Helper;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -15,10 +16,12 @@ namespace SistemaOrcamentario.Controllers
     public class PessoaController : Controller
     {
         private readonly DataContext _dataContext;
+        private readonly ISessao _sessao;
 
-        public PessoaController(DataContext dataContext)
+        public PessoaController(DataContext dataContext, ISessao sessao)
         {
             _dataContext = dataContext;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
@@ -84,17 +87,37 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public IActionResult Create(PessoaModel pessoa)
         {
-            if (ModelState.IsValid)
+            try
             {
-                pessoa.PesIncEm = DateTime.Now;
-                _dataContext.TBPESSOA.Add(pessoa);
-                _dataContext.SaveChanges();
-                TempData["MessageSuccess"] = "Cadastro realizado.";
+                if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf))
+                {
+                    TempData["MessageErro"] = "Já existe um cliente com este CPF!";
+                    return RedirectToAction("Create");
+                }
 
+                if (ModelState.IsValid)
+                {
+                    var UsuId = _sessao.ObterIdUsuarioLogado().ToString();
+
+                    if (int.TryParse(UsuId, out int parsedUsuId))
+                    {
+                        pessoa.PesIncPor = parsedUsuId;
+                    }
+
+                    pessoa.PesIncEm = DateTime.Now;
+                    _dataContext.TBPESSOA.Add(pessoa);
+                    _dataContext.SaveChanges();
+                    TempData["MessageSuccess"] = "Cliente cadastrado com sucesso.";
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception erro)
+            {
+                ViewData["MessageErro"] = $"Ops, não foi possível efetuar o cadastro.{erro.Message}";
                 return RedirectToAction("Index");
             }
-            TempData["MessageErro"] = "Não foi possível realizar o cadastro.";
-            return View();
+            return View(pessoa);
         }
 
         [HttpPost]

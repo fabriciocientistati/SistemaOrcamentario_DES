@@ -21,14 +21,12 @@ namespace SistemaOrcamentario.Controllers
             _context = context;
         }
 
-        // GET: Orcamento
         public async Task<IActionResult> Index()
         {
             var dataContext = _context.TBORCAMENTO.Include(o => o.OrcamentoPessoa);
             return View(await dataContext.ToListAsync());
         }
 
-        // GET: Orcamento/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.TBORCAMENTO == null)
@@ -49,6 +47,8 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Create(int? id) //Carrega o ID que vem por parametro
         {
+            var PesOrcamento = new ViewPessoaOrcamento();
+
             if (id == null || id == 0)
             {
                 ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome"); //Lista nomes no select aleatório
@@ -56,23 +56,22 @@ namespace SistemaOrcamentario.Controllers
                 return View();
             }
             ViewBag.PesId = new SelectList(_context.TBPESSOA, "PesId", "PesNome", id); //Lista nome no select por parametro
-            return View();
+            return View(PesOrcamento);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("PesId,OrcDesc,OrcObservacao,OrcPreco,OrcTipoPagamento,OrcTipoEntrega,OrcIncEm")] OrcamentoModel orcamento)
+        public async Task<IActionResult> Create(ViewPessoaOrcamento model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orcamento);
+                _context.TBORCAMENTO.Add(model.Orcamento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", orcamento.PesId);
-            return View(orcamento);
+            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", model.Orcamento.PesId);
+            return View(model);
         }
 
-        // GET: Orcamento/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.TBORCAMENTO == null)
@@ -89,9 +88,6 @@ namespace SistemaOrcamentario.Controllers
             return View(orcamentoModel);
         }
 
-        // POST: Orcamento/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("OrcamentoId,PessoaId,Descricao,Observacoes,Preco,TipoPagamento,TipoEntrega,DataInclusao")] OrcamentoModel orcamentoModel)
@@ -125,7 +121,6 @@ namespace SistemaOrcamentario.Controllers
             return View(orcamentoModel);
         }
 
-        // GET: Orcamento/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.TBORCAMENTO == null)
@@ -144,7 +139,6 @@ namespace SistemaOrcamentario.Controllers
             return View(orcamentoModel);
         }
 
-        // POST: Orcamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -158,14 +152,14 @@ namespace SistemaOrcamentario.Controllers
             {
                 _context.TBORCAMENTO.Remove(orcamentoModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrcamentoModelExists(int id)
         {
-          return _context.TBORCAMENTO.Any(e => e.OrcId == id);
+            return _context.TBORCAMENTO.Any(e => e.OrcId == id);
         }
     }
 }

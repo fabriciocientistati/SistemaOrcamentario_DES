@@ -29,6 +29,12 @@ namespace SistemaOrcamentario.Helper
             _context.HttpContext.Session.SetString("sessaoUsuarioLogado", valor);
         }
 
+        public int? ObterIdUsuarioLogado()
+        {
+            var usuarioLogado = BuscarSessaoDoUsuario();
+            return usuarioLogado?.UsuId;
+        }
+
         public void RemoverSessaoDoUsuario()
         {
             _context.HttpContext.Session.Remove("sessaoUsuarioLogado");

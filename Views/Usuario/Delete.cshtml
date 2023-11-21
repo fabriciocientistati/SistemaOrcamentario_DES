@@ -2,14 +2,14 @@
 @model SistemaOrcamentario.Models.UsuarioModel
 
 @{
-    ViewData["Title"] = "Editar Usuário";
+    ViewData["Title"] = "Apagar usuário";
 }
 <section id="basic-vertical-layouts">
     <div class="row match-height">
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Cadastro de Usuários</h4>
+                    <h4 class="card-title">Apagar usuário</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -18,14 +18,22 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Código</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuId" type="text" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
                                             <label for="first-name-icon">Perfil</label>
                                             <div class="position-relative">
                                                 <fieldset class="form-group">
-                                                    <select readonly asp-for="UsuPerfil" class="form-select" id="basicSelect">
+                                                    <select disabled asp-for="UsuPerfil" class="form-select" id="basicSelect">
                                                         <option value="">Selecione</option>
-                                                        <option value="@PerfilEnum.Administrador">Administrador</option>
-                                                        <option value="@PerfilEnum.Consultor">Consultor</option>
-                                                        <option value="@PerfilEnum.Padrão">Padrão</option>
+                                                        <option value="@PerfilEnum.Administrador.ToString()">Administrador</option>
+                                                        <option value="@PerfilEnum.Consultor.ToString()">Consultor</option>
+                                                        <option value="@PerfilEnum.Padrão.ToString()">Padrão</option>
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -65,7 +73,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-danger me-1 mb-1">Deletar usuário</button>
+                                        <button type="submit" class="btn btn-danger me-1 mb-1">Apagar usuário</button>
                                         <button asp-controller="Usuario" asp-action="Index" class="btn btn-primary me-1 mb-1">Voltar</button>
                                     </div>
                                 </div>

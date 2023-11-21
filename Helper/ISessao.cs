@@ -7,5 +7,6 @@ namespace SistemaOrcamentario.Helper
         void CriarSessaoDoUsuario(UsuarioModel usuario);
         void RemoverSessaoDoUsuario();
         UsuarioModel BuscarSessaoDoUsuario();
+        int? ObterIdUsuarioLogado();
     }
 }

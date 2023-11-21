@@ -1,4 +1,4 @@
-﻿@model SistemaOrcamentario.Models.OrcamentoModel
+﻿@model ViewPessoaOrcamento
 
 @{
     TempData["Title"] = "Incluir Orçamento";
@@ -16,7 +16,7 @@
                                     <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                                <select disabled asp-for="PesId" required class="form-control" asp-items="ViewBag.PesId"></select>
+                                                <select asp-for="Orcamento.PesId" required class="form-control" asp-items="ViewBag.PesId"></select>
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -28,7 +28,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Forma de pagamento <i class="bi bi-credit-card-2-back"></i>   <i class="bi bi-wallet2"></i></h6>
                                         <div class="form-group position-relative">
-                                            <select class="form-select col-2" asp-for="OrcTipoPagamento" required aria-label="Selecione uma forma de pagamento">
+                                            <select class="form-select col-2" asp-for="Orcamento.OrcTipoPagamento" required aria-label="Selecione uma forma de pagamento">
                                                 <option selected>Selecione</option>
                                                 <option value="Dinheiro Ávista">Dinheiro</option>
                                                 <option value="Dinheiro + 1x parcela - Cartão de Crédito">Dinheiro + 1x parcela - Cartão de Crédito</option>
@@ -49,17 +49,17 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Valor R$</h6>
                                         <div class="form-group position-relative">
-                                            <input id="preco" type="text" asp-for="OrcPreco" class="form-control" placeholder="$" />
+                                            <input id="preco" type="text" asp-for="Orcamento.OrcPreco" class="form-control" placeholder="$" />
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2 mb-3">
                                         <h6>Forma da entrega</h6>
                                         <div class="form-group position-relative">
-                                            <select class="form-select" asp-for="OrcTipoEntrega" required aria-label="Selecione uma de entrega">
+                                            <select class="form-select" asp-for="Orcamento.OrcTipoEntrega" required aria-label="Selecione uma de entrega">
                                                 <option selected>Selecione</option>
                                                 <option value="Lojá">Lojá</option>
-                                                <option value="Cliente">Cliente</option>
+                                                <option value="Pessoa">Pessoa</option>
                                                 <option value="Transportadora">Transportadora</option>
                                             </select>
                                         </div>
@@ -70,7 +70,7 @@
                                     <div class="col-sm-8 mb-3">
                                         <h6>Observação</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control" placeholder="" asp-for="OrcObservacao">
+                                            <input type="text" class="form-control" placeholder="" asp-for="Orcamento.OrcObservacao">
                                             <div class="form-control-icon">
                                                 <div class="form-control-icon">
                                                     <i class="bi bi-card-text"></i>
@@ -84,7 +84,7 @@
                                     <div class="col-sm-8 mb-3">
                                         <h6>Descrição</h6>
                                         <div class="form-group position-relative">
-                                            <textarea asp-for="OrcDesc" class="form-control" placeholder="Descrição do produto..." style="height: 200px"></textarea>
+                                            <textarea asp-for="Orcamento.OrcDesc" class="form-control" placeholder="Descrição do produto..." style="height: 200px"></textarea>
                                             <div class="form-control-icon">
                                             </div>
                                         </div>

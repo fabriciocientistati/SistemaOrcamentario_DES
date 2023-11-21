@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Helper;
+using SistemaOrcamentario.Services;
 
 namespace SistemaOrcamentario
 {
@@ -21,14 +23,16 @@ namespace SistemaOrcamentario
 
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<DataContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
             services.AddSingleton <IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<IEmail, Email>();
-
+            services.AddScoped<IService, Service>();
 
             services.AddSession(options =>
             {

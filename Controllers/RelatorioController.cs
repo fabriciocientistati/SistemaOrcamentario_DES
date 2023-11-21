@@ -37,8 +37,8 @@
 //            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
 //            doc.Open();
 
-//            // Adicione o cabeçalho com o nome do cliente
-//            Paragraph pessoaParagraph = new Paragraph($"Cliente: {viewModel.Pessoa.PesNome}\n\n");
+//            // Adicione o cabeçalho com o nome do Pessoa
+//            Paragraph pessoaParagraph = new Paragraph($"Pessoa: {viewModel.Pessoa.PesNome}\n\n");
 //            pessoaParagraph.Alignment = Element.ALIGN_CENTER; // Centralize o texto
 //            pessoaParagraph.SpacingAfter = 20f; // Adicione um espaçamento após o parágrafo
 //            doc.Add(pessoaParagraph);

@@ -58,6 +58,9 @@ namespace SistemaOrcamentario.Mappings
 
             builder.Property(p => p.PesIncEm)
                 .HasColumnType("datetime");
+
+            builder.HasIndex(p => p.PesCpf)
+                .IsUnique();
         }
     }
 }
