@@ -1,21 +1,6 @@
 ﻿@model IEnumerable<UsuarioModel>
 
 <div class="card-body">
-    @if (TempData["MessageErro"] != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
-            @TempData["MessageErro"]
-        </div>
-    }
-
-    @if (TempData["MessageSuccess"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
-            @TempData["MessageSuccess"]
-        </div>
-    }
     <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Usuario" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova Usuário</a>
 
     <div class="card-body">
@@ -47,34 +32,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar usuário" asp-controller="Usuario" asp-action="Edit" asp-route-id="@usuario.UsuId"><i class="bi bi-pencil-square mx-2"></i>Editar</a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#apagar-@usuario.UsuId"><i class="bi bi-trash mx-2"></i>Excluir</a>
-
-                                    <!--Modal de exclusão-->
-                                    <div class="modal fade text-left" id="apagar-@usuario.UsuId" tabindex="-1" role="dialog"
-                                         aria-labelledby="myModalLabel120" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-danger">
-                                                    <h5 class="modal-title white" id="myModalLabel120"><b>Excluir usuário</b></h5>
-                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                        <i data-feather="x"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Deseja realmente excluir o usuário <b>@usuario.UsuNome ?</b>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Não</span>
-                                                    </button>
-                                                    <a class="btn btn-danger ml-1" data-toggle="tooltip" data-placement="top" title="Excluir cliente" asp-controller="Usuario" asp-action="Delete" asp-route-id="@usuario.UsuId">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>Sim
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@usuario.UsuId, event)" asp-controller="Usuario" asp-action="Delete" asp-route-id="@usuario.UsuId">Excluir</a>
                                 </td>
                             </tr>
                         }
@@ -85,3 +43,34 @@
     </div>
 </div>
 
+@section Scripts{
+    @if (TempData["MessageSuccess"] != null)
+    {
+        <script>Swal.fire('Sucesso', '@TempData["MessageSuccess"]', 'success');</script>
+    }
+
+    @if (TempData["MessageErro"] != null)
+    {
+        <script>Swal.fire('Erro', '@TempData["MessageError"]', 'error');</script>
+    }
+    <script>
+        function displayAlert(usuId, event) {
+            event.preventDefault();  // Evita o comportamento padrão do link
+
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Você não será capaz de reverter isso!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Se o usuário confirmar, redirecione para a ação de exclusão
+                    window.location.href = event.target.href;
+                }
+            });
+        }
+    </script>
+}

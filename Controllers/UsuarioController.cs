@@ -60,7 +60,7 @@ namespace SistemaOrcamentario.Controllers
                 if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin))
                 {
                     TempData["MessageErro"] = "Já existe um usuário com este login!";
-                    return RedirectToAction("Create");
+                    return View(usuario);
                 }
 
                 if (ModelState.IsValid)
@@ -75,9 +75,10 @@ namespace SistemaOrcamentario.Controllers
 
                     usuario.SetSenhaHas();
                     await _service.Create(usuario);
+
                     TempData["MessageSuccess"] = "Usuário cadastrado com sucesso.";
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
             }
             catch (Exception)
@@ -88,6 +89,7 @@ namespace SistemaOrcamentario.Controllers
 
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Edit(UsuarioModel usuario)

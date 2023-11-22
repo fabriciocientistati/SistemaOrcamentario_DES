@@ -1,19 +1,20 @@
 ﻿
 //Capturar ID da pessoa para carregar os orçamentos
-function capturar(id) {
-    var codigoUsuario = id
+//function capturar(id) {
+//    var codigoUsuario = id
 
-    $.ajax({
-        type: 'GET',
-        url: '/Pessoa/ListarOrcamentosPessoaId/' + codigoUsuario,
-        success: function (result) {
-            console.log(result);
-            $("#ListaOrcamento").html(result);
-            var modal = new bootstrap.Modal(document.querySelector('.modal'));
-            modal.show(codigoUsuario);
-        }
-    });
-}
+//    $.ajax({
+//        type: 'GET',
+//        url: '/Pessoa/ListarOrcamentosPessoaId/' + codigoUsuario,
+//        success: function (result) {
+//            console.log(result);
+//            $("#ListaOrcamento").html(result);
+//            var modal = new bootstrap.Modal(document.querySelector('.modal'));
+//            modal.show(codigoUsuario);
+//        }
+//    });
+//}
+
 
 
 function limpa_formulario_cep() {

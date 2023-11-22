@@ -28,9 +28,9 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Nome</th>
-                        <th>Data</th>
-                        <th>Orçamentos</th>
+                        <th>Cliente</th>
+                        <th>Data de inclusão</th>
+                        <th>Qtd. Orçamentos</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -46,9 +46,7 @@
                                 <td>
                                     @if (pessoa.Orcamentos != null && pessoa.Orcamentos.Any())
                                     {
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#info" onclick="capturar(@pessoa.PesId)" class="btn btn-info btn-sm">
-                                            @pessoa.Orcamentos.Count()
-                                        </a>
+                                        <a href="#" class="btn btn-secondary btn-sm btn-total-orcamentos">@pessoa.Orcamentos.Count()</a>
                                     }
                                     else
                                     {
@@ -60,7 +58,9 @@
                                     <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.PesId"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
                                     <a class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#apagar-@pessoa.PesId"><i class="bi bi-trash mx-2"></i>Excluir</a>
                                     <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.PesId"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
-
+                                    <button class="btn btn-primary" onclick="displayAlertDanger()">
+                                        Alert
+                                    </button>
                                     <!--Modal de exclusão-->
                                     <div class="modal fade text-left" id="apagar-@pessoa.PesId" tabindex="-1" role="dialog"
                                          aria-labelledby="myModalLabel120" aria-hidden="true">
@@ -94,30 +94,14 @@
                     }
                 </tbody>
             </table>
-
-            <!--info theme Modal -->
-            <div class="modal fade text-left" id="info" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel130" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h5 class="modal-title white" id="myModalLabel130">Info Modal</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <i data-feather="x"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="ListaOrcamento"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-info ml-1" data-bs-dismiss="modal">
-                                <i class="bx bx-check d-block d-sm-none"></i>
-                                <span class="d-none d-sm-block">Voltar</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        function displayAlertSuccess() {
+            Swal.fire('Sucesso','Cadastro realizado!','success')
+        }
+    </script>
+ }
