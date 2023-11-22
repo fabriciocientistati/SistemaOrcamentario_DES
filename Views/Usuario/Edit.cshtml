@@ -46,6 +46,7 @@
                                                     </select>
                                                 </fieldset>
                                             </div>
+                                            @Html.ValidationMessageFor(model => model.UsuPerfil, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -56,6 +57,7 @@
                                                 <div class="form-control-icon">
                                                     <i data-feather="user"></i>
                                                 </div>
+                                                @Html.ValidationMessageFor(model => model.UsuNome, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -67,6 +69,7 @@
                                                 <div class="form-control-icon">
                                                     <i data-feather="user"></i>
                                                 </div>
+                                                @Html.ValidationMessageFor(model => model.UsuLogin, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -78,6 +81,7 @@
                                                 <div class="form-control-icon">
                                                     <i data-feather="lock"></i>
                                                 </div>
+                                                @Html.ValidationMessageFor(model => model.UsuSenha, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -89,6 +93,7 @@
                                                 <div class="form-control-icon">
                                                     <i data-feather="mail"></i>
                                                 </div>
+                                                @Html.ValidationMessageFor(model => model.UsuEmail, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>

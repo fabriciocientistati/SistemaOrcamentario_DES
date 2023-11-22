@@ -12,9 +12,13 @@ namespace SistemaOrcamentario.Mappings
 
             builder.HasKey(p => p.PesId);
 
+            builder.HasIndex(p => p.PesCpf).IsUnique();
+
             builder.Property(p => p.PesNome)
                 .HasColumnType("varchar(150)")
                 .IsRequired();
+
+            builder.HasIndex(p => p.PesCnpj).IsUnique();
 
             builder.Property(p => p.PesCpf)
                 .HasColumnType("varchar(40)")
@@ -58,9 +62,6 @@ namespace SistemaOrcamentario.Mappings
 
             builder.Property(p => p.PesIncEm)
                 .HasColumnType("datetime");
-
-            builder.HasIndex(p => p.PesCpf)
-                .IsUnique();
         }
     }
 }

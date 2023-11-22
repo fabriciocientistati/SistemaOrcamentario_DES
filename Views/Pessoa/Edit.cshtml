@@ -1,8 +1,17 @@
 ﻿@model SistemaOrcamentario.Models.PessoaModel
 
 @{
-    TempData["Title"] = "Editar Pessoa";
+    TempData["Title"] = "Atualizar Cliente";
 }
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
@@ -13,20 +22,22 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-6 mb-3">
+                                        <h6>Código</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input type="text" readonly class="form-control" required placeholder="" asp-for="PesId">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
                                             <input type="text" class="form-control" required placeholder="" asp-for="PesNome">
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-2 mb-3">
-                                        <h6>Data de hoje</h6>
-                                        <div class="form-group position-relative has-icon-right">
-                                            <input type="datetime-local" required class="form-control"
-                                                   placeholder="" asp-for="PesIncEm">
+                                            @Html.ValidationMessageFor(model => model.PesNome, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
@@ -39,6 +50,7 @@
                                             <div class="form-control-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </div>
+                                            @Html.ValidationMessageFor(model => model.PesNumCelular, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -96,12 +108,13 @@
                                             <div class="form-control-icon">
                                                 <i class="bi bi-house"></i>
                                             </div>
+                                            @Html.ValidationMessageFor(model => model.PesCep, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <button type="button" class="btn btn-primary" style="margin-top: 25px;" onclick="pesquisacep(cep.value)">
                                             Pesquisar
-                                        </button>
+                                        </button>                      
                                     </div>
                                 </div>
 
@@ -118,6 +131,7 @@
                                         <div class="form-group position-relative">
                                             <input id="numero" type="text" class="form-control" placeholder="" asp-for="PesNumero">
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.PesNumero, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 

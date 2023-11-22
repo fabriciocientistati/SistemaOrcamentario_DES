@@ -59,7 +59,7 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin))
                 {
-                    TempData["MessageErro"] = "Já existe um usuário com este login!";
+                    TempData["MessageErro"] = "Já existe usuário com esse login!";
                     return View(usuario);
                 }
 
@@ -76,7 +76,7 @@ namespace SistemaOrcamentario.Controllers
                     usuario.SetSenhaHas();
                     await _service.Create(usuario);
 
-                    TempData["MessageSuccess"] = "Usuário cadastrado com sucesso.";
+                    TempData["MessageSuccess"] = "Usuário cadastrado com sucesso!";
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -100,7 +100,6 @@ namespace SistemaOrcamentario.Controllers
                 {
                     if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin && u.UsuId == usuario.UsuId))
                     {
-
                         var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
                         if (int.TryParse(UsuIdLogado, out int parseUsuId))
@@ -110,17 +109,17 @@ namespace SistemaOrcamentario.Controllers
                         }
 
                         await _service.Update(usuario);
-                        TempData["MessageSuccess"] = "Usuário alterado com sucesso!";
+                        TempData["MessageSuccess"] = "Usuário atualizado!";
 
                         return RedirectToAction("Index");
                     }
-                    TempData["MessageErro"] = "Já existe um usuário com este login!";
+                    TempData["MessageErro"] = "Já existe um usuário com esse login!";
                     return RedirectToAction("Edit");
                 }
             }
             catch (Exception)
             {
-                TempData["MessageErro"] = "Ops, não foi possível alterar o usuário!";
+                TempData["MessageErro"] = "Ops, não foi possível atualizar usuário(a)!";
                 return RedirectToAction("Edit");
             }
 
@@ -136,7 +135,7 @@ namespace SistemaOrcamentario.Controllers
 
             await _service.Delete(id);
 
-            TempData["MessageSuccess"] = "Usuário apagado com sucesso!";
+            TempData["MessageSuccess"] = "Usuário excluido com sucesso!";
 
             return RedirectToAction("Index");
         }

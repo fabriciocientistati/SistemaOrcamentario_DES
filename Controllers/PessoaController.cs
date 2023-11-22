@@ -78,8 +78,14 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf))
                 {
-                    TempData["MessageErro"] = "Já existe um cliente com este CPF!";
-                    return RedirectToAction("Create");
+                    TempData["MessageErro"] = "Já existe cliente com esse CPF!";
+                    return View(pessoa);
+                }
+
+                if (_dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj))
+                {
+                    TempData["MessageErro"] = "Já existe cliente com esse CNPJ!";
+                    return View(pessoa);
                 }
 
                 if (ModelState.IsValid)
@@ -93,43 +99,65 @@ namespace SistemaOrcamentario.Controllers
                     }
 
                     await _service.Create(pessoa);
-                    TempData["MessageSuccess"] = "Cliente cadastrado com sucesso.";
+                    TempData["MessageSuccess"] = "Cliente cadastrado com sucesso!";
 
                     return RedirectToAction("Index");
                 }
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                ViewData["MessageErro"] = $"Ops, não foi possível efetuar o cadastro.{erro.Message}";
+                ViewData["MessageErro"] = $"Ops, não foi possível cadastrar cliente!";
                 return RedirectToAction("Index");
             }
-            return View(pessoa);
+
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Edit(PessoaModel pessoa)
+        public async Task<IActionResult> Edit(PessoaModel pessoa)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (pessoa != null)
+                    if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId == pessoa.PesId || _dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId == pessoa.PesId)))
                     {
-                        _service.Update(pessoa);
-                        TempData["MessageSuccess"] = "Cadastro atualização.";
+                        var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
-                        return RedirectToAction("Index");
+                        if (int.TryParse(UsuIdLogado, out int parseUsuId))
+                        {
+                            pessoa.PesAltPor = parseUsuId;
+                            pessoa.PesAltEm = DateTime.Now;
+                        }
+
+                        await _service.Update(pessoa);
+                        TempData["MessageSuccess"] = "Cliente atualizado!";
+
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId != pessoa.PesId))
+                           {
+                            TempData["MessageErro"] = "Já existe um cliente com esse CPF!";
+                            return RedirectToAction("Edit");
+                        }
+
+                        if (_dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId != pessoa.PesId))
+                        {
+                            TempData["MessageErro"] = "Já existe um cliente com esse CNPJ!";
+                            return RedirectToAction("Edit");
+                        }
                     }
                 }
-
-                TempData["MessageErro"] = "Não foi possível atualizar o cadastro.";
-                return View();
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                TempData["MessageErro"] = $"Ops, não foi possível atualizar o cadastro: detalhe do erro: {erro.Message}";
-                return RedirectToAction("Index");
+                TempData["MessageErro"] = $"Ops, não foi possível atualizar cliente!";
+                return RedirectToAction("Edit");
             }
+
+            return View();
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -141,7 +169,7 @@ namespace SistemaOrcamentario.Controllers
 
             await _service.Delete(id);
 
-            TempData["MessageSuccess"] = "Sucesso: Deletado com sucesso!";
+            TempData["MessageSuccess"] = "Cliente excluido com sucesso!";
 
             return RedirectToAction("Index");
         }

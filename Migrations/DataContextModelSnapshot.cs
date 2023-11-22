@@ -137,6 +137,10 @@ namespace SistemaOrcamentario.Migrations
 
                     b.HasKey("PesId");
 
+                    b.HasIndex("PesCnpj")
+                        .IsUnique()
+                        .HasFilter("[PesCnpj] IS NOT NULL");
+
                     b.HasIndex("PesCpf")
                         .IsUnique();
 

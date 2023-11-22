@@ -3,25 +3,7 @@
 <div class="card-body">
 
     <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Pessoa" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar nova Pessoa</a>
-    <br /><br />
-    @if (TempData["MessageSuccess"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show">
-            <button type="button" class="btn btn-danger" data-dismiss="alert" arial-label="Close">X</button>
-            @TempData["MessageSuccess"]
-        </div>
-
-    }
-
-    @if (TempData["MessageErro"] != null)
-    {
-        <div class="alert alert-danger">
-            <button type="button" class="btn btn-danger" data-dismiss="alert" arial-label="Close">X</button>
-            @TempData["MessageErro"]
-        </div>
-
-    }
-
+   
     <div class="card-body">
         <div class="table-responsive">
             <table class='table table-sm table-striped' id="table1">
@@ -56,38 +38,8 @@
                                 <td>
                                     <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.PesId"><i class="bi bi-eye mx-2"></i>Detalhes</a>
                                     <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.PesId"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
-                                    <a class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#apagar-@pessoa.PesId"><i class="bi bi-trash mx-2"></i>Excluir</a>
+                                    <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@pessoa.PesId, event)" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.PesId">Excluir</a>
                                     <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.PesId"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
-                                    <button class="btn btn-primary" onclick="displayAlertDanger()">
-                                        Alert
-                                    </button>
-                                    <!--Modal de exclusão-->
-                                    <div class="modal fade text-left" id="apagar-@pessoa.PesId" tabindex="-1" role="dialog"
-                                         aria-labelledby="myModalLabel120" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-danger">
-                                                    <h5 class="modal-title white" id="myModalLabel120"><b>Excluir cliente</b></h5>
-                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                        <i data-feather="x"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Deseja realmente excluir cliente <b>@pessoa.PesNome ?</b>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Não</span>
-                                                    </button>
-                                                    <a class="btn btn-danger ml-1" data-toggle="tooltip" data-placement="top" title="Excluir usuário" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.PesId">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>Sim
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </td>
                             </tr>
                         }
@@ -99,9 +51,34 @@
 </div>
 
 @section Scripts{
+    @if (TempData["MessageSuccess"] != null)
+    {
+        <script>Swal.fire('Sucesso', '@TempData["MessageSuccess"]', 'success');</script>
+    }
+
+    @if (TempData["MessageErro"] != null)
+    {
+        <script>Swal.fire('Erro', '@TempData["MessageError"]', 'error');</script>
+    }
+
     <script>
-        function displayAlertSuccess() {
-            Swal.fire('Sucesso','Cadastro realizado!','success')
+        function displayAlert(usuId, event) {
+            event.preventDefault();  // Evita o comportamento padrão do link
+
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Você não será capaz de reverter isso!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Se o usuário confirmar, redirecione para a ação de exclusão
+                    window.location.href = event.target.href;
+                }
+            });
         }
     </script>
  }
