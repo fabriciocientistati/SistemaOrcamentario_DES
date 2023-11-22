@@ -96,26 +96,26 @@ namespace SistemaOrcamentario.Controllers
         {
             try
             {
-                if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin && u.UsuId != usuario.UsuId))
-                {
-                    TempData["MessageErro"] = "Já existe um usuário com este login!";
-                    return RedirectToAction("Edit");
-                }
-
                 if (ModelState.IsValid)
                 {
-                    var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
-
-                    if (int.TryParse(UsuIdLogado, out int parseUsuId))
+                    if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin && u.UsuId == usuario.UsuId))
                     {
-                        usuario.UsuAltPor = parseUsuId;
-                        usuario.UsuAltEm = DateTime.Now;
+
+                        var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
+
+                        if (int.TryParse(UsuIdLogado, out int parseUsuId))
+                        {
+                            usuario.UsuAltPor = parseUsuId;
+                            usuario.UsuAltEm = DateTime.Now;
+                        }
+
+                        await _service.Update(usuario);
+                        TempData["MessageSuccess"] = "Usuário alterado com sucesso!";
+
+                        return RedirectToAction("Index");
                     }
-
-                    await _service.Update(usuario);
-                    TempData["MessageSuccess"] = "Usuário alterado com sucesso!";
-
-                    return RedirectToAction("Index");
+                    TempData["MessageErro"] = "Já existe um usuário com este login!";
+                    return RedirectToAction("Edit");
                 }
             }
             catch (Exception)
@@ -138,7 +138,7 @@ namespace SistemaOrcamentario.Controllers
 
             TempData["MessageSuccess"] = "Usuário apagado com sucesso!";
 
-           return  RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }
