@@ -651,6 +651,15 @@
           }
         }
       },
+      "ServiceStack.Interfaces/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {}
+        }
+      },
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
@@ -2028,6 +2037,21 @@
         "packageIcon.png"
       ]
     },
+    "ServiceStack.Interfaces/8.0.0": {
+      "sha512": "orzuwTZ4NIArN4ywzhUTfpMIyNdCvmsxPrgJ5dFV/ympQkUzQ+Ixz35R9doZXCvzfZRWEt7jDXcxiYMCdEVGDA==",
+      "type": "package",
+      "path": "servicestack.interfaces/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/ServiceStack.Interfaces.dll",
+        "lib/net6.0/ServiceStack.Interfaces.dll",
+        "lib/net8.0/ServiceStack.Interfaces.dll",
+        "lib/netstandard2.0/ServiceStack.Interfaces.dll",
+        "servicestack.interfaces.8.0.0.nupkg.sha512",
+        "servicestack.interfaces.nuspec"
+      ]
+    },
     "System.CodeDom/4.4.0": {
       "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "type": "package",
@@ -2926,23 +2950,24 @@
       "Microsoft.EntityFrameworkCore.Design >= 7.0.13",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.13",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.13",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "ServiceStack.Interfaces >= 8.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\05178722183\\.nuget\\packages\\": {}
+    "C:\\Users\\fabri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
+      "projectUniqueName": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
       "projectName": "SistemaOrcamentario",
-      "projectPath": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
-      "packagesPath": "C:\\Users\\05178722183\\.nuget\\packages\\",
-      "outputPath": "D:\\Repository\\fabriciocientistati\\SistemaOrcamentario_DES\\obj\\",
+      "projectPath": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\SistemaOrcamentario.csproj",
+      "packagesPath": "C:\\Users\\fabri\\.nuget\\packages\\",
+      "outputPath": "C:\\Desenvolvimento\\Repositorio\\SistemaOrcamentario_DES\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\05178722183\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2991,6 +3016,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "ServiceStack.Interfaces": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           }
         },
         "imports": [

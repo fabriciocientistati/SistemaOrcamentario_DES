@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Services;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -74,22 +75,29 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PessoaModel pessoa)
         {
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf))
-                {
-                    TempData["MessageErro"] = "Já existe cliente com esse CPF!";
-                    return View(pessoa);
-                }
-
-                if (_dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj))
-                {
-                    TempData["MessageErro"] = "Já existe cliente com esse CNPJ!";
-                    return View(pessoa);
-                }
-
                 if (ModelState.IsValid)
                 {
+                    if (!string.IsNullOrEmpty(pessoa.PesCpf) &&
+                        _dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId != pessoa.PesId))
+                    {
+                        TempData["MessageErro"] = "Já existe cliente com esse CPF!";
+                        return View(pessoa);
+                    }
+
+                    if (!string.IsNullOrEmpty(pessoa.PesCnpj) &&
+                        _dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId != pessoa.PesId))
+                    {
+                        TempData["MessageErro"] = "Já existe cliente com esse CNPJ!";
+                        return View(pessoa);
+                    }
+
                     var UsuId = _sessao.ObterIdUsuarioLogado().ToString();
 
                     if (int.TryParse(UsuId, out int parsedUsuId))
@@ -104,9 +112,10 @@ namespace SistemaOrcamentario.Controllers
                     return RedirectToAction("Index");
                 }
             }
+
             catch (Exception)
             {
-                ViewData["MessageErro"] = $"Ops, não foi possível cadastrar cliente!";
+                TempData["MessageErro"] = $"Ops, Não foi possível cadastrar cliente!";
                 return RedirectToAction("Index");
             }
 
@@ -118,37 +127,38 @@ namespace SistemaOrcamentario.Controllers
         {
             try
             {
+                if (pessoa == null)
+                {
+                    return NotFound();
+                }
+
                 if (ModelState.IsValid)
                 {
-                    if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId == pessoa.PesId || _dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId == pessoa.PesId)))
+                    if (!string.IsNullOrEmpty(pessoa.PesCpf) &&
+                        _dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId != pessoa.PesId))
                     {
-                        var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
-
-                        if (int.TryParse(UsuIdLogado, out int parseUsuId))
-                        {
-                            pessoa.PesAltPor = parseUsuId;
-                            pessoa.PesAltEm = DateTime.Now;
-                        }
-
-                        await _service.Update(pessoa);
-                        TempData["MessageSuccess"] = "Cliente atualizado!";
-
-                        return RedirectToAction(nameof(Index));
+                        TempData["MessageErro"] = "Já existe cliente com esse CPF!";
+                        return View(pessoa);
                     }
-                    else
+
+                    if (!string.IsNullOrEmpty(pessoa.PesCnpj) &&
+                        _dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId != pessoa.PesId))
                     {
-                        if (_dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId != pessoa.PesId))
-                           {
-                            TempData["MessageErro"] = "Já existe um cliente com esse CPF!";
-                            return RedirectToAction("Edit");
-                        }
-
-                        if (_dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId != pessoa.PesId))
-                        {
-                            TempData["MessageErro"] = "Já existe um cliente com esse CNPJ!";
-                            return RedirectToAction("Edit");
-                        }
+                        TempData["MessageErro"] = "Já existe cliente com esse CNPJ!";
                     }
+
+                    var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
+
+                    if (int.TryParse(UsuIdLogado, out int parseUsuId))
+                    {
+                        pessoa.PesAltPor = parseUsuId;
+                        pessoa.PesAltEm = DateTime.Now;
+                    }
+
+                    await _service.Update(pessoa);
+                    TempData["MessageSuccess"] = "Cliente atualizado!";
+
+                    return RedirectToAction(nameof(Index));
                 }
             }
             catch (Exception)

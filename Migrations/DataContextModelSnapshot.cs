@@ -100,7 +100,6 @@ namespace SistemaOrcamentario.Migrations
                         .HasColumnType("varchar(40)");
 
                     b.Property<string>("PesCpf")
-                        .IsRequired()
                         .HasColumnType("varchar(40)");
 
                     b.Property<string>("PesEmail")
@@ -142,7 +141,8 @@ namespace SistemaOrcamentario.Migrations
                         .HasFilter("[PesCnpj] IS NOT NULL");
 
                     b.HasIndex("PesCpf")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[PesCpf] IS NOT NULL");
 
                     b.ToTable("TBPESSOA", (string)null);
                 });

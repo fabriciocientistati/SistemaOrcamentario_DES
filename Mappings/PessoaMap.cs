@@ -12,17 +12,16 @@ namespace SistemaOrcamentario.Mappings
 
             builder.HasKey(p => p.PesId);
 
-            builder.HasIndex(p => p.PesCpf).IsUnique();
-
             builder.Property(p => p.PesNome)
                 .HasColumnType("varchar(150)")
                 .IsRequired();
 
-            builder.HasIndex(p => p.PesCnpj).IsUnique();
+            builder.HasIndex(p => p.PesCpf).IsUnique();
 
             builder.Property(p => p.PesCpf)
-                .HasColumnType("varchar(40)")
-                .IsRequired();
+                .HasColumnType("varchar(40)");
+
+            builder.HasIndex(p => p.PesCnpj).IsUnique();
 
             builder.Property(p => p.PesCnpj)
                 .HasColumnType("varchar(40)");

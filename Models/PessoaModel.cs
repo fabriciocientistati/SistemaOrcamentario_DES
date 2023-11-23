@@ -39,7 +39,7 @@ namespace SistemaOrcamentario.Models
 
         public string? PesCpf { get; set; } = null;
 
-        public string? PesCnpj { get; set; }
+        public string? PesCnpj { get; set; } = null;
 
         [Required(ErrorMessage = "Preenchao campo Telefone")]
         [Phone(ErrorMessage = "O número informado não é valido")]
@@ -71,6 +71,6 @@ namespace SistemaOrcamentario.Models
 
         public DateTime? PesAltEm { get; set; }
 
-        public virtual List<OrcamentoModel> Orcamentos { get; set; }
+        public List<OrcamentoModel> Orcamentos { get; set; }
     }
 }

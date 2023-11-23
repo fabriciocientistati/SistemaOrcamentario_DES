@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ServiceStack;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Filters;
+using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
 
 namespace SistemaOrcamentario.Controllers
@@ -15,10 +16,13 @@ namespace SistemaOrcamentario.Controllers
     public class OrcamentoController : Controller
     {
         private readonly DataContext _context;
+        private readonly ISessao _sessao;
 
-        public OrcamentoController(DataContext context)
+        public OrcamentoController(DataContext context, ISessao sessao)
         {
             _context = context;
+            _sessao = sessao;
+
         }
 
         public async Task<IActionResult> Index()
@@ -45,7 +49,7 @@ namespace SistemaOrcamentario.Controllers
             return View(orcamentoModel);
         }
 
-        public IActionResult Create(int? id) //Carrega o ID que vem por parametro
+        public IActionResult Create(int? id)
         {
             var PesOrcamento = new ViewPessoaOrcamento();
 
@@ -62,13 +66,39 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ViewPessoaOrcamento model)
         {
-            if (ModelState.IsValid)
+            if (model == null)
             {
-                _context.TBORCAMENTO.Add(model.Orcamento);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", model.Orcamento.PesId);
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var usuId = _sessao.ObterIdUsuarioLogado().ToString();
+
+                    if (int.TryParse(usuId, out int parseUsuId))
+                    {
+                        model.Orcamento.OrcIncPor = parseUsuId;
+                        model.Orcamento.OrcIncEm = DateTime.Now;
+                    }
+
+                    _context.TBORCAMENTO.Add(model.Orcamento);
+                    await _context.SaveChangesAsync();
+
+                    TempData["MessageSuccess"] = "Orçamento criado com sucesso!";
+
+                    return RedirectToAction("Index", "Pessoa");
+                }
+            }
+
+            catch (Exception)
+            {
+                TempData["MessageErro"] = $"Ops, Não foi possível criar orçamento!";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.PesId = new SelectList(_context.TBPESSOA, "PesId", "PesNome", model.Orcamento.PesId); 
             return View(model);
         }
 

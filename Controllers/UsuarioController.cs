@@ -55,16 +55,21 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UsuarioModel usuario)
         {
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin))
-                {
-                    TempData["MessageErro"] = "Já existe usuário com esse login!";
-                    return View(usuario);
-                }
-
                 if (ModelState.IsValid)
                 {
+                    if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin))
+                    {
+                        TempData["MessageErro"] = "Já existe usuário com esse login!";
+                        return View(usuario);
+                    }
+
                     var UsuarioLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
                     if (int.TryParse(UsuarioLogado, out int parseUsuarioLogado))
@@ -81,9 +86,10 @@ namespace SistemaOrcamentario.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
+
             catch (Exception)
             {
-                TempData["MessageErro"] = $"Ops, Não foi possível cadastrar o usuário!";
+                TempData["MessageErro"] = $"Ops, Não foi possível cadastrar usuário!";
                 return RedirectToAction("Index");
             }
 
@@ -113,7 +119,7 @@ namespace SistemaOrcamentario.Controllers
 
                         return RedirectToAction("Index");
                     }
-                    TempData["MessageErro"] = "Já existe um usuário com esse login!";
+                    TempData["MessageErro"] = "Já existe usuário com esse Login!";
                     return RedirectToAction("Edit");
                 }
             }

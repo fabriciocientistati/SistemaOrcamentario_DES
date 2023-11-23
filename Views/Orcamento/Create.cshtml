@@ -1,5 +1,13 @@
 ﻿@model ViewPessoaOrcamento
 
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
 @{
     TempData["Title"] = "Incluir Orçamento";
 }
@@ -20,6 +28,7 @@
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
+                                            @Html.ValidationMessageFor(model => model.Orcamento.PesId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
@@ -44,6 +53,7 @@
                                                 <option value="Parcelado - 10x">10x - parcelas no Cartão de Crédito</option>
                                             </select>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Orcamento.OrcTipoPagamento, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="col-sm-3 mb-3">
@@ -63,6 +73,7 @@
                                                 <option value="Transportadora">Transportadora</option>
                                             </select>
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Orcamento.OrcTipoEntrega, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -87,6 +98,7 @@
                                             <textarea asp-for="Orcamento.OrcDesc" class="form-control" placeholder="Descrição do produto..." style="height: 200px"></textarea>
                                             <div class="form-control-icon">
                                             </div>
+                                            @Html.ValidationMessageFor(model => model.Orcamento.OrcDesc, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
