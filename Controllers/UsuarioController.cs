@@ -100,6 +100,11 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UsuarioModel usuario)
         {
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
             try
             {
                 if (ModelState.IsValid)

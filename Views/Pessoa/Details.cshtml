@@ -13,6 +13,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-sm-3 mb-3" readonly>
+                                        <b>Código</b> @Html.DisplayFor(model => model.Pessoa.PesId)
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-sm-3 mb-3">
                                         <h3 class="mb-4">@Html.DisplayFor(model => model.Pessoa.PesNome)</h3>
                                     </div>
@@ -134,7 +140,7 @@
                                         </div>
 
                                         <div class="col-sm-3 mb-3">
-                                            <button class="btn btn-primary" asp-controller="Orcamento" asp-action="Edit" asp-route-id="@orcamento.PesId">Editar Orçamento</button>
+                                            <a class="btn btn-primary" type="button" asp-controller="Orcamento" asp-action="Edit" asp-route-id1="@orcamento.OrcId" asp-route-id2="@orcamento.PesId">Editar orçamento</a>
                                         </div>
                                     </div>
 
