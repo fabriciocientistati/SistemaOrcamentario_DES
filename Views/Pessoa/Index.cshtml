@@ -39,7 +39,7 @@
                                     <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Pessoa" asp-action="Details" asp-route-id="@pessoa.PesId"><i class="bi bi-eye mx-2"></i>Detalhes</a>
                                     <a class="btn btn-success btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Incluir Orçamento" asp-controller="Orcamento" asp-action="Create" asp-route-id="@pessoa.PesId"><i class="bi bi-file-earmark-plus mx-2"></i>Incluir Orçamento</a>
                                     <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@pessoa.PesId, event)" asp-controller="Pessoa" asp-action="Delete" asp-route-id="@pessoa.PesId">Excluir</a>
-                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.PesId"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a>
+                                    @* <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Imprimir" asp-controller="Relatorio" asp-action="GerarPDF" asp-route-id="@pessoa.PesId"><i class="bi bi-printer-fill mx-2"></i>Imprimir</a> *@
                                 </td>
                             </tr>
                         }

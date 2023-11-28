@@ -35,6 +35,7 @@ namespace SistemaOrcamentario
             services.AddScoped<IEmail, Email>();
             services.AddScoped<IService<UsuarioModel>, UsuarioService>();
             services.AddScoped<IService<PessoaModel>, PessoaService>();
+            services.AddScoped<IService<OrcamentoModel>, OrcamentoService>();
 
             services.AddSession(options =>
             {

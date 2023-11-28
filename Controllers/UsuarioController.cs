@@ -37,12 +37,12 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            UsuarioModel usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuId == id);
+            var usuario = _dataContext.TBUSUARIO.FirstOrDefault(x => x.UsuId == id);
 
             if (usuario == null)
             {
@@ -70,9 +70,9 @@ namespace SistemaOrcamentario.Controllers
                         return View(usuario);
                     }
 
-                    var UsuarioLogado = _sessao.ObterIdUsuarioLogado().ToString();
+                    var usuarioLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
-                    if (int.TryParse(UsuarioLogado, out int parseUsuarioLogado))
+                    if (int.TryParse(usuarioLogado, out int parseUsuarioLogado))
                     {
                         usuario.UsuIncPor = parseUsuarioLogado;
                         usuario.UsuIncEm = DateTime.Now;
@@ -111,9 +111,9 @@ namespace SistemaOrcamentario.Controllers
                 {
                     if (_dataContext.TBUSUARIO.Any(u => u.UsuLogin == usuario.UsuLogin && u.UsuId == usuario.UsuId))
                     {
-                        var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
+                        var usuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
-                        if (int.TryParse(UsuIdLogado, out int parseUsuId))
+                        if (int.TryParse(usuIdLogado, out int parseUsuId))
                         {
                             usuario.UsuAltPor = parseUsuId;
                             usuario.UsuAltEm = DateTime.Now;

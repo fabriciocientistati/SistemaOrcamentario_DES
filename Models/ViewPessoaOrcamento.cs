@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SistemaOrcamentario.Models
+﻿namespace SistemaOrcamentario.Models
 {
     public class ViewPessoaOrcamento
     {

@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ServiceStack;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Filters;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
+using SistemaOrcamentario.Services;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -18,12 +17,13 @@ namespace SistemaOrcamentario.Controllers
     {
         private readonly DataContext _context;
         private readonly ISessao _sessao;
+        private readonly IService<OrcamentoModel> _service;
 
-        public OrcamentoController(DataContext context, ISessao sessao)
+        public OrcamentoController(DataContext context, ISessao sessao, IService<OrcamentoModel> service)
         {
             _context = context;
             _sessao = sessao;
-
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
@@ -34,34 +34,35 @@ namespace SistemaOrcamentario.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TBORCAMENTO == null)
+            if (id == 0 || _context.TBORCAMENTO == null)
             {
                 return NotFound();
             }
 
-            var orcamentoModel = await _context.TBORCAMENTO
+            var orcamento = await _context.TBORCAMENTO
                 .Include(o => o.OrcamentoPessoa)
                 .FirstOrDefaultAsync(m => m.PesId == id);
-            if (orcamentoModel == null)
+            if (orcamento == null)
             {
                 return NotFound();
             }
 
-            return View(orcamentoModel);
+            return View(orcamento);
         }
 
         public IActionResult Create(int? id)
         {
-            var PesOrcamento = new ViewPessoaOrcamento();
+            var pesOrcamento = new ViewPessoaOrcamento();
 
-            if (id == null || id == 0)
+            if (id == 0)
             {
-                ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome"); //Lista nomes no select aleatório
+                ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome");
 
                 return View();
             }
-            ViewBag.PesId = new SelectList(_context.TBPESSOA, "PesId", "PesNome", id); //Lista nome no select por parametro
-            return View(PesOrcamento);
+
+            ViewBag.PesId = new SelectList(_context.TBPESSOA, "PesId", "PesNome", id);
+            return View(pesOrcamento);
         }
 
         [HttpPost]
@@ -95,34 +96,34 @@ namespace SistemaOrcamentario.Controllers
             catch (Exception)
             {
                 TempData["MessageErro"] = $"Ops, Não foi possível criar orçamento!";
+                return RedirectToAction("Edit");
             }
 
             ViewBag.PesId = new SelectList(_context.TBPESSOA, "PesId", "PesNome", model.Orcamento.PesId);
             return View(model);
         }
 
-
-        public async Task<IActionResult> Edit(int id1, int id2)
+        public async Task<IActionResult> Edit(int orcId, int pesId)
         {
-            if (id1 == 0 && id2 == 0)
+            if (orcId == 0 || pesId == 0)
             {
                 return NotFound();
             }
-
-            var orcamento = await _context.TBORCAMENTO.FindAsync(id1);
-            var pessoa = await _context.TBORCAMENTO.FindAsync(id2);
+            
+            var orcamento = await _context.TBORCAMENTO.FirstOrDefaultAsync(o => o.OrcId == orcId);
+            var pessoa = await _context.TBORCAMENTO.FirstOrDefaultAsync(o => o.PesId == pesId);
+            var viewModel = new ViewPessoaOrcamento { Orcamento = orcamento };
 
             if (orcamento == null && pessoa == null)
             {
                 return NotFound();
             }
 
-            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", id2);
-            return View(orcamento);
+            ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", pesId);
+            return View(viewModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ViewPessoaOrcamento model)
         {
             if (model == null)
@@ -130,69 +131,55 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.TBORCAMENTO.Update(model.Orcamento);
-                    await _context.SaveChangesAsync();
+                    var usuId = _sessao.ObterIdUsuarioLogado().ToString();
+
+                    if (int.TryParse(usuId, out int parseUsuId))
+                    {
+                        model.Orcamento.OrcAltPor = parseUsuId;
+                        model.Orcamento.OrcAltEm = DateTime.Now;
+                    }
+
+                    await _service.Update(model.Orcamento);
 
                     TempData["MessageSuccess"] = "Orçamento atualizado com sucesso!";
 
                     return RedirectToAction("Index", "Pessoa");
                 }
-
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrcamentoModelExists(model.Orcamento.OrcId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        TempData["MessageErro"] = $"Ops, Não foi possível atualizar orçamento!";
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
+            catch (Exception)
+            {
+                TempData["MessageErro"] = $"Ops, não foi possível atualizar orçamento!";
+                    return RedirectToAction("Details", "Pessoa");
+            }
+
             ViewData["PesId"] = new SelectList(_context.TBPESSOA, "PesId", "PesNome", model.Orcamento.PesId);
-            return View(model);
+            return View();
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.TBORCAMENTO == null)
+            if (id == 0)
             {
                 return NotFound();
             }
-
-            var orcamentoModel = await _context.TBORCAMENTO
-                .Include(o => o.OrcamentoPessoa)
-                .FirstOrDefaultAsync(m => m.OrcId == id);
-            if (orcamentoModel == null)
+            
+            try
             {
-                return NotFound();
+                await _service.Delete(id);
+                TempData["MessageSuccess"] = "Orçamento excluído com sucesso!";
+                
+                return RedirectToAction("Index", "Pessoa");
             }
-
-            return View(orcamentoModel);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.TBORCAMENTO == null)
+            catch (Exception)
             {
-                return Problem("Entity set 'DataContext.Orcamentos'  is null.");
-            }
-            var orcamentoModel = await _context.TBORCAMENTO.FindAsync(id);
-            if (orcamentoModel != null)
-            {
-                _context.TBORCAMENTO.Remove(orcamentoModel);
-            }
+                TempData["MessageErro"] = "Ops, não foi possível excluir o orçamento!";
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Pessoa");
+            }
         }
 
         private bool OrcamentoModelExists(int id)

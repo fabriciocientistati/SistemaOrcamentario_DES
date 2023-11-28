@@ -1,5 +1,13 @@
 ﻿@model ViewPessoaOrcamento
 
+@{
+    TempData["Title"] = "Criar orçamento";
+}
+
+@{
+    Layout = "_Layout";
+}
+
 @if (TempData["MessageErro"] != null)
 {
     <div class="alert alert-danger" role="alert">
@@ -24,7 +32,8 @@
                                     <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
                                         <div class="form-group position-relative has-icon-left">
-                                                <select asp-for="Orcamento.PesId" required class="form-control" asp-items="ViewBag.PesId"></select>
+                                            <select id="pesIdSelect" asp-for="Orcamento.PesId" required class="form-control" asp-items="ViewBag.PesId"></select>
+                                            <input type="hidden" asp-for="Orcamento.PesId" id="pesIdHidden"/>
                                             <div class="form-control-icon">
                                                 <i data-feather="user"></i>
                                             </div>
@@ -35,7 +44,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-3 mb-3">
-                                        <h6>Forma de pagamento <i class="bi bi-credit-card-2-back"></i>   <i class="bi bi-wallet2"></i></h6>
+                                        <h6>Forma de pagamento <i class="bi bi-credit-card-2-back"></i> <i class="bi bi-wallet2"></i></h6>
                                         <div class="form-group position-relative">
                                             <select class="form-select col-2" asp-for="Orcamento.OrcTipoPagamento" required aria-label="Selecione uma forma de pagamento">
                                                 <option selected>Selecione</option>
@@ -59,7 +68,7 @@
                                     <div class="col-sm-3 mb-3">
                                         <h6>Valor R$</h6>
                                         <div class="form-group position-relative">
-                                            <input id="preco" type="text" asp-for="Orcamento.OrcPreco" class="form-control" placeholder="R$" />
+                                            <input id="preco" type="text" asp-for="Orcamento.OrcPreco" class="form-control" placeholder="R$"/>
                                         </div>
                                     </div>
 
@@ -105,7 +114,7 @@
 
                                 <div class="row">
                                     <div class="col-sm mb-4">
-                                        <input type="submit" value="Incluir orçamento" class="btn btn-primary" />
+                                        <input type="submit" value="Incluir orçamento" class="btn btn-primary"/>
                                         <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
                                     </div>
                                 </div>
@@ -118,10 +127,3 @@
         </div>
     </div>
 </div>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
-
-

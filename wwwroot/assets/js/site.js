@@ -15,7 +15,11 @@
 //    });
 //}
 
-
+$(document).ready(function () {
+    // Desabilitar o select e copiar o valor para o campo oculto
+    $("#pesIdSelect").prop("disabled", true);
+    $("#pesIdHidden").val($("#pesIdSelect").val());
+});
 
 function limpa_formulario_cep() {
     //Limpa valores do formulário de cep.

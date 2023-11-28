@@ -1,5 +1,6 @@
 ﻿//using iTextSharp.text.pdf;
 //using iTextSharp.text;
+
 using Microsoft.AspNetCore.Mvc;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Models;
@@ -42,12 +43,12 @@ namespace SistemaOrcamentario.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            PessoaModel pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
+            var pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
 
             if (pessoa == null)
             {
@@ -56,20 +57,21 @@ namespace SistemaOrcamentario.Controllers
 
             return View(pessoa);
         }
-
+        
+        
         public IActionResult Details(int? id)
         {
-            PessoaModel pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
-            List<OrcamentoModel> orcamentos = _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToList();
-            var viewModel = new ViewModel { Pessoa = pessoa, Orcamento = orcamentos };
+            var pessoa = _dataContext.TBPESSOA.FirstOrDefault(x => x.PesId == id);
+            var orcamento = _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToList();
+            var viewModel = new ViewModel { Pessoa = pessoa, Orcamento = orcamento };
 
             return View(viewModel);
         }
 
         public async Task<IActionResult> ListarOrcamentosPessoaId(int? id)
         {
-            List<OrcamentoModel> orcamentos = await _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToListAsync();
-            return PartialView("_PessoaOrcamentosIndex", orcamentos);
+            var orcamento = await _dataContext.TBORCAMENTO.Where(x => x.PesId == id).ToListAsync();
+            return PartialView("_PessoaOrcamentosIndex", orcamento);
         }
 
         [HttpPost]
@@ -98,9 +100,9 @@ namespace SistemaOrcamentario.Controllers
                         return View(pessoa);
                     }
 
-                    var UsuId = _sessao.ObterIdUsuarioLogado().ToString();
+                    var usuId = _sessao.ObterIdUsuarioLogado().ToString();
 
-                    if (int.TryParse(UsuId, out int parsedUsuId))
+                    if (int.TryParse(usuId, out int parsedUsuId))
                     {
                         pessoa.PesIncPor = parsedUsuId;
                         pessoa.PesIncEm = DateTime.Now;
@@ -125,13 +127,13 @@ namespace SistemaOrcamentario.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PessoaModel pessoa)
         {
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (pessoa == null)
-                {
-                    return NotFound();
-                }
-
                 if (ModelState.IsValid)
                 {
                     if (!string.IsNullOrEmpty(pessoa.PesCpf) &&
@@ -147,15 +149,16 @@ namespace SistemaOrcamentario.Controllers
                         TempData["MessageErro"] = "Já existe cliente com esse CNPJ!";
                     }
 
-                    var UsuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
+                    var usuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
-                    if (int.TryParse(UsuIdLogado, out int parseUsuId))
+                    if (int.TryParse(usuIdLogado, out int parseUsuId))
                     {
                         pessoa.PesAltPor = parseUsuId;
                         pessoa.PesAltEm = DateTime.Now;
                     }
 
                     await _service.Update(pessoa);
+                    
                     TempData["MessageSuccess"] = "Cliente atualizado!";
 
                     return RedirectToAction(nameof(Index));
@@ -166,7 +169,7 @@ namespace SistemaOrcamentario.Controllers
                 TempData["MessageErro"] = $"Ops, não foi possível atualizar cliente!";
                 return RedirectToAction("Edit");
             }
-
+    
             return View();
         }
 
