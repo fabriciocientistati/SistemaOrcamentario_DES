@@ -29,13 +29,38 @@
             <span>Orçamentos</span>
         </a>
 
-
-        <ul class="submenu ">
+        <ul class="submenu">
             <li>
                 <a asp-controller="Orcamento" asp-action="Index">Lista de orçamentos</a>
             </li>
-
         </ul>
+    </li>
 
+    <li class="sidebar-item  has-sub">
+
+        <a href="#" class='sidebar-link'>
+            <i class="bi bi-file-text" width="20"></i>
+            <span>Categoria dos produtos</span>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                <a asp-controller="Categoria" asp-action="Index">Lista de categorias</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="sidebar-item  has-sub">
+
+        <a href="#" class='sidebar-link'>
+            <i class="bi bi-file-text" width="20"></i>
+            <span>Produtos</span>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                <a asp-controller="Produto" asp-action="Index">Lista de produtos</a>
+            </li>
+        </ul>
     </li>
 }

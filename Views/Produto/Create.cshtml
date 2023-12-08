@@ -1,0 +1,72 @@
+﻿@model SistemaOrcamentario.Models.ProdutoModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>ProdutoModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProNome" class="control-label"></label>
+                <input asp-for="ProNome" class="form-control" />
+                <span asp-validation-for="ProNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProDesc" class="control-label"></label>
+                <input asp-for="ProDesc" class="form-control" />
+                <span asp-validation-for="ProDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProPreco" class="control-label"></label>
+                <input asp-for="ProPreco" class="form-control" />
+                <span asp-validation-for="ProPreco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProQuantidadeEmEstoque" class="control-label"></label>
+                <input asp-for="ProQuantidadeEmEstoque" class="form-control" />
+                <span asp-validation-for="ProQuantidadeEmEstoque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProImagemUrl" class="control-label"></label>
+                <input name="arquivo" type="file" class="form-control" />
+                <span asp-validation-for="ProImagemUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatId" class="control-label"></label>
+                <select asp-for="CatId" class ="form-control" asp-items="ViewBag.CatId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProIncPor" class="control-label"></label>
+                <input asp-for="ProIncPor" class="form-control" />
+                <span asp-validation-for="ProIncPor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProIncEm" class="control-label"></label>
+                <input asp-for="ProIncEm" class="form-control" />
+                <span asp-validation-for="ProIncEm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

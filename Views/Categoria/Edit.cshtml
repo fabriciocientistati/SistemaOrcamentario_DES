@@ -1,0 +1,63 @@
+﻿@model SistemaOrcamentario.Models.CategoriaModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>CategoriaModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CatId" />
+            <div class="form-group">
+                <label asp-for="CatNome" class="control-label"></label>
+                <input asp-for="CatNome" class="form-control" />
+                <span asp-validation-for="CatNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatIncPor" class="control-label"></label>
+                <input asp-for="CatIncPor" class="form-control" />
+                <span asp-validation-for="CatIncPor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatIncEm" class="control-label"></label>
+                <input asp-for="CatIncEm" class="form-control" />
+                <span asp-validation-for="CatIncEm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatAltPor" class="control-label"></label>
+                <input asp-for="CatAltPor" class="form-control" />
+                <span asp-validation-for="CatAltPor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatAltEm" class="control-label"></label>
+                <input asp-for="CatAltEm" class="form-control" />
+                <span asp-validation-for="CatAltEm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

@@ -22,6 +22,35 @@ namespace SistemaOrcamentario.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SistemaOrcamentario.Models.CategoriaModel", b =>
+                {
+                    b.Property<int>("CatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatId"));
+
+                    b.Property<DateTime?>("CatAltEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CatAltPor")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CatIncEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CatIncPor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CatNome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CatId");
+
+                    b.ToTable("TBCATEGORIA");
+                });
+
             modelBuilder.Entity("SistemaOrcamentario.Models.OrcamentoModel", b =>
                 {
                     b.Property<int>("OrcId")
@@ -147,6 +176,53 @@ namespace SistemaOrcamentario.Migrations
                     b.ToTable("TBPESSOA", (string)null);
                 });
 
+            modelBuilder.Entity("SistemaOrcamentario.Models.ProdutoModel", b =>
+                {
+                    b.Property<int>("ProId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProId"));
+
+                    b.Property<int>("CatId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ProAltEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ProAltPor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProImagemUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ProIncEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProIncPor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProNome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ProPreco")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProQuantidadeEmEstoque")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProId");
+
+                    b.HasIndex("CatId");
+
+                    b.ToTable("TBPRODUTO", (string)null);
+                });
+
             modelBuilder.Entity("SistemaOrcamentario.Models.UsuarioModel", b =>
                 {
                     b.Property<int>("UsuId")
@@ -203,6 +279,22 @@ namespace SistemaOrcamentario.Migrations
                         .IsRequired();
 
                     b.Navigation("OrcamentoPessoa");
+                });
+
+            modelBuilder.Entity("SistemaOrcamentario.Models.ProdutoModel", b =>
+                {
+                    b.HasOne("SistemaOrcamentario.Models.CategoriaModel", "Categoria")
+                        .WithMany("CategoriaProdutos")
+                        .HasForeignKey("CatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("SistemaOrcamentario.Models.CategoriaModel", b =>
+                {
+                    b.Navigation("CategoriaProdutos");
                 });
 
             modelBuilder.Entity("SistemaOrcamentario.Models.PessoaModel", b =>

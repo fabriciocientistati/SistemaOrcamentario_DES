@@ -25,6 +25,9 @@
             <div class="row match-height">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Novo orçamento</h4>
+                        </div>
                         <div class="card-body">
                             <form asp-action="Create">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -78,7 +81,7 @@
                                             <select class="form-select" asp-for="Orcamento.OrcTipoEntrega" required aria-label="Selecione uma de entrega">
                                                 <option selected>Selecione</option>
                                                 <option value="Lojá">Lojá</option>
-                                                <option value="Pessoa">Pessoa</option>
+                                                <option value="Pessoa">Cliente</option>
                                                 <option value="Transportadora">Transportadora</option>
                                             </select>
                                         </div>

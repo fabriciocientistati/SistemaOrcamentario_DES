@@ -1,0 +1,88 @@
+﻿@model SistemaOrcamentario.Models.ProdutoModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>ProdutoModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProId" />
+            <div class="form-group">
+                <label asp-for="ProNome" class="control-label"></label>
+                <input asp-for="ProNome" class="form-control" />
+                <span asp-validation-for="ProNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProDesc" class="control-label"></label>
+                <input asp-for="ProDesc" class="form-control" />
+                <span asp-validation-for="ProDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProPreco" class="control-label"></label>
+                <input asp-for="ProPreco" class="form-control" />
+                <span asp-validation-for="ProPreco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProQuantidadeEmEstoque" class="control-label"></label>
+                <input asp-for="ProQuantidadeEmEstoque" class="form-control" />
+                <span asp-validation-for="ProQuantidadeEmEstoque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProImagemUrl" class="control-label"></label>
+                <input asp-for="ProImagemUrl" class="form-control" />
+                <span asp-validation-for="ProImagemUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatId" class="control-label"></label>
+                <select asp-for="CatId" class="form-control" asp-items="ViewBag.CatId"></select>
+                <span asp-validation-for="CatId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProIncPor" class="control-label"></label>
+                <input asp-for="ProIncPor" class="form-control" />
+                <span asp-validation-for="ProIncPor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProIncEm" class="control-label"></label>
+                <input asp-for="ProIncEm" class="form-control" />
+                <span asp-validation-for="ProIncEm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProAltPor" class="control-label"></label>
+                <input asp-for="ProAltPor" class="form-control" />
+                <span asp-validation-for="ProAltPor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProAltEm" class="control-label"></label>
+                <input asp-for="ProAltEm" class="form-control" />
+                <span asp-validation-for="ProAltEm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

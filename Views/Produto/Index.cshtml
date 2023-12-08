@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SistemaOrcamentario.Models.ProdutoModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProPreco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProQuantidadeEmEstoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProImagemUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProIncPor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProIncEm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProAltPor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProAltEm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProPreco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProQuantidadeEmEstoque)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProImagemUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProIncPor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProIncEm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProAltPor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProAltEm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.CatNome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

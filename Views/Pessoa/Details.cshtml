@@ -11,6 +11,9 @@
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Detalhamento do Cliente</h4>
+                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3 mb-3" readonly>
@@ -136,10 +139,10 @@
                                 {
                                     <div class="row">
                                         <div class="col-sm-3 mb-3">
-                                            <h3 class="mb-4">Orçamentos</h3>
+                                            <h3 class="mb-4">Orçamento</h3>
                                         </div>
 
-                                        <div class="col-sm-3 mb-3">
+                                        <div class="col-sm-4 mb-3">
                                             <a class="btn btn-primary btn-sm mx-1" asp-controller="Orcamento" asp-action="Edit" asp-route-orcId="@orcamento.OrcId" asp-route-pesId="@orcamento.PesId"><i class="bi bi-pencil-square mx-2"></i>Atualizar orçamento</a>
                                             <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@orcamento.OrcId, event)" asp-controller="Orcamento" asp-action="Delete" asp-route-id="@orcamento.OrcId">Excluir</a>
                                         </div>

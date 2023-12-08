@@ -36,6 +36,7 @@ namespace SistemaOrcamentario
             services.AddScoped<IService<UsuarioModel>, UsuarioService>();
             services.AddScoped<IService<PessoaModel>, PessoaService>();
             services.AddScoped<IService<OrcamentoModel>, OrcamentoService>();
+            services.AddScoped<IService<CategoriaModel>, CategoriaService>();
 
             services.AddSession(options =>
             {
