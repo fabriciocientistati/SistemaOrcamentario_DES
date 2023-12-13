@@ -1,4 +1,5 @@
-﻿@model ViewModel
+﻿@using System.Globalization
+@model ViewModel
 
 @{
     TempData["Title"] = "Detalhamento do cliente";
@@ -34,7 +35,7 @@
                                     <div class="col-sm-3 mb-3 mt-2">
                                         <h6>Data de inclusão</h6>
                                         <div class="form-group position-relative has-icon-right">
-                                            @Html.DisplayFor(Model => Model.Pessoa.PesIncEm)
+                                            <span>@Model.Pessoa.PesIncEm.ToShortDateString()</span>
                                             <i class="bi bi-calendar-date"></i>
                                         </div>
                                     </div>
@@ -153,10 +154,11 @@
                                         <div class="col-sm-3 mb-3">
                                             <h6>Data de inclusão</h6>
                                             <div class="form-group position-relative has-icon-left">
-                                                @Html.DisplayFor(Model => orcamento.OrcIncEm)
+                                                <span>@orcamento.OrcIncEm.ToShortDateString()</span>
                                                 <i class="bi bi-house"></i>
                                             </div>
                                         </div>
+
                                         <div class="col-sm-3 mb-3">
                                             <h6>Forma de pagamento</h6>
                                             <div class="form-group position-relative">
@@ -174,9 +176,9 @@
                                         </div>
 
                                         <div class="col-sm-3 mb-3">
-                                            <h6>Valor R$</h6>
+                                            <h6>Valor</h6>
                                             <div class="form-group position-relative">
-                                                @Html.DisplayFor(Model => orcamento.OrcPreco)
+                                                <span>@orcamento.OrcPreco.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</span>
                                             </div>
                                         </div>
                                     </div>

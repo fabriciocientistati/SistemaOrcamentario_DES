@@ -18,7 +18,7 @@ namespace SistemaOrcamentario.Controllers
         private readonly ISessao _sessao;
         private readonly IService<CategoriaModel> _service;
 
-        public CategoriaController(DataContext context, Sessao sessao, IService<CategoriaModel> service)
+        public CategoriaController(DataContext context, ISessao sessao, IService<CategoriaModel> service)
         {
             _context = context;
             _sessao = sessao;
@@ -27,7 +27,7 @@ namespace SistemaOrcamentario.Controllers
 
         public async Task<IActionResult> Index()
         {
-              return View(await _context.TBCATEGORIA.ToListAsync());
+            return View(await _service.FindAll());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -103,75 +103,53 @@ namespace SistemaOrcamentario.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CatId,CatNome,CatIncPor,CatIncEm,CatAltPor,CatAltEm")] CategoriaModel categoriaModel)
+        public async Task<IActionResult> Edit(CategoriaModel categoria)
         {
-            if (id != categoriaModel.CatId)
+            if (categoria == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(categoriaModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaModelExists(categoriaModel.CatId))
+                    var usuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
+
+                    if (int.TryParse(usuIdLogado, out int parseUsuId))
                     {
-                        return NotFound();
+                        categoria.CatAltPor = parseUsuId;
+                        categoria.CatAltEm = DateTime.Now;
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    await _service.Update(categoria);
+
+                    TempData["MessageSuccess"] = "Categoria atualizada!";
+
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(categoriaModel);
+            catch (Exception)
+            {
+                TempData["MessageErro"] = $"Ops, não foi possível atualizar categoria!";
+                return RedirectToAction("Edit");
+            }
+
+            return View();
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.TBCATEGORIA == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var categoriaModel = await _context.TBCATEGORIA
-                .FirstOrDefaultAsync(m => m.CatId == id);
-            if (categoriaModel == null)
-            {
-                return NotFound();
-            }
+            await _service.Delete(id);
 
-            return View(categoriaModel);
-        }
+            TempData["MessageSuccess"] = "Categoria excluida com sucesso!";
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.TBCATEGORIA == null)
-            {
-                return Problem("Entity set 'DataContext.TBCATEGORIA'  is null.");
-            }
-            var categoriaModel = await _context.TBCATEGORIA.FindAsync(id);
-            if (categoriaModel != null)
-            {
-                _context.TBCATEGORIA.Remove(categoriaModel);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CategoriaModelExists(int id)
-        {
-          return _context.TBCATEGORIA.Any(e => e.CatId == id);
+            return RedirectToAction("Index");
         }
     }
 }

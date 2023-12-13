@@ -105,9 +105,9 @@ namespace SistemaOrcamentario.Controllers
                 }
                 return View("Index");
             }
-            catch (Exception erro)
+            catch (Exception)
             {
-                TempData["MessageErro"] = $"Ops, Não conseguimos redefinir sua senha, tente novamente: {erro.Message}";
+                TempData["MessageErro"] = $"Ops, Não conseguimos redefinir sua senha, tente novamente!";
                 return RedirectToAction("Index");
             }
         }

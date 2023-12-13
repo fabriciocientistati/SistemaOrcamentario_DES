@@ -1,63 +1,58 @@
 ﻿@model SistemaOrcamentario.Models.CategoriaModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Atualizar Categoria";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
-
-<h4>CategoriaModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CatId" />
-            <div class="form-group">
-                <label asp-for="CatNome" class="control-label"></label>
-                <input asp-for="CatNome" class="form-control" />
-                <span asp-validation-for="CatNome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CatIncPor" class="control-label"></label>
-                <input asp-for="CatIncPor" class="form-control" />
-                <span asp-validation-for="CatIncPor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CatIncEm" class="control-label"></label>
-                <input asp-for="CatIncEm" class="form-control" />
-                <span asp-validation-for="CatIncEm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CatAltPor" class="control-label"></label>
-                <input asp-for="CatAltPor" class="form-control" />
-                <span asp-validation-for="CatAltPor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CatAltEm" class="control-label"></label>
-                <input asp-for="CatAltEm" class="form-control" />
-                <span asp-validation-for="CatAltEm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-</body>
-</html>
+
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Atualizar Categoria</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form asp-action="Edit" class="form form-vertical">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Código</label>
+                                            <div class="position-relative">
+                                                <input asp-for="CatId" readonly type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Nome</label>
+                                            <div class="position-relative">
+                                                <input asp-for="CatNome" required type="text" class="form-control" placeholder="Nome da categoria" id="first-name-icon">
+                                                @Html.ValidationMessageFor(model => model.CatNome, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success me-1 mb-1">Atualizar categoria</button>
+                                        <button asp-controller="Categoria" asp-action="Index" class="btn btn-danger me-1 mb-1">Voltar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
