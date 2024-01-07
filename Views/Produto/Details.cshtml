@@ -1,0 +1,48 @@
+﻿@model SistemaOrcamentario.Models.ProdutoModel
+
+@{
+    ViewData["Title"] = "Detalhamento do produto";
+}
+
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">@Model.ProNome</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                @if (!string.IsNullOrEmpty(Model.ProImagemUrl))
+                                {
+                                    <img src="~/images/@Model.ProImagemUrl" alt="Imagem do Produto" class="img-fluid" />
+                                }
+                                else
+                                {
+                                    <p>Imagem não disponível</p>
+                                }
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <p><strong>Descrição:</strong> @Model.ProDesc</p>
+                                <p><strong>Preço:</strong> R$ @Model.ProPreco.ToString("0.00")</p>
+                                <p><strong>Quantidade em Estoque:</strong> @Model.ProQuantidadeEmEstoque</p>
+                                <p><strong>Categoria:</strong> @Model.Categoria.CatNome</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <a type="button" class="btn btn-danger" asp-controller="Produto" asp-action="Index">Voltar</a>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

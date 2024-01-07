@@ -1,0 +1,112 @@
+﻿@using SistemaOrcamentario.Enums;
+@model SistemaOrcamentario.Models.UsuarioModel
+
+@{
+    ViewData["Title"] = "Editar usuário";
+}
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Atualizar usuário</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form asp-action="Edit" class="form form-vertical">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Código</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuId" type="text" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Perfil</label>
+                                            <div class="position-relative">
+                                                <fieldset class="form-group">
+                                                    <select asp-for="UsuPerfil" class="form-select" id="basicSelect">
+                                                        <option value="">Selecione</option>
+                                                        <option value="@PerfilEnum.Administrador">ADMINISTRADOR</option>
+                                                        <option value="@PerfilEnum.Consultor">CONSULTOR</option>
+                                                        <option value="@PerfilEnum.Padrão">PADRÃO</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.UsuPerfil, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Nome</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuNome" type="text" class="form-control" placeholder="Nome" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.UsuNome, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Login</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuLogin" type="text" class="form-control" placeholder="Login de usuário" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.UsuLogin, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="display: none;">
+                                        <div class="form-group has-icon-left">
+                                            <label for="password-id-icon">Senha</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuSenha" type="text" class="form-control" placeholder="" id="password-id-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.UsuSenha, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-5">
+                                        <div class="form-group has-icon-left">
+                                            <label for="email-id-icon">Email</label>
+                                            <div class="position-relative">
+                                                <input asp-for="UsuEmail" type="text" class="form-control" placeholder="Email" id="email-id-icon">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="mail"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.UsuEmail, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Editar usuário</button>
+                                        <button asp-controller="Usuario" asp-action="Index" class="btn btn-danger me-1 mb-1">Voltar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

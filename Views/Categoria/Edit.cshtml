@@ -1,0 +1,58 @@
+﻿@model SistemaOrcamentario.Models.CategoriaModel
+
+@{
+    ViewData["Title"] = "Atualizar Categoria";
+}
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Atualizar Categoria</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form asp-action="Edit" class="form form-vertical">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Código</label>
+                                            <div class="position-relative">
+                                                <input asp-for="CatId" readonly type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Nome</label>
+                                            <div class="position-relative">
+                                                <input asp-for="CatNome" required type="text" class="form-control" placeholder="Nome da categoria" id="first-name-icon">
+                                                @Html.ValidationMessageFor(model => model.CatNome, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success me-1 mb-1">Atualizar categoria</button>
+                                        <button asp-controller="Categoria" asp-action="Index" class="btn btn-danger me-1 mb-1">Voltar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

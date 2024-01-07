@@ -1,0 +1,58 @@
+﻿@model RedefinirSenhaModel
+
+@{
+    ViewData["Title"] = "Redefinir Senha";
+}
+
+@{
+    Layout = "_LayoutLogin";
+}
+
+    <div id="auth">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 mx-auto">
+                    <div class="card py-4">
+                        <div class="card-body">
+                            @if (TempData["MessageErro"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+                                    @TempData["MessageErro"]
+                                </div>
+                            }
+
+                            @if (TempData["MessageSuccess"] != null)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+                                    @TempData["MessageSuccess"]
+                                </div>
+                            }
+                            <div class="text-center mb-5">
+                                <h3>Esqueceu sua senha?</h3>
+                                <p>Preencha os campos abaixo para receber o link de redefinição de senha.</p>
+                            </div>
+                            <form asp-controller="Login" asp-action="EnviarLinkRedefinirSenha">
+                                <div class="form-group">
+                                    <label for="Login">Login</label>
+                                    <input type="text" asp-for="Login" id="Login" class="form-control" name="Login">
+                                    @Html.ValidationMessageFor(x => x.Login, "", new { @class = "text-danger" })
+                                    <label class="mt-3" for="Email">E-mail</label>
+                                    <input type="email" asp-for="Email" id="Email" class="form-control" name="Email">
+                                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="clearfix mt-5">
+                                    <button class="btn btn-primary" type="submit">Redefinir senha</button>
+                                    <button asp-controller="Login" asp-action="Index" class="btn btn-danger ">Voltar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

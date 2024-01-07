@@ -1,0 +1,100 @@
+﻿@model SistemaOrcamentario.Models.ProdutoModel
+
+@{
+    ViewData["Title"] = "Cadastrar Produto";
+}
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Cadastro de Produto</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form asp-action="Create" class="form form-vertical" enctype="multipart/form-data">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Cateogira</label>
+                                            <div class="position-relative">
+                                                <select asp-for="CatId" required type="text" class="form-control" id="first-name-icon" asp-items="ViewBag.CatId"></select>
+                                                @Html.ValidationMessageFor(model => model.ProNome, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Nome</label>
+                                            <div class="position-relative">
+                                                <input asp-for="ProNome" required type="text" class="form-control" placeholder="Nome do produto" id="first-name-icon">
+                                                @Html.ValidationMessageFor(model => model.ProNome, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">–
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Descrição</label>
+                                            <div class="position-relative">
+                                                <input asp-for="ProDesc" required type="text" class="form-control" placeholder="Descrição do produto" id="first-name-icon">
+                                                @Html.ValidationMessageFor(model => model.ProDesc, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Valor R$</label>
+                                            <div class="position-relative">
+                                                <input id="preco" asp-for="ProPreco" required type="text" class="form-control" placeholder="R$">
+                                                @Html.ValidationMessageFor(model => model.ProPreco, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Qtd. Estoque</label>
+                                            <div class="position-relative">
+                                                <input asp-for="ProQuantidadeEmEstoque" required type="text" class="form-control" id="first-name-icon">
+                                                @Html.ValidationMessageFor(model => model.ProQuantidadeEmEstoque, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <p>Imagem</p>
+                                            <div class="form-file">
+                                                <input type="file" asp-for="ProImagemUrl" class="form-file-input" id="customFile" name="arquivo">
+                                                @Html.ValidationMessageFor(model => model.ProImagemUrl, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" onclick="concluirCadastro()" class="btn btn-success me-1 mb-1">Criar produto</button>
+                                        <button type="reset" class="btn btn-primary me-1 mb-1">Limpar</button>
+                                        <a asp-controller="Produto" asp-action="Index" class="btn btn-danger me-1 mb-1">Voltar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

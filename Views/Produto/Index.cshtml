@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SistemaOrcamentario.Models.ProdutoModel>
+
+<div class="card-body">
+    <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Produto" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar novo Produto</a>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class='table table-sm table-striped' id="table1">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Qtd: Estoque</th>
+                        <th>Categoria</th>
+                        <th>R$</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var produto in Model)
+                        {
+                            <tr>
+                                <th scope="row">@produto.CatId</th>
+                                <td>@produto.ProDesc</td>
+                                <td>@produto.ProQuantidadeEmEstoque</td>
+                                <td>@produto.Categoria</td>
+                                <td>
+                                    <span class="badge bg-success">Disponivel</span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Produto" asp-action="Details" asp-route-id="@produto.ProId"><i class="bi bi-eye mx-2"></i>Detalhamento</a>
+                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar produto" asp-controller="Produto" asp-action="Edit" asp-route-id="@produto.ProId"><i class="bi bi-pencil-square mx-2"></i>Atualizar</a>
+                                    <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@produto.ProId, event)" asp-controller="Produto" asp-action="Delete" asp-route-id="@produto.ProId">Excluir</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @if (TempData["MessageSuccess"] != null)
+    {
+        <script>Swal.fire('Sucesso', '@TempData["MessageSuccess"]', 'success');</script>
+    }
+
+    @if (TempData["MessageErro"] != null)
+    {
+        <script>Swal.fire('Erro', '@TempData["MessageError"]', 'error');</script>
+    }
+    <script>
+        function displayAlert(ProId, event) {
+            event.preventDefault();  // Evita o comportamento padrão do link
+
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Você não será capaz de reverter isso!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Se o usuário confirmar, redirecione para a ação de exclusão
+                    window.location.href = event.target.href;
+                }
+            });
+        }
+    </script>
+}

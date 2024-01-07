@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Home\**" />
+    <Content Remove="Views\Home\**" />
+    <EmbeddedResource Remove="Views\Home\**" />
+    <None Remove="Views\Home\**" />
+    <Compile Remove="Mappings\CategoriaMap.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\HomeController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\images\04ab5883-e107-40f8-9ef4-617b949ed7a2_" />
+    <Content Remove="wwwroot\images\12d938de-ce88-4015-b419-5351399ee077_Aviao.png" />
+    <Content Remove="wwwroot\images\14a0abbb-4527-40db-a3eb-37267aacf275_" />
+    <Content Remove="wwwroot\images\54ad2033-3985-4c21-9804-b7f2428054ef_" />
+    <Content Remove="wwwroot\images\a22da04f-04e7-4285-97a4-a0cca4f42ed6_" />
+    <Content Remove="wwwroot\images\db0f9c8f-49f1-4850-908d-9326e9187eee_" />
+    <Content Remove="wwwroot\images\fa7f1765-dba0-41c5-a4f7-3a37c7fd2ae7_iphone12ProMaxxx.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Orcamentos.frx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="FastReport.OpenSource" Version="2023.3.11" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2023.3.11" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ServiceStack.Interfaces" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>

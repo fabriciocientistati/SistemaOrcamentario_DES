@@ -1,0 +1,36 @@
+﻿@model List<OrcamentoModel>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Orbservação</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Entrega</th>
+                    <th scope="col">Data de inclusão</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var orcamento in Model)
+                    {
+                        <tr>
+                            <th scope="row">@orcamento.PesId</th>
+                            <td>@orcamento.OrcObservacao</td>
+                            <td>@orcamento.OrcDesc</td>
+                            <td>@orcamento.OrcTipoEntrega</td>
+                            <td>@orcamento.OrcIncEm</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>Nenhum orçamento encontrado</tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

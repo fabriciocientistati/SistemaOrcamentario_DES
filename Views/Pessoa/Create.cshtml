@@ -1,0 +1,174 @@
+﻿@model SistemaOrcamentario.Models.PessoaModel
+
+@{
+    TempData["Title"] = "Cadastrar Cliente";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+@if (TempData["MessageErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" arial-label="Close">X</button>
+        @TempData["MessageErro"]
+    </div>
+}
+
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <form asp-action="Create">
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Cadastro de Cliente</h4>
+                                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <h6>Nome</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input type="text" class="form-control" placeholder="Insira o nome..." asp-for="PesNome">
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PesNome, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>Número telefone</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" oninput="mascaraTelefone(this)" asp-for="PesNumCelular">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-telephone-fill"></i>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PesNumCelular, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>Número telefone</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input type="text" class="form-control" maxlength="15" placeholder="XX XXXXX-XXXX" oninput="mascaraTelefone(this)" asp-for="PesNumTelefone">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-telephone-fill"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>CPF</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input id="cpf" type="text" class="form-control" maxlength="14" placeholder="000.000.000-00" oninput="mascaraCpfCnpj(this)" asp-for="PesCpf">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 mb-3">
+                                        <h6>CNPJ</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input id="cnpj" type="text" class="form-control" maxlength="18" placeholder="00.000.000/0000-00" oninput="mascaraCpfCnpj(this)" asp-for="PesCnpj">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-5">
+                                        <h6>E-mail</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input id="email" type="email" class="form-control" placeholder="email@email.com.br" asp-for="PesEmail">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-envelope"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <h3 class="mb-4">Endereço</h3>
+                                    <div class="col-sm-2">
+                                        <h6>CEP</h6>
+                                        <div class="form-group position-relative has-icon-left">
+                                            <input id="cep" type="text" class="form-control" oninput="mascaraCep(this)" placeholder="XXXXX-XXX" asp-for="PesCep">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-house"></i>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PesCep, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="btn btn-primary" style="margin-top: 25px;" onclick="pesquisacep(cep.value)">
+                                            Pesquisar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h6>Rua</h6>
+                                        <div class="form-group position-relative">
+                                            <input id="rua" type="text" class="form-control" readonly placeholder="" asp-for="PesRua">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <h6>Número</h6>
+                                        <div class="form-group position-relative">
+                                            <input id="numero" type="text" class="form-control" placeholder="" asp-for="PesNumero">
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PesNumero, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3 mb-4">
+                                        <h6>Bairro</h6>
+                                        <div class="form-group position-relative">
+                                            <input id="bairro" type="text" class="form-control" readonly placeholder="" asp-for="PesBairro">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 mb-4">
+                                        <h6>Estado</h6>
+                                        <div class="form-group position-relative">
+                                            <input id="estado" type="text" class="form-control" readonly placeholder="" asp-for="PesEstado">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 mb-4">
+                                        <h6>Cidade</h6>
+                                        <div class="form-group position-relative">
+                                            <input id="cidade" type="text" class="form-control" readonly placeholder="" asp-for="PesCidade">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm mb-4">
+                                        <button class="btn btn-success" type="submit">Cadastrar</button>
+                                        <a type="button" class="btn btn-danger" asp-controller="Pessoa" asp-action="Index">Cancelar</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
