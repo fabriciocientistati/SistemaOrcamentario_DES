@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SistemaOrcamentario.Models
 {
-    public class ProdutoModel
+    public class ProdutoModel : IEnumerable
     {
         public ProdutoModel() =>
             ProIncEm = DateTime.Now;
@@ -55,5 +56,9 @@ namespace SistemaOrcamentario.Models
         public DateTime? ProAltEm { get; set; }
 
         public CategoriaModel Categoria { get; set; }
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

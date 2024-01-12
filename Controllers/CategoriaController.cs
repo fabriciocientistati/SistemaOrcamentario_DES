@@ -48,7 +48,6 @@ namespace SistemaOrcamentario.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoriaModel categoria)
         {
             if (categoria == null)
@@ -89,12 +88,13 @@ namespace SistemaOrcamentario.Controllers
                 return NotFound();
             }
 
-            var categoriaModel = await _context.TBCATEGORIA.FindAsync(id);
-            if (categoriaModel == null)
+            var categoria = await _context.TBCATEGORIA.FindAsync(id);
+            
+            if (categoria == null)
             {
                 return NotFound();
             }
-            return View(categoriaModel);
+            return View(categoria);
         }
 
         [HttpPost]

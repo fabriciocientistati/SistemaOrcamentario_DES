@@ -9,6 +9,8 @@
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
+                    <b>Código</b> @Model.ProId
+                    <hr/>
                     <h4 class="card-title">@Model.ProNome</h4>
                 </div>
                 <div class="card-content">
@@ -17,7 +19,7 @@
                             <div class="col-12">
                                 @if (!string.IsNullOrEmpty(Model.ProImagemUrl))
                                 {
-                                    <img src="~/images/@Model.ProImagemUrl" alt="Imagem do Produto" class="img-fluid" />
+                                    <img src="~/images/@Model.ProImagemUrl" alt="Imagem do Produto" class="img-fluid"/>
                                 }
                                 else
                                 {
@@ -38,7 +40,7 @@
                             <div class="col-12">
                                 <a type="button" class="btn btn-danger" asp-controller="Produto" asp-action="Index">Voltar</a>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>

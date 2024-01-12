@@ -33,7 +33,7 @@ namespace SistemaOrcamentario.Services
 
             if (catId != null)
             {
-                _dbContext.Remove(catId);
+                _dbContext.TBCATEGORIA.Remove(catId);
                 await _dbContext.SaveChangesAsync();
             }
         }

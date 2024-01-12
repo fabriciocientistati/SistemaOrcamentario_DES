@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SistemaOrcamentario.Models.ProdutoModel>
+﻿@using System.Globalization
+@model IEnumerable<SistemaOrcamentario.Models.ProdutoModel>
 
 <div class="card-body">
     <a class="btn btn-success btn-lg " onclick="Alert" asp-controller="Produto" asp-action="Create"><i class="bi bi-file-earmark-plus mx-2"></i>Cadastrar novo Produto</a>
@@ -9,9 +10,8 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Descrição</th>
+                        <th>Nome</th>
                         <th>Qtd: Estoque</th>
-                        <th>Categoria</th>
                         <th>R$</th>
                         <th></th>
                     </tr>
@@ -22,16 +22,14 @@
                         @foreach (var produto in Model)
                         {
                             <tr>
-                                <th scope="row">@produto.CatId</th>
-                                <td>@produto.ProDesc</td>
+                                <th scope="row">@produto.ProId</th>
+                                <td>@produto.ProNome</td>
                                 <td>@produto.ProQuantidadeEmEstoque</td>
-                                <td>@produto.Categoria</td>
-                                <td>
-                                    <span class="badge bg-success">Disponivel</span>
-                                </td>
+                                <td>@produto.ProPreco.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</td>
+
                                 <td>
                                     <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Produto" asp-action="Details" asp-route-id="@produto.ProId"><i class="bi bi-eye mx-2"></i>Detalhamento</a>
-                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar produto" asp-controller="Produto" asp-action="Edit" asp-route-id="@produto.ProId"><i class="bi bi-pencil-square mx-2"></i>Atualizar</a>
+                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar produto" asp-controller="Produto" asp-action="Edit" asp-route-proId="@produto.ProId" asp-route-catId="@produto.CatId"><i class="bi bi-pencil-square mx-2"></i>Atualizar</a>
                                     <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@produto.ProId, event)" asp-controller="Produto" asp-action="Delete" asp-route-id="@produto.ProId">Excluir</a>
                                 </td>
                             </tr>
@@ -54,7 +52,7 @@
         <script>Swal.fire('Erro', '@TempData["MessageError"]', 'error');</script>
     }
     <script>
-        function displayAlert(ProId, event) {
+        function displayAlert(proId, event) {
             event.preventDefault();  // Evita o comportamento padrão do link
 
             Swal.fire({

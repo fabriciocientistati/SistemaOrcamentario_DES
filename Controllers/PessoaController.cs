@@ -4,7 +4,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Models;
-using System.Collections.Generic;
 using System.Linq;
 using SistemaOrcamentario.Filters;
 using System;
@@ -12,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Services;
 using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
 
 namespace SistemaOrcamentario.Controllers
 {
@@ -30,7 +28,7 @@ namespace SistemaOrcamentario.Controllers
             _service = service;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nome)
         {
             var pessoas = await _service.FindAll();
             return View(pessoas);

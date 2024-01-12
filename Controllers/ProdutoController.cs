@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -61,8 +60,7 @@ namespace SistemaOrcamentario.Controllers
         }
         
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProId,ProNome,ProDesc,ProPreco,ProQuantidadeEmEstoque,ProImagemUrl,CatId,ProIncPor,ProIncEm,ProAltPor,ProAltEm")] ProdutoModel produtoModel, IFormFile arquivo)
+        public async Task<IActionResult> Create(ProdutoModel produtoModel, IFormFile arquivo)
         {
             if (produtoModel == null || arquivo == null)
             {
@@ -93,104 +91,109 @@ namespace SistemaOrcamentario.Controllers
                 {
                     produtoModel.ProIncPor = parseUsuId;
                     produtoModel.ProIncEm = DateTime.Now;
-                }    
-                    
-                _context.Add(produtoModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                }
+
+                await _service.Create(produtoModel);
+                TempData["MessageSuccess"] = "Produto cadastrado com sucesso!";
+
+                return RedirectToAction("Index");
             }
             ViewData["CatId"] = new SelectList(_context.TBCATEGORIA, "CatId", "CatNome", produtoModel.CatId);
             return View(produtoModel);
         }
         
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int proId, int catId)
         {
-            if (id == null || _context.TBPRODUTO == null)
+            if (proId == 0 && catId == 0)
             {
                 return NotFound();
             }
 
-            var produtoModel = await _context.TBPRODUTO.FindAsync(id);
-            if (produtoModel == null)
+            var produto = await _context.TBPRODUTO.FirstOrDefaultAsync(x => x.ProId == proId);
+            var categoria = await _context.TBCATEGORIA.FirstOrDefaultAsync(x => x.CatId == catId);
+            var viewProduto = new ViewProduto { Produtos = produto};
+            
+            if (produto == null || categoria == null)
             {
                 return NotFound();
             }
-            ViewData["CatId"] = new SelectList(_context.TBCATEGORIA, "CatId", "CatNome", produtoModel.CatId);
-            return View(produtoModel);
+            
+            
+            ViewData["CatId"] = new SelectList(_context.TBCATEGORIA, "CatId", "CatNome",catId);
+            return View(viewProduto);
         }
-        
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProId,ProNome,ProDesc,ProPreco,ProQuantidadeEmEstoque,ProImagemUrl,CatId,ProIncPor,ProIncEm,ProAltPor,ProAltEm")] ProdutoModel produtoModel)
+        public async Task<IActionResult> Edit(ViewProduto model, IFormFile arquivo)
         {
-            if (id != produtoModel.ProId)
+            if (model == null || arquivo == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(produtoModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProdutoModelExists(produtoModel.ProId))
+                    var caminhoImagem = Path.Combine(_caminhoServidor, "images");
+                    var novoNomeImagem = Guid.NewGuid().ToString() + "_" + arquivo.FileName;
+                    var caminhoCompleto = Path.Combine(caminhoImagem, novoNomeImagem);
+                    
+                    if (System.IO.File.Exists(novoNomeImagem))
                     {
-                        return NotFound();
+                        TempData["MessageErro"] = $"Ops, uma imagem com o mesmo nome já existe!";
+                        return RedirectToAction("Edit", "Produto");
                     }
-                    else
+                    
+                    using (var stream = System.IO.File.Create(caminhoCompleto))
                     {
-                        throw;
+                        await arquivo.CopyToAsync(stream);
                     }
+
+                    if (!Directory.Exists(caminhoImagem))
+                    {
+                        Directory.CreateDirectory(caminhoImagem);
+                    }
+
+                    model.Produtos.ProImagemUrl = novoNomeImagem;
+                    
+                    var usuId = _sessao.ObterIdUsuarioLogado().ToString();
+
+                    if (int.TryParse(usuId, out int parseUsuId))
+                    {
+                        model.Produtos.ProAltPor = parseUsuId;
+                        model.Produtos.ProAltEm = DateTime.Now;
+                    }
+
+                    await _service.Update(model.Produtos);
+
+                    TempData["MessageSuccess"] = "Produto atualizado com sucesso!";
+
+                    return RedirectToAction("Index","Produto");
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["CatId"] = new SelectList(_context.TBCATEGORIA, "CatId", "CatNome", produtoModel.CatId);
-            return View(produtoModel);
+            catch (Exception)
+            {
+                TempData["MessageErro"] = $"Ops, não foi possível atualizar produto!";
+                return RedirectToAction("Edit", "Produto");
+            }
+
+            ViewData["CatId"] = new SelectList(_context.TBCATEGORIA, "CatId", "CatNome", model.Produtos.CatId);
+            return View();
         }
         
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.TBPRODUTO == null)
+            if (id == 0 || _context.TBPRODUTO == null)
             {
                 return NotFound();
             }
 
-            var produtoModel = await _context.TBPRODUTO
-                .Include(p => p.Categoria)
-                .FirstOrDefaultAsync(m => m.ProId == id);
-            if (produtoModel == null)
-            {
-                return NotFound();
-            }
+            await _service.Delete(id);
+            
+            TempData["MessageSuccess"] = "Produto excluido com sucesso!";
 
-            return View(produtoModel);
-        }
-        
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.TBPRODUTO == null)
-            {
-                return Problem("Entity set 'DataContext.TBPRODUTO'  is null.");
-            }
-            var produtoModel = await _context.TBPRODUTO.FindAsync(id);
-            if (produtoModel != null)
-            {
-                _context.TBPRODUTO.Remove(produtoModel);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProdutoModelExists(int id)
-        {
-            return _context.TBPRODUTO.Any(e => e.ProId == id);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -4,6 +4,10 @@
     ViewData["Title"] = "Cadastrar Produto";
 }
 
+@{
+    Layout = "_Layout";
+}
+
 @if (TempData["MessageErro"] != null)
 {
     <div class="alert alert-danger" role="alert">
@@ -44,7 +48,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12">–
+                                    <div class="col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="first-name-icon">Descrição</label>
                                             <div class="position-relative">

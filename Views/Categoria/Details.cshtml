@@ -37,15 +37,19 @@
                                 @foreach (var produto in Model.Produtos)
                                 {
                                     <div class="row">
+                                        <div class="col-sm-3 mb-3">                                            
+                                            <b>Código</b> @Html.DisplayFor(model => produto.ProId)
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-3 mb-3">
                                             <div class="form-group position-relative has-icon-left">
                                                 <h3>@Html.DisplayFor(Model => produto.ProNome)</h3>
-                                            </div>                                            
-                                            <b>Código</b> @Html.DisplayFor(model => produto.ProId)
+                                            </div>
                                         </div>
 
                                         <div class="col-sm-4 mb-3">
-                                            <a class="btn btn-primary btn-sm mx-1" asp-controller="Produto" asp-action="Edit" asp-route-orcId="@produto.ProId" asp-route-pesId="@produto.ProId"><i class="bi bi-pencil-square mx-2"></i>Atualizar produto</a>
+                                            <a class="btn btn-primary btn-sm mx-1" asp-controller="Produto" asp-action="Edit" asp-route-proId="@produto.ProId" asp-route-catId="@produto.CatId"><i class="bi bi-pencil-square mx-2"></i>Atualizar produto</a>
                                             <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@produto.ProId, event)" asp-controller="Produto" asp-action="Delete" asp-route-id="@produto.ProId">Excluir</a>
                                         </div>
                                     </div>

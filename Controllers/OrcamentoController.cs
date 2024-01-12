@@ -114,7 +114,7 @@ namespace SistemaOrcamentario.Controllers
             var pessoa = await _context.TBORCAMENTO.FirstOrDefaultAsync(o => o.PesId == pesId);
             var viewModel = new ViewPessoaOrcamento { Orcamento = orcamento };
 
-            if (orcamento == null && pessoa == null)
+            if (orcamento == null || pessoa == null)
             {
                 return NotFound();
             }
