@@ -1,4 +1,5 @@
-﻿@model SistemaOrcamentario.Models.ViewProduto
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model SistemaOrcamentario.Models.ViewProduto
 
 @{
     ViewData["Title"] = "Atualizar Produto";
@@ -39,9 +40,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group has-icon-left">
-                                            <label for="first-name-icon">Cateogira</label>
+                                            <label for="first-name-icon">Categoria</label>
                                             <div class="position-relative">
-                                                <input class="form-control" asp-for="Produtos.CatId" readonly/>
+                                                <select class="form-control" asp-for="Produtos.CatId" asp-items="@(ViewData["CatId"] as SelectList)"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -97,8 +98,8 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <button type="submit" onclick="concluirCadastro()" class="btn btn-success me-1 mb-1">Atualizar produto</button>
                                         <a asp-controller="Produto" asp-action="Index" class="btn btn-danger me-1 mb-1">Voltar</a>
+                                        <button type="submit" class="btn btn-warning me-1 mb-1">Atualizar</button>
                                     </div>
                                 </div>
                             </div>

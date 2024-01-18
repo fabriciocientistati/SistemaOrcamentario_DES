@@ -9,7 +9,7 @@ namespace SistemaOrcamentario.Models
         public OrcamentoModel() =>
             OrcIncEm = DateTime.Now;
 
-        public OrcamentoModel(int orcId, int pesId, string orcDesc, string orcObservacao, decimal orcPreco, string orcTipoPagamento, string orcTipoEntrega, int orcIncPor, DateTime orcIncEm, int? orcAltPor, DateTime? orcAltEm, PessoaModel orcamentoPessoa) : this()
+        public OrcamentoModel(int orcId, int pesId, string orcDesc, string orcObservacao, decimal orcPreco, string orcTipoPagamento, string orcTipoEntrega, int orcIncPor, int? orcAltPor, DateTime? orcAltEm, PessoaModel orcamentoPessoa, List<ProdutoModel> orcamentoProduto)
         {
             OrcId = orcId;
             PesId = pesId;
@@ -19,10 +19,10 @@ namespace SistemaOrcamentario.Models
             OrcTipoPagamento = orcTipoPagamento;
             OrcTipoEntrega = orcTipoEntrega;
             OrcIncPor = orcIncPor;
-            OrcIncEm = orcIncEm;
             OrcAltPor = orcAltPor;
             OrcAltEm = orcAltEm;
             OrcamentoPessoa = orcamentoPessoa;
+            OrcamentoProduto = orcamentoProduto;
         }
 
         [Key]
@@ -53,6 +53,6 @@ namespace SistemaOrcamentario.Models
         public DateTime? OrcAltEm { get; set; }
 
         public PessoaModel OrcamentoPessoa { get; set; }
-        //public List<ProdutoModel> OrcamentoProduto { get; set; }
+        public List<ProdutoModel>? OrcamentoProduto { get; set; }
     }
 }

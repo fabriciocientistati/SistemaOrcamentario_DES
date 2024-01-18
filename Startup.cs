@@ -38,11 +38,17 @@ namespace SistemaOrcamentario
             services.AddScoped<IService<CategoriaModel>, CategoriaService>();
             services.AddScoped<IService<ProdutoModel>, ProdutoService>();
 
+
+            services.AddDistributedMemoryCache();
+
             services.AddSession(options =>
             {
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            
+            services.AddSession();
 
             services.AddControllersWithViews();
         }

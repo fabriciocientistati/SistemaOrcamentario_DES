@@ -49,7 +49,7 @@
                                         </div>
 
                                         <div class="col-sm-4 mb-3">
-                                            <a class="btn btn-primary btn-sm mx-1" asp-controller="Produto" asp-action="Edit" asp-route-proId="@produto.ProId" asp-route-catId="@produto.CatId"><i class="bi bi-pencil-square mx-2"></i>Atualizar produto</a>
+                                            <a class="btn btn-warning btn-sm mx-1" asp-controller="Produto" asp-action="Edit" asp-route-proId="@produto.ProId" asp-route-catId="@produto.CatId"><i class="bi bi-pencil-square mx-2"></i>Atualizar produto</a>
                                             <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@produto.ProId, event)" asp-controller="Produto" asp-action="Delete" asp-route-id="@produto.ProId">Excluir</a>
                                         </div>
                                     </div>

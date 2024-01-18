@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SistemaOrcamentario.Context;
 using SistemaOrcamentario.Helper;
 using SistemaOrcamentario.Models;
@@ -59,6 +58,14 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (!string.IsNullOrEmpty(categoria.CatNome) &&
+
+                        _context.TBCATEGORIA.Any(c => c.CatNome == categoria.CatNome))
+                    {
+                        TempData["MessageErro"] = "Já existe categoria com esse nome.";
+                        return View(categoria);
+                    }
+                    
                    var usuId = _sessao.ObterIdUsuarioLogado().ToString();
 
                    if (int.TryParse(usuId, out int parsedUsuId))
@@ -109,6 +116,13 @@ namespace SistemaOrcamentario.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (!string.IsNullOrEmpty(categoria.CatNome) &&
+                        _context.TBCATEGORIA.Any(c => c.CatNome == categoria.CatNome && c.CatId != categoria.CatId))
+                    {
+                        TempData["MessageErro"] = "Já existe categoria com esse nome.";
+                        return View(categoria);
+                    }
+                    
                     var usuIdLogado = _sessao.ObterIdUsuarioLogado().ToString();
 
                     if (int.TryParse(usuIdLogado, out int parseUsuId))

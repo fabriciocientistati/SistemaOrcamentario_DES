@@ -31,6 +31,40 @@
                         <div class="card-body">
                             <form asp-action="Create">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row" id="table-hover-row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Produtos</h4>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="codigo-produto">Código do produto</label>
+                                                <input type="text" id="codigo-produto" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nome-produto">Nome do Produto</label>
+                                                <input type="text" id="nome-produto" class="form-control" />
+                                            </div>
+                                            <div class="col-sm mb-4">
+                                                <button type="button" id="adicionar-produto" class="btn btn-primary">Adicionar Produto</button>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Nome do Produto</th>
+                                                    <th>Valor R$</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="produtos-body">
+                                                <!-- Aqui será dinamicamente adicionado HTML para cada produto -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-sm-6 mb-3">
                                         <h6>Nome</h6>
@@ -73,7 +107,7 @@
                                         <div class="form-group position-relative">
                                             <input id="preco" type="text" asp-for="Orcamento.OrcPreco" class="form-control" placeholder="R$"/>
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Orcamento.OrcPreco, "Insira o valor", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Orcamento.OrcPreco, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="col-sm-2 mb-3">
@@ -131,3 +165,113 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var produtos = []; // Array para armazenar os produtos
+
+            $("#adicionar-produto").on("click", function () {
+                var codigoProduto = $("#codigo-produto").val();
+                var nomeProduto = $("#nome-produto").val();
+
+                // Chamada Ajax para buscar detalhes do produto no backend
+                $.ajax({
+                    url: '@Url.Action("ObterDetalhesProduto")',
+                    type: 'GET',
+                    data: { codigoProduto: codigoProduto, nomeProduto: nomeProduto },
+                    success: function (detalhesProduto) {
+                        // Verificar se o produto foi encontrado
+                        if (detalhesProduto) {
+                            var produto = {
+                                Codigo: detalhesProduto.codigo,
+                                Nome: detalhesProduto.nome,
+                                Preco: detalhesProduto.preco
+                                // Preco: detalhesProduto.Preco
+                            };
+
+                            produtos.push(produto);
+                            renderizarTabela();
+                        } else {
+                            alert("Produto não encontrado.");
+                        }
+                    },
+                    error: function () {
+                        alert("Erro ao buscar detalhes do produto.");
+                    }
+                });
+            });
+
+            window.removerProduto = function (rowIndex) {
+                produtos.splice(rowIndex, 1);
+                renderizarTabela();
+            };
+
+            function renderizarTabela() {
+                // Limpar a tabela
+                $("#produtos-body").empty();
+                // Adicionar produtos à tabela
+                for (var i = 0; i < produtos.length; i++) {
+                    var newRow =
+                        "<tr>" +
+                        "<td>" + produtos[i].Codigo + "</td>" +
+                        "<td>" + produtos[i].Nome + "</td>" +
+                        "<td>" + produtos[i].Preco + "</td>" +
+                        "<td><button type='button' class='btn btn-danger' onclick='removerProduto(" + i + ")'>Remover</button></td>" +
+                        "</tr>";
+
+                    $("#produtos-body").append(newRow);
+                }
+            }
+        });
+    </script>
+}
+
+
+@* *@
+@* @section Scripts { *@
+@*     <script> *@
+@*         $(document).ready(function () { *@
+@*             var produtos = []; // Array para armazenar os produtos *@
+@* *@
+@*             $("#adicionar-produto").on("click", function () { *@
+@*                 var codigoProduto = $("#codigo-produto").val(); *@
+@*                 var nomeProduto = $("#nome-produto").val(); *@
+@* *@
+@*                 // Você deve implementar a lógica para buscar o produto pelo código ou nome no seu backend. *@
+@*                 // Aqui, estou apenas adicionando um objeto fictício à lista. *@
+@*                 var produto = { *@
+@*                     Codigo: codigoProduto, *@
+@*                     Nome: nomeProduto, *@
+@*                     Preco: 0 // Você deve ajustar o preço conforme a lógica real *@
+@*                 }; *@
+@* *@
+@*                 produtos.push(produto); *@
+@* *@
+@*                 renderizarTabela(); *@
+@*             }); *@
+@* *@
+@*             window.removerProduto = function (rowIndex) { *@
+@*                 produtos.splice(rowIndex, 1); *@
+@*                 renderizarTabela(); *@
+@*             }; *@
+@* *@
+@*             function renderizarTabela() { *@
+@*                 // Limpar a tabela *@
+@*                 $("#produtos-body").empty(); *@
+@* *@
+@*                 // Adicionar produtos à tabela *@
+@*                 for (var i = 0; i < produtos.length; i++) { *@
+@*                     var newRow = *@
+@*                         "<tr>" + *@
+@*                         "<td>" + produtos[i].Codigo + "</td>" + *@
+@*                         "<td>" + produtos[i].Nome + "</td>" + *@
+@*                         "<td>" + produtos[i].Preco + "</td>" + *@
+@*                         "<td><button type='button' class='btn btn-danger' onclick='removerProduto(" + i + ")'>Remover</button></td>" + *@
+@*                         "</tr>"; *@
+@* *@
+@*                     $("#produtos-body").append(newRow); *@
+@*                 } *@
+@*             } *@
+@*         }); *@
+@*     </script> *@
+@* } *@

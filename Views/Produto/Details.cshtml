@@ -30,15 +30,22 @@
                         <br/><br/>
                         <div class="row">
                             <div class="col-12">
-                                <p><strong>Descrição:</strong> @Model.ProDesc</p>
+                                <p>
+                                    <strong>Descrição:</strong> @Model.ProDesc
+                                </p>
                                 <p><strong>Preço:</strong> R$ @Model.ProPreco.ToString("0.00")</p>
-                                <p><strong>Quantidade em Estoque:</strong> @Model.ProQuantidadeEmEstoque</p>
-                                <p><strong>Categoria:</strong> @Model.Categoria.CatNome</p>
+                                <p>
+                                    <strong>Quantidade em Estoque:</strong> @Model.ProQuantidadeEmEstoque
+                                </p>
+                                <p>
+                                    <strong>Categoria:</strong> @Model.Categoria.CatNome
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <a type="button" class="btn btn-danger" asp-controller="Produto" asp-action="Index">Voltar</a>
+                                <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar produto" asp-controller="Produto" asp-action="Edit" asp-route-proId="@Model.ProId" asp-route-catId="@Model.CatId"><i class="bi bi-pencil-square mx-2"></i>Atualizar produto</a>
                             </div>
                         </div>
                     </div>
@@ -47,4 +54,3 @@
         </div>
     </div>
 </section>
-

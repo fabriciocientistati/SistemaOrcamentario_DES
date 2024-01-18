@@ -1,81 +1,80 @@
-﻿ @model IEnumerable<SistemaOrcamentario.Models.OrcamentoModel>
-
-@{
-    Layout = null;
-}
-@* 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p> *@
-    @*
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacoes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoPagamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoEntrega)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInclusao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pessoa)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacoes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoPagamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoEntrega)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInclusao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pessoa.Bairro)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrcId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.OrcId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.OrcId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
- *@
+﻿@*  @model IEnumerable<SistemaOrcamentario.Models.OrcamentoModel> *@
+@* *@
+@* @{ *@
+@*     Layout = "_Layout"; *@
+@* } *@
+@* *@
+@* <table id="itemsTable" class="table"> *@
+@*     <thead> *@
+@*     <tr> *@
+@*         <th>Cod. Orcamento</th> *@
+@*         <th>Nome</th> *@
+@*         <th>Cod. Cliente</th> *@
+@*     </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@*     @foreach (var item in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td>@item.OrcId</td> *@
+@*             <td>@item.OrcDesc</td> *@
+@*             <td>@item.PesId</td> *@
+@*         </tr> *@
+@*     } *@
+@*     </tbody> *@
+@* </table> *@
+@* *@
+@* *@
+@* @section scripts {   *@
+@*       <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>   *@
+@*       <script>   *@
+@*           $(document).ready(function () {   *@
+@*               // Carregar itens existentes   *@
+@*               loadItems();   *@
+@*     *@
+@*               // Adicionar um novo item ao clicar no botão   *@
+@*                $('#addItemBtn').click(function () {   *@
+@*                    var itemName = $('#itemName').val();   *@
+@*                    var itemPrice = $('#itemPrice').val();   *@
+@*                  *@
+@*                  // Realizar uma requisição AJAX para adicionar um novo item à sessão   *@
+@*                    $.ajax({   *@
+@*                        url: '/Orcamento/additem',   *@
+@*                        type: 'POST',   *@
+@*                        data: {   *@
+@*                            name: itemName,   *@
+@*                            // price: itemPrice   *@
+@*                        },   *@
+@*                        success: function (data) {   *@
+@*                            // Recarregar os itens após adicionar um novo   *@
+@*                            loadItems();   *@
+@*                        },   *@
+@*                        error: function (error) {   *@
+@*                            console.log(error);   *@
+@*                        }   *@
+@*                    });   *@
+@*                });   *@
+@*     *@
+@*               // Carregar itens da sessão   *@
+@*               function loadItems() {   *@
+@*                   $.ajax({   *@
+@*                        url: '@Url.Action("Index")',   *@
+@*                       type: 'GET',   *@
+@*                       dataType: 'json',   *@
+@*                       success: function (data) {   *@
+@*                           // Limpar a tabela antes de adicionar os novos dados   *@
+@*                           $('#itemsTable tbody').empty();   *@
+@*     *@
+@*                           // Adicionar os dados da sessão à tabela   *@
+@*                           $.each(data, function (index, item) {   *@
+@*                               $('#itemsTable tbody').append('<tr><td>' + item.OrcId + '</td><td>' + item.OrcDesc + '<tr><td>' + item.PesId + '<tr></td>');   *@
+@*                           });   *@
+@*                       },   *@
+@*                       error: function (error) {   *@
+@*                           console.log(error);   *@
+@*                       }   *@
+@*                   });   *@
+@*               }   *@
+@*           });   *@
+@*       </script>   *@
+@*   } *@

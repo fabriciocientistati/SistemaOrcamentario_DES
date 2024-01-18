@@ -29,7 +29,6 @@
 
                                 <td>
                                     <a class="btn btn-primary btn-sm mx-1 " data-toggle="tooltip" data-placement="top" title="Detalhes" asp-controller="Produto" asp-action="Details" asp-route-id="@produto.ProId"><i class="bi bi-eye mx-2"></i>Detalhamento</a>
-                                    <a class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Editar produto" asp-controller="Produto" asp-action="Edit" asp-route-proId="@produto.ProId" asp-route-catId="@produto.CatId"><i class="bi bi-pencil-square mx-2"></i>Atualizar</a>
                                     <a class="btn btn-danger btn-sm mx-1" onclick="displayAlert(@produto.ProId, event)" asp-controller="Produto" asp-action="Delete" asp-route-id="@produto.ProId">Excluir</a>
                                 </td>
                             </tr>

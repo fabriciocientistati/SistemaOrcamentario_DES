@@ -14,6 +14,7 @@ namespace SistemaOrcamentario.Context
             modelBuilder.ApplyConfiguration(new OrcamentoMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new ProdutoMap());
+            modelBuilder.ApplyConfiguration(new CategoriaMap());
             //modelBuilder.ApplyConfiguration(new ProdutoOrcamentoMap());
         }
 

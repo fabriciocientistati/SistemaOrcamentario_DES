@@ -8,9 +8,8 @@ public class CategoriaMap : IEntityTypeConfiguration<CategoriaModel>
 {
     public void Configure(EntityTypeBuilder<CategoriaModel> builder)
     {
-        builder.ToTable("TBCAREGORIA");
+        builder.ToTable("TBCATEGORIA");
 
-        builder.HasOne(c => c.CategoriaProdutos)
-            .WithMany(p => p.)
+        builder.HasIndex(c => c.CatNome).IsUnique();
     }
 }

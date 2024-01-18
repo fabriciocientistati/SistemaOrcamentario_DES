@@ -13,6 +13,8 @@ namespace SistemaOrcamentario.Mappings
             builder.HasOne(p => p.Categoria)
                 .WithMany(c => c.CategoriaProdutos)
                 .HasForeignKey(p => p.CatId);
+
+            builder.HasIndex(p => p.ProNome).IsUnique();
         }
     }
 }

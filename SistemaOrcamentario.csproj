@@ -9,7 +9,7 @@
     <Content Remove="Views\Home\**" />
     <EmbeddedResource Remove="Views\Home\**" />
     <None Remove="Views\Home\**" />
-    <Compile Remove="Mappings\CategoriaMap.cs" />
+    <Compile Remove="Mappings\CategoriaMapp.cs" />
   </ItemGroup>
 
   <ItemGroup>

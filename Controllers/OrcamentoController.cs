@@ -26,11 +26,25 @@ namespace SistemaOrcamentario.Controllers
             _service = service;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> ObterDetalhesProduto(int codigoProduto, string nomeProduto)
         {
-            var dataContext = _context.TBORCAMENTO.Include(o => o.OrcamentoPessoa);
-            return View(await dataContext.ToListAsync());
+            var produto =
+                await _context.TBORCAMENTO.FirstOrDefaultAsync(p => p.OrcId == codigoProduto || p.OrcDesc == nomeProduto);
+
+            if (produto == null)
+            {
+                return NotFound(); 
+            }
+
+            return Json(new
+            {
+                Codigo = produto.OrcId,
+                Nome = produto.OrcDesc,
+                Preco = produto.OrcPreco
+            });
         }
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -87,6 +101,13 @@ namespace SistemaOrcamentario.Controllers
 
                     _context.TBORCAMENTO.Add(model.Orcamento);
                     await _context.SaveChangesAsync();
+
+                    // int orcId = model.Orcamento.OrcId;
+                    //
+                    // foreach (var produto in model.Orcamento.OrcamentoProduto)
+                    // {
+                    //     produto.Categoria.
+                    // }
 
                     TempData["MessageSuccess"] = "Orçamento criado com sucesso!";
 
@@ -181,10 +202,6 @@ namespace SistemaOrcamentario.Controllers
                 return RedirectToAction("Index", "Pessoa");
             }
         }
-
-        private bool OrcamentoModelExists(int id)
-        {
-            return _context.TBORCAMENTO.Any(e => e.OrcId == id);
-        }
     }
+    
 }

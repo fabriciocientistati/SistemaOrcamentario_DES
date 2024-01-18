@@ -90,14 +90,14 @@ namespace SistemaOrcamentario.Controllers
                 if (ModelState.IsValid)
                 {
                     if (!string.IsNullOrEmpty(pessoa.PesCpf) &&
-                        _dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf && p.PesId != pessoa.PesId))
+                        _dataContext.TBPESSOA.Any(p => p.PesCpf == pessoa.PesCpf))
                     {
                         TempData["MessageErro"] = "Já existe cliente com esse CPF!";
                         return View(pessoa);
                     }
 
                     if (!string.IsNullOrEmpty(pessoa.PesCnpj) &&
-                        _dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj && p.PesId != pessoa.PesId))
+                        _dataContext.TBPESSOA.Any(p => p.PesCnpj == pessoa.PesCnpj))
                     {
                         TempData["MessageErro"] = "Já existe cliente com esse CNPJ!";
                         return View(pessoa);
@@ -162,7 +162,7 @@ namespace SistemaOrcamentario.Controllers
 
                     await _service.Update(pessoa);
                     
-                    TempData["MessageSuccess"] = "Cliente atualizado!";
+                    TempData["MessageSuccess"] = "Cliente atualizado.";
 
                     return RedirectToAction(nameof(Index));
                 }

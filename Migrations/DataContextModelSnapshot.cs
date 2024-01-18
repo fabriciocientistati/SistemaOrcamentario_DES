@@ -44,11 +44,14 @@ namespace SistemaOrcamentario.Migrations
 
                     b.Property<string>("CatNome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CatId");
 
-                    b.ToTable("TBCATEGORIA");
+                    b.HasIndex("CatNome")
+                        .IsUnique();
+
+                    b.ToTable("TBCATEGORIA", (string)null);
                 });
 
             modelBuilder.Entity("SistemaOrcamentario.Models.OrcamentoModel", b =>
@@ -208,7 +211,7 @@ namespace SistemaOrcamentario.Migrations
 
                     b.Property<string>("ProNome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("ProPreco")
                         .HasColumnType("decimal(18,2)");
@@ -219,6 +222,9 @@ namespace SistemaOrcamentario.Migrations
                     b.HasKey("ProId");
 
                     b.HasIndex("CatId");
+
+                    b.HasIndex("ProNome")
+                        .IsUnique();
 
                     b.ToTable("TBPRODUTO", (string)null);
                 });
